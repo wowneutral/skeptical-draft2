@@ -1,0 +1,1 @@
+var e={slug:`look`,n:17,name:`The look`,color:`#f2d8c9`,ink:`#161210`,kind:`Big type`,text:`A huge pair of printed eyes that does not believe a word. They follow your pointer, and every claim has a Prove it button that pulls up the real line behind it; check all twelve and the look turns to approval and Join opens.`};export{e as default};
