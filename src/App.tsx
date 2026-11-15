@@ -5,6 +5,7 @@ import { Switcher } from '@/components/Switcher';
 
 const Index = lazy(() => import('@/versions/index/Index'));
 const Head = lazy(() => import('@/versions/head/Head'));
+const Head3D = lazy(() => import('@/versions/head/Head3D'));
 const Statue = lazy(() => import('@/versions/statue/Statue'));
 const Question = lazy(() => import('@/versions/question/Question'));
 const Flow = lazy(() => import('@/versions/flow/Flow'));
@@ -20,6 +21,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/head" element={<Head />} />
+            <Route path="/head-3d" element={<Head3D />} />
             <Route path="/statue" element={<Statue />} />
             <Route path="/question" element={<Question />} />
             <Route path="/flow" element={<Flow />} />

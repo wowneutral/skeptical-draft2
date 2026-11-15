@@ -16,7 +16,8 @@ const U = ({ href, children }: { href: string; children: ReactNode }) => (
   <a className="u" href={href} rel={href.startsWith('http') ? 'noopener' : undefined}>{children}</a>
 );
 
-export function OrbitPage({ slug, scene, credit }: { slug: 'head' | 'statue'; scene: ReactNode; credit: string }) {
+export function OrbitPage({ slug, scene, credit, sides = 'alternate' }: { slug: 'head' | 'statue'; scene: ReactNode; credit: string; sides?: 'alternate' | 'left' }) {
+  const R = sides === 'left' ? 'left' : 'right';
   useVersion(slug, { anchorOffset: 2 });
   const root = useRef<HTMLDivElement>(null);
   const [ready, setReady] = useState(false);
@@ -109,7 +110,7 @@ export function OrbitPage({ slug, scene, credit }: { slug: 'head' | 'statue'; sc
   }, { scope: root });
 
   return (
-    <div className="orbit" ref={root}>
+    <div className={`orbit${sides === 'left' ? ' is-fixed' : ''}`} ref={root}>
       <a className="skip-x" href="#main">Skip to content</a>
       <Loader onDone={onDone} bg="#050505" ink="#f0f0ec" font='400 clamp(5rem, 16vw, 15rem)/0.85 "Bodoni Moda Variable", Didot, serif' />
       <div className="stage" aria-hidden="true">{scene}</div>
@@ -129,7 +130,7 @@ export function OrbitPage({ slug, scene, credit }: { slug: 'head' | 'statue'; sc
           </div></div>
         </section>
 
-        <section className="act" id="why" data-side="right" data-scrub="words" aria-label="How the team works">
+        <section className="act" id="why" data-side={R} data-scrub="words" aria-label="How the team works">
           <div className="act-in"><div className="act-col mani">{MANIFESTO.map((m) => <p key={m}>{m}</p>)}</div></div>
         </section>
 
@@ -143,7 +144,7 @@ export function OrbitPage({ slug, scene, credit }: { slug: 'head' | 'statue'; sc
           </div></div>
         </section>
 
-        <section className="act" id="drive" data-side="right" data-long data-scrub="drive">
+        <section className="act" id="drive" data-side={R} data-long data-scrub="drive">
           <div className="act-in"><div className="act-col">
             <h2 data-letters>{DRIVE.title}</h2>
             <p className="lead gap-s" data-rise>{DRIVE.lead}</p>
@@ -160,7 +161,7 @@ export function OrbitPage({ slug, scene, credit }: { slug: 'head' | 'statue'; sc
           </div></div>
         </section>
 
-        <section className="act" id="join" data-side="right">
+        <section className="act" id="join" data-side={R}>
           <div className="act-in"><div className="act-col">
             <h2 data-letters>{JOIN.title}</h2>
             <p className="lead gap-s" data-rise>{JOIN.lead}</p>
