@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
-import { VERSIONS, type VersionSlug } from '@/content';
+import { ALL as VERSIONS } from '@/registry';
 import { useTransition } from '@/components/Transition';
 import { useSmoothScroll } from './scroll';
 
 /** What every version does on mount: name the page, set the theme, start smooth scroll, lift the cover. */
-export function useVersion(slug: VersionSlug | 'index', opts: { anchorOffset?: number } = {}) {
+export function useVersion(slug: string, opts: { anchorOffset?: number } = {}) {
   const { ready } = useTransition();
   useSmoothScroll(opts.anchorOffset ?? 0);
   useEffect(() => {

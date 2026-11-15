@@ -1,6 +1,6 @@
 # Skeptical, draft 2
 
-Fourteen drafts of the [Skeptical](https://skeptical.pages.dev) site in one app, one route each. A design lab, not deployed.
+Drafts of the [Skeptical](https://skeptical.pages.dev) site in one app, one route each. A design lab, not deployed.
 
 | Route | Version | What it is |
 | --- | --- | --- |
@@ -15,8 +15,6 @@ Fourteen drafts of the [Skeptical](https://skeptical.pages.dev) site in one app,
 | `/badge` | The badge | A tournament badge on a lanyard you can grab and swing; its faces are drawn in the browser. |
 | `/terminal` | The terminal | The site as a command line, with history and on-screen keys. |
 | `/spread` | The spread | A speed reader: the whole site one word at a time, over a night road that keeps pace. |
-| `/bento` | The bento | Everything on one screen: a grid of tiles with counting numbers and a light that follows the pointer. |
-| `/server` | The server | The site as a group chat. Each section is a channel that the team account types out to you. |
 | `/metal` | The metal | The wordmark poured in liquid metal, and the drive as one line of words you scroll sideways through. |
 
 `[` and `]` step between versions. Route changes play an ordered-dither cover.
@@ -37,7 +35,7 @@ Vite, React 19, TypeScript. React Three Fiber, drei and postprocessing for the 3
 - `src/content.ts`: every word on every version. It mirrors the live site's `content.ts`; nothing is invented.
 - `src/lib`: smooth scroll, text reveals, the per-version setup hook.
 - `src/components`: the page transition, the version switcher, the loader, shadcn components, shared 3D pieces.
-- `src/versions/*`: one folder per version.
+- `src/versions/*`: one folder per version. Later versions register themselves with a `meta.ts` (see `src/registry.ts` and `BUILDING.md`).
 - `PRODUCT.md`: the rules every version follows.
 
 ## Credits

@@ -2,14 +2,14 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router';
 import { ChevronLeft, ChevronRight, LayoutGrid } from 'lucide-react';
-import { VERSIONS } from '@/content';
+import { ALL as VERSIONS } from '@/registry';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { useTransition } from './Transition';
 
 export function Switcher() {
   const { pathname } = useLocation();
   const { go } = useTransition();
-  const i = VERSIONS.findIndex((v) => pathname.startsWith(`/${v.slug}`));
+  const i = VERSIONS.findIndex((v) => pathname === `/${v.slug}` || pathname.startsWith(`/${v.slug}/`) || pathname.startsWith(`/${v.slug}-`));
   const prev = VERSIONS[(i - 1 + VERSIONS.length) % VERSIONS.length], next = VERSIONS[(i + 1) % VERSIONS.length];
 
   useEffect(() => {

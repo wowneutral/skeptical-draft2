@@ -4,7 +4,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, type ReactNode } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import gsap from 'gsap';
-import { VERSIONS } from '@/content';
+import { ALL as VERSIONS } from '@/registry';
 import { still } from '@/lib/utils';
 
 type Api = { go: (to: string) => void; ready: () => void };
@@ -13,7 +13,7 @@ export const useTransition = () => useContext(Ctx);
 
 const CELL = 14;
 const B8 = [0, 32, 8, 40, 2, 34, 10, 42, 48, 16, 56, 24, 50, 18, 58, 26, 12, 44, 4, 36, 14, 46, 6, 38, 60, 28, 52, 20, 62, 30, 54, 22, 3, 35, 11, 43, 1, 33, 9, 41, 51, 19, 59, 27, 49, 17, 57, 25, 15, 47, 7, 39, 13, 45, 5, 37, 63, 31, 55, 23, 61, 29, 53, 21];
-const colorFor = (path: string) => VERSIONS.find((v) => path.startsWith(`/${v.slug}`))?.color ?? '#050505';
+const colorFor = (path: string) => VERSIONS.find((v) => path === `/${v.slug}` || path.startsWith(`/${v.slug}/`) || path.startsWith(`/${v.slug}-`))?.color ?? '#050505';
 const rgb = (hex: string) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
 
 export function TransitionProvider({ children }: { children: ReactNode }) {
