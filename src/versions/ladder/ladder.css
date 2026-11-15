@@ -10,7 +10,7 @@
   --t-body: clamp(1.12rem, 1.02rem + 0.36vw, 1.36rem);
 }
 .vl.is-day { --halo: rgba(244, 233, 220, 0.8); --fg: #1c1512; --soft: #5b4a45; --line: rgba(28, 21, 18, 0.28); }
-.vl a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.22em; }
+.vl a { color: inherit; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.22em; }
 .vl a:hover { text-decoration-thickness: 2px; }
 .vl :focus-visible { outline: 2px solid var(--fg); outline-offset: 4px; }
 .vl .skip { position: fixed; left: var(--pad); top: 10px; z-index: 30; padding: 8px 12px; background: var(--fg); color: var(--sky); transform: translateY(-220%); }
