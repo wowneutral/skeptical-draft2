@@ -1,0 +1,217 @@
+/* Version 13: the letters. Paper, ink and one red. */
+html[data-v="letters"] { background: #e9e4d8; }
+
+.v-letters {
+  --paper: #e9e4d8; --ink: #14110d; --red: #de3417; --red-ink: #a8240b; --soft: #4d463b; --line: rgba(20, 17, 13, 0.22);
+  --gut: clamp(20px, 3.4vw, 56px); --cut: 0;
+  --background: var(--paper); --foreground: var(--ink); --primary: var(--ink); --primary-foreground: var(--paper);
+  --border: var(--line); --input: var(--line); --ring: var(--red-ink); --muted: #dcd6c8; --muted-foreground: var(--soft);
+  --accent: #dcd6c8; --accent-foreground: var(--ink); --popover: var(--paper); --popover-foreground: var(--ink); --radius: 0px;
+  position: relative; color: var(--ink); background: var(--paper);
+  font: 500 1.0625rem/1.5 'Archivo Variable', 'Helvetica Neue', Arial, sans-serif;
+  font-synthesis: none; touch-action: pan-y; overflow-x: clip;
+}
+.v-letters ::selection { background: var(--red); color: #fff8f0; }
+.v-letters :focus-visible { outline: 3px solid var(--red-ink); outline-offset: 3px; }
+.v-letters.can-push { cursor: pointer; }
+.v-letters b { font-weight: 800; }
+
+/* The stage is the whole screen, behind the words. */
+.v-letters .stage { position: fixed; inset: 0; z-index: 0; opacity: 0; transition: opacity 0.7s ease 0.1s; }
+.v-letters .stage:has(canvas) { opacity: 1; }
+.v-letters .stage canvas { display: block; touch-action: pan-y; }
+.v-letters .sill { display: none; }
+.v-letters main, .v-letters footer { position: relative; z-index: 1; }
+
+/* Top bar. */
+.v-letters .top { position: fixed; z-index: 6; inset: 0 0 auto 0; height: 64px; padding: 0 var(--gut); display: flex; align-items: center; justify-content: space-between; pointer-events: none; }
+.v-letters .top a { pointer-events: auto; }
+.v-letters .brand { font: 400 1.5rem/1 'Anton', Impact, sans-serif; text-transform: uppercase; letter-spacing: 0.02em; min-height: 44px; display: inline-flex; align-items: center; background: var(--paper); padding: 0 10px; margin-left: -10px; }
+.v-letters .brand i { font-style: normal; color: var(--red-ink); margin-left: 0.04em; }
+.v-letters .top nav { display: flex; gap: clamp(2px, 1.2vw, 18px); background: var(--ink); color: var(--paper); padding: 0 8px; }
+.v-letters .top nav a { font: 700 0.82rem/1 'Archivo Variable', sans-serif; font-stretch: 82%; letter-spacing: 0.11em; text-transform: uppercase; min-height: 44px; outline-color: var(--paper); outline-offset: -5px; min-width: 44px; padding: 0 8px; display: inline-flex; align-items: center; justify-content: center; position: relative; }
+.v-letters .top nav a::after { content: ''; position: absolute; left: 8px; right: 8px; bottom: 9px; height: 2px; background: var(--red); transform: scaleX(0); transform-origin: left; transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.v-letters .top nav a:hover::after, .v-letters .top nav a:focus-visible::after { transform: scaleX(1); }
+
+/* The corner: push button, how to, and the slate that names the shot. */
+.v-letters .hud { position: fixed; z-index: 6; right: var(--gut); bottom: 20px; display: flex; align-items: center; gap: 16px; pointer-events: none; }
+.v-letters .hud > * { pointer-events: auto; }
+.v-letters .shove { font: 400 1.05rem/1 'Anton', Impact, sans-serif; letter-spacing: 0.05em; text-transform: uppercase; color: var(--paper); background: var(--ink); min-height: 46px; padding: 0 18px 0 16px; display: inline-flex; align-items: center; gap: 10px; cursor: pointer; transition: background 0.2s, transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.v-letters .shove::before { content: ''; width: 9px; height: 16px; background: var(--red); transform: rotate(0deg); transform-origin: 50% 100%; transition: transform 0.35s cubic-bezier(0.3, 1.6, 0.5, 1); }
+.v-letters .shove:hover, .v-letters .shove:focus-visible { background: var(--red-ink); }
+.v-letters .shove:hover::before, .v-letters .shove:focus-visible::before { transform: rotate(78deg); background: var(--paper); }
+.v-letters .shove:active { transform: translateY(2px); }
+.v-letters .how { position: absolute; right: 0; bottom: calc(100% + 8px); white-space: nowrap; font: 600 0.8rem/1.2 'Archivo Variable', sans-serif; color: var(--soft); pointer-events: none; transition: opacity 0.4s; }
+.v-letters:not([data-shot="hero"]) .how { opacity: 0; }
+.v-letters .slate { font: 700 0.74rem/1 'Archivo Variable', sans-serif; font-stretch: 80%; letter-spacing: 0.13em; text-transform: uppercase; display: flex; gap: 10px; align-items: center; pointer-events: none; font-variant-numeric: tabular-nums; }
+.v-letters .slate > span:first-child { color: var(--paper); background: var(--ink); padding: 4px 5px 3px; letter-spacing: 0.06em; }
+.v-letters .slate .tally { color: var(--soft); padding-left: 10px; border-left: 1px solid var(--line); }
+.v-letters .locked { position: fixed; z-index: 8; left: 50%; top: 50%; transform: translate(-50%, -100%); margin: 0; padding: 7px 10px 6px; background: var(--ink); color: var(--paper); font: 700 0.78rem/1 'Archivo Variable', sans-serif; font-stretch: 82%; letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; visibility: hidden; opacity: 0; pointer-events: none; }
+
+/* Everything waits for the letters to land. */
+.v-letters .top, .v-letters .hud, .v-letters .hero .side { transition: opacity 0.9s ease 0.25s; }
+.v-letters:not(.is-open) .top, .v-letters:not(.is-open) .hud, .v-letters:not(.is-open) .hero .side, .v-letters:not(.is-open) .pitch { opacity: 0; }
+
+/* Stops: each is a screen, with a stretch of travel before the next. */
+.v-letters .stop { min-height: 100svh; padding: 0 var(--gut); display: grid; align-content: center; }
+.v-letters .stop + .stop { margin-top: 62svh; }
+.v-letters main > .stop:last-child { margin-bottom: 62svh; }
+/* The run from the first line to the second goes right round the word: give it room. */
+.v-letters .stop[data-stop="m2"] { margin-top: 120svh; }
+
+/* First screen. */
+.v-letters .hero { grid-template-columns: minmax(0, 1fr) auto; align-content: start; column-gap: 3vw; padding-top: clamp(84px, 11svh, 112px); }
+.v-letters .pitch { font: 400 clamp(2.7rem, 6.15vw, 6.7rem)/0.95 'Anton', Impact, sans-serif; text-transform: uppercase; letter-spacing: 0.004em; max-width: 12.6em; text-wrap: balance; }
+.v-letters .hero .side { display: grid; gap: 18px; justify-items: end; text-align: right; padding-top: 0.5rem; }
+.v-letters .statement { display: grid; font: 700 clamp(1.05rem, 1.35vw, 1.3rem)/1.25 'Archivo Variable', sans-serif; font-stretch: 108%; }
+.v-letters .doors { display: grid; gap: 8px; justify-items: stretch; }
+.v-letters .doors a { font: 400 1.1rem/1 'Anton', Impact, sans-serif; letter-spacing: 0.045em; text-transform: uppercase; min-height: 48px; padding: 0 18px; display: inline-flex; align-items: center; justify-content: space-between; gap: 22px; background: var(--ink); color: var(--paper); border: 2px solid var(--ink); transition: background 0.2s, color 0.2s, border-color 0.2s; }
+.v-letters .doors a::after { content: '\2192'; font-family: 'Archivo Variable', sans-serif; font-weight: 700; transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.v-letters .doors a + a { background: transparent; color: var(--ink); }
+.v-letters .doors a:hover, .v-letters .doors a:focus-visible { background: var(--red-ink); border-color: var(--red-ink); color: var(--paper); }
+.v-letters .doors a:hover::after, .v-letters .doors a:focus-visible::after { transform: translateX(5px); }
+.v-letters .flat { width: 100%; grid-column: 1 / -1; margin-top: 6svh; fill: var(--ink); }
+.v-letters .flat .q { fill: var(--red); }
+
+/* The four lines the team says about itself. */
+.v-letters .say { align-content: start; padding-top: 17svh; }
+.v-letters .line { font: 800 clamp(1.9rem, 4.1vw, 4.3rem)/1.02 'Archivo Variable', sans-serif; font-stretch: 112%; letter-spacing: -0.028em; max-width: 9.6em; text-wrap: balance; }
+.v-letters .say.at-r .line { margin-left: auto; }
+.v-letters .say.wide .line { max-width: 17em; }
+
+/* Sections: a column of words in the clear half of the picture. */
+.v-letters .col { width: min(42vw, 620px); display: grid; gap: 20px; }
+.v-letters .at-r .col { margin-left: auto; }
+.v-letters .title { font: 400 clamp(3.8rem, 9.4vw, 10rem)/0.86 'Anton', Impact, sans-serif; text-transform: uppercase; letter-spacing: 0.002em; margin-left: -0.03em; }
+.v-letters .lead { font: 700 clamp(1.2rem, 1.75vw, 1.6rem)/1.24 'Archivo Variable', sans-serif; font-stretch: 105%; letter-spacing: -0.012em; max-width: 24em; }
+.v-letters .more { font: 400 1.1rem/1 'Anton', Impact, sans-serif; letter-spacing: 0.045em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 12px; min-height: 46px; padding: 0 2px; box-shadow: inset 0 -3px 0 var(--ink); transition: box-shadow 0.25s, color 0.25s; }
+.v-letters .more::after { content: '\2192'; font-family: 'Archivo Variable', sans-serif; font-weight: 700; transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.v-letters .more:hover, .v-letters .more:focus-visible { box-shadow: inset 0 -46px 0 var(--ink); color: var(--paper); padding: 0 12px; }
+.v-letters .more:hover::after, .v-letters .more:focus-visible::after { transform: translateX(5px); }
+
+.v-letters .event { font-size: 1.0625rem; line-height: 1.4; max-width: 30em; padding-top: 14px; border-top: 2px solid var(--ink); }
+.v-letters .event b { font-stretch: 82%; letter-spacing: 0.11em; text-transform: uppercase; font-size: 0.82rem; display: block; margin-bottom: 4px; }
+.v-letters .results { display: grid; gap: 14px; }
+.v-letters .results li { display: grid; gap: 2px; }
+.v-letters .results h3 { font: 400 clamp(1.7rem, 3vw, 2.9rem)/0.98 'Anton', Impact, sans-serif; text-transform: uppercase; }
+.v-letters .results p { color: var(--soft); }
+.v-letters .results p b { color: var(--ink); }
+
+.v-letters .kit { display: grid; grid-template-columns: 1fr 1fr; column-gap: 26px; border-top: 2px solid var(--ink); }
+.v-letters .kit > div { padding: 11px 0 12px; border-bottom: 1px solid var(--line); display: grid; align-content: start; gap: 2px; }
+.v-letters .kit > div:last-child { grid-column: 1 / -1; }
+.v-letters .kit dt { font: 400 1.5rem/1 'Anton', Impact, sans-serif; text-transform: uppercase; letter-spacing: 0.01em; display: flex; align-items: baseline; gap: 9px; }
+.v-letters .kit dt span { font: 700 0.72rem/1 'Archivo Variable', sans-serif; font-stretch: 80%; letter-spacing: 0.1em; color: var(--soft); font-variant-numeric: tabular-nums; }
+.v-letters .kit dd { font-size: 1rem; line-height: 1.35; color: var(--soft); }
+
+.v-letters .coaches { display: grid; gap: 18px; border-top: 2px solid var(--ink); padding-top: 16px; }
+.v-letters .coaches li { display: grid; gap: 4px; }
+.v-letters .coaches h3 { font: 400 clamp(1.9rem, 3.3vw, 3.2rem)/0.98 'Anton', Impact, sans-serif; text-transform: uppercase; display: flex; align-items: center; gap: 0.32em; }
+.v-letters .coaches h3 span { font-size: 0.62em; width: 1.5em; height: 1.5em; display: inline-grid; place-items: center; background: var(--paper); color: var(--ink); border: 2px solid var(--ink); flex: none; }
+.v-letters .coaches p { max-width: 30em; }
+
+.v-letters .ways { display: grid; border-top: 2px solid var(--ink); counter-reset: way; }
+.v-letters .ways > li { position: relative; padding: 14px 0 16px 34px; border-bottom: 1px solid var(--line); display: grid; gap: 8px; transition: padding 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.v-letters .ways > li::before { content: ''; position: absolute; left: 0; top: 24px; width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--ink); background: transparent; transition: background 0.3s, border-color 0.3s, transform 0.45s cubic-bezier(0.3, 1.6, 0.5, 1); transform: scale(0.62); }
+.v-letters .ways > li.is-on::before { background: var(--red); border-color: var(--red); transform: scale(1); }
+.v-letters .ways a { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 16px; min-height: 46px; }
+.v-letters .ways .name { font: 400 clamp(2.1rem, 3.7vw, 3.6rem)/1 'Anton', Impact, sans-serif; text-transform: uppercase; transition: color 0.25s; }
+.v-letters .ways .what { font: 700 1.1rem/1.2 'Archivo Variable', sans-serif; font-stretch: 105%; }
+.v-letters .ways a:hover .name, .v-letters .ways a:focus-visible .name { color: var(--red-ink); }
+.v-letters .ways ul { display: grid; gap: 3px; font-size: 1rem; line-height: 1.38; color: var(--soft); max-width: 34em; }
+.v-letters .after { max-width: 32em; }
+.v-letters .after a, .v-letters .foot a { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; transition: color 0.2s; }
+.v-letters .after a:hover, .v-letters .after a:focus-visible, .v-letters .foot a:hover, .v-letters .foot a:focus-visible { color: var(--red-ink); }
+
+/* The end: the whole set above, the last words below. */
+.v-letters .end { align-content: end; padding-bottom: 5.6rem; }
+.v-letters .foot { display: grid; grid-template-columns: minmax(0, 1.25fr) auto auto; column-gap: clamp(28px, 5vw, 90px); align-items: end; }
+.v-letters .last { font: 400 clamp(2.4rem, 5.2vw, 5.4rem)/0.92 'Anton', Impact, sans-serif; text-transform: uppercase; max-width: 9.5em; text-wrap: balance; grid-row: 1 / 3; }
+.v-letters .foot ul { display: grid; gap: 0; font-weight: 600; }
+.v-letters .foot li a { min-height: 34px; display: inline-flex; align-items: center; }
+.v-letters .foot small { grid-column: 2 / -1; font-size: 0.82rem; color: var(--soft); padding-top: 10px; }
+
+/* ───────── Phone: the set is a window in the top half; the words run underneath it. ───────── */
+@media (max-width: 820px) {
+  .v-letters { font-size: 1rem; }
+  .v-letters .stage { z-index: 2; clip-path: inset(0 0 calc(var(--cut) * 53svh) 0); }
+  .v-letters .sill { display: block; position: fixed; z-index: 3; left: 0; right: 0; top: calc(100svh - var(--cut) * 53svh); height: 2px; background: var(--ink); opacity: var(--cut); pointer-events: none; }
+  /* The first screen's words sit over the set; every later section runs under it. */
+  .v-letters main { z-index: auto; }
+  .v-letters .stop { position: relative; z-index: 1; }
+  .v-letters .hero { z-index: 3; }
+  .v-letters .top { height: 56px; padding: 0 12px 0 20px; }
+  .v-letters .brand { font-size: 1.25rem; }
+  .v-letters .top nav { gap: 0; padding: 0 2px; }
+  .v-letters .top nav a { font-size: 0.74rem; padding: 0 6px; letter-spacing: 0.08em; }
+  .v-letters .top nav a::after { left: 6px; right: 6px; }
+
+  .v-letters .hud { right: 14px; bottom: 14px; gap: 6px; }
+  .v-letters .how { position: fixed; right: 14px; bottom: 66px; }
+  .v-letters .slate { position: fixed; left: 0; right: auto; top: calc(47svh - 25px); bottom: auto; opacity: calc(var(--cut) * 3 - 2); font-size: 0.68rem; background: var(--paper); padding: 4px 10px 4px 14px; }
+  .v-letters .slate .tally { display: none; }
+  .v-letters .shove { min-height: 46px; font-size: 0.98rem; padding: 0 14px 0 12px; }
+
+  .v-letters .stop { min-height: 0; display: block; padding: 0 20px; }
+  .v-letters .stop + .stop { margin-top: 74svh; }
+  .v-letters .stop[data-stop="m2"] { margin-top: 120svh; }
+  .v-letters main > .stop:last-child { margin-bottom: 74svh; }
+  .v-letters .hero { position: relative; min-height: 100svh; display: flex; flex-direction: column; justify-content: space-between; padding: 70px 20px 86px; opacity: calc(1 - var(--cut) * 3); }
+  .v-letters .pitch { font-size: clamp(2.5rem, 12.4vw, 3.4rem); max-width: 100%; }
+  .v-letters .hero .side { justify-items: start; text-align: left; gap: 12px; }
+  .v-letters .statement { font-size: 1.02rem; }
+  .v-letters .doors { grid-auto-flow: column; justify-content: start; }
+  .v-letters .doors a { font-size: 0.98rem; padding: 0 12px; gap: 10px; min-height: 46px; }
+
+  .v-letters .say { padding-top: 0; }
+  .v-letters .line { font-size: clamp(1.85rem, 8.6vw, 2.5rem); max-width: 100%; }
+  .v-letters .say.at-r .line { margin-left: 0; }
+  .v-letters .col { width: 100%; gap: 16px; }
+  .v-letters .title { font-size: clamp(3.6rem, 21vw, 5.4rem); }
+  .v-letters .kit { grid-template-columns: 1fr; }
+  .v-letters .ways > li { padding-left: 30px; }
+  .v-letters .end { min-height: 0; padding-bottom: 96px; }
+  .v-letters .foot { grid-template-columns: 1fr 1fr; row-gap: 18px; }
+  .v-letters .last { grid-column: 1 / -1; grid-row: auto; font-size: clamp(2.3rem, 11vw, 3rem); }
+  .v-letters .foot li a { min-height: 44px; }
+  .v-letters .foot small { grid-column: 1 / -1; }
+}
+
+/* ───────── No WebGL: the same words, set close, with the name as flat type. ───────── */
+.v-letters.no-gl .stop { min-height: 0; padding-top: 7svh; padding-bottom: 7svh; }
+.v-letters.no-gl .stop + .stop, .v-letters.no-gl .stop[data-stop="m2"] { margin-top: 0; }
+.v-letters.no-gl main > .stop:last-child { margin-bottom: 0; }
+.v-letters.no-gl .hero { padding-top: clamp(84px, 11svh, 112px); }
+.v-letters.no-gl .say { border-top: 2px solid var(--ink); margin-left: var(--gut); margin-right: var(--gut); padding-left: 0; padding-right: 0; }
+.v-letters.no-gl .say .line { margin-left: 0; max-width: 14em; }
+.v-letters.no-gl .col { width: min(100%, 760px); margin-left: 0; }
+.v-letters.no-gl .end { padding-bottom: 5.6rem; }
+@media (max-width: 820px) {
+  .v-letters.no-gl .stop + .stop { margin-top: 0; }
+  .v-letters.no-gl .hero { min-height: 0; display: grid; grid-template-columns: minmax(0, 1fr); align-content: start; gap: 22px; padding: 76px 20px 7svh; }
+  .v-letters.no-gl .flat { margin-top: 0; }
+  .v-letters.no-gl .say { margin-left: 20px; margin-right: 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v-letters .hero { opacity: 1; }
+  .v-letters .stage, .v-letters .top, .v-letters .hud, .v-letters .hero .side { transition: none; }
+}
+
+/* Wide screens: words that cross the set sit on a slip of paper, so the letters never eat them. */
+@media (min-width: 821px) {
+  .v-letters:not(.no-gl) .say .line,
+  .v-letters:not(.no-gl) .sec .col {
+    background: var(--paper); padding: clamp(18px, 1.8vw, 28px) clamp(20px, 2vw, 32px) clamp(20px, 2vw, 30px);
+    border-top: 6px solid var(--ink);
+    box-shadow: 0 1px 0 var(--line), 0 26px 50px -30px rgba(20, 17, 13, 0.55);
+  }
+  .v-letters:not(.no-gl) .say .line { width: fit-content; }
+  .v-letters:not(.no-gl) .say:not(.at-r) .line { margin-left: calc(-1 * clamp(20px, 2vw, 32px)); }
+  .v-letters:not(.no-gl) .sec:not(.at-r) .col { margin-left: calc(-1 * clamp(20px, 2vw, 32px)); }
+  .v-letters .how { font: 400 1.35rem/1 'Anton', Impact, sans-serif; letter-spacing: 0.03em; text-transform: uppercase; color: var(--ink); bottom: calc(100% + 12px); display: flex; align-items: center; gap: 10px; }
+  .v-letters .how::before { content: ''; width: 12px; height: 12px; border-radius: 50%; background: var(--red); flex: none; }
+}
+@media (max-width: 820px) {
+  .v-letters .how { font: 400 1.08rem/1 'Anton', Impact, sans-serif; letter-spacing: 0.03em; text-transform: uppercase; color: var(--ink); }
+}
