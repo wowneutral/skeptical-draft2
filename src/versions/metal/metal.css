@@ -1,0 +1,60 @@
+/* Version 14. The live site's black and off-white, with the wordmark in liquid metal. */
+html[data-v="metal"] { background: #050505; }
+.vm { --bg: #050505; --fg: #f0f0ec; --mute: #8f8f8a; --rule: #262624; --pad: clamp(20px, 4vw, 56px); --ease: cubic-bezier(0.76, 0, 0.24, 1);
+  --serif: "Bodoni Moda Variable", "Bodoni Moda", Didot, serif; --sans: "Instrument Sans Variable", "Helvetica Neue", Arial, sans-serif;
+  min-height: 100vh; background: var(--bg); color: var(--fg); font: 400 clamp(1.05rem, 0.98rem + 0.3vw, 1.25rem)/1.45 var(--sans); letter-spacing: -0.01em; color-scheme: dark; overflow-x: clip; }
+.vm ::selection { background: var(--fg); color: var(--bg); }
+.vm :focus-visible { outline: 2px solid var(--fg); outline-offset: 5px; }
+.vm a { color: inherit; text-decoration: none; }
+.vm .u { background: linear-gradient(currentColor, currentColor) no-repeat 0 100% / 100% 1px; padding-bottom: 0.08em; transition: background-size 0.5s var(--ease); }
+.vm .u:hover { background-position: 100% 100%; background-size: 0 1px; }
+.vm .top { position: fixed; z-index: 20; inset: 0 0 auto; height: 64px; padding: 0 var(--pad); display: flex; align-items: center; justify-content: space-between; background: linear-gradient(var(--bg) 30%, transparent); }
+.vm .top a { display: inline-flex; align-items: center; min-height: 44px; }
+.vm .mark { font: italic 400 1.75rem/1 "Bodoni Moda", var(--serif); }
+.vm .top nav { display: flex; gap: clamp(0.8rem, 2.4vw, 2.2rem); }
+.vm h1, .vm h2, .vm h3, .vm .why p, .vm .track dt, .vm .paths b, .vm footer .line { font-family: var(--serif); font-optical-sizing: none; font-weight: 400; letter-spacing: -0.025em; }
+.vm section { padding: clamp(4rem, 14vh, 9rem) var(--pad); }
+.vm .hero { height: 100vh; height: 100svh; min-height: 34rem; padding-top: 64px; padding-bottom: clamp(1.6rem, 5vh, 3rem); display: grid; grid-template-rows: minmax(0, 1fr) auto; }
+.vm .pour { min-height: 0; height: 100%; overflow: hidden; margin: 0 calc(var(--pad) * -1); }
+.vm .foot { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); gap: 1.4rem clamp(1.6rem, 6vw, 6rem); align-items: end; }
+.vm h1 { font-size: clamp(2rem, 1rem + 3vw, 4.2rem); line-height: 1.02; text-wrap: balance; }
+.vm .lede { font-size: clamp(1.2rem, 1.02rem + 0.62vw, 1.6rem); line-height: 1.3; max-width: 28ch; }
+.vm .doors { display: grid; justify-items: start; gap: 0.2em; margin-top: 1rem; font: 400 clamp(1.5rem, 1rem + 1.6vw, 2.5rem)/1.12 var(--serif); letter-spacing: -0.02em; }
+.vm .why { display: grid; gap: 0.5em; font-size: clamp(1.9rem, 0.9rem + 3.6vw, 5rem); }
+.vm .why p { line-height: 1.05; max-width: 18em; text-wrap: balance; }
+.vm .why p:nth-child(even) { color: var(--mute); }
+.vm h2 { font-size: clamp(2.8rem, 1.2rem + 5vw, 6.4rem); line-height: 0.98; }
+.vm .cols { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: clamp(1.6rem, 6vw, 6rem); align-items: start; border-top: 1px solid var(--rule); }
+.vm .cols > div:first-child { display: grid; gap: 1rem; justify-items: start; }
+.vm .mute { color: var(--mute); }
+.vm .results > div { padding: clamp(1rem, 2.2vw, 1.6rem) 0; border-bottom: 1px solid var(--rule); }
+.vm .results > div:first-child { border-top: 1px solid var(--rule); }
+.vm h3 { font-size: clamp(1.8rem, 1rem + 2.4vw, 3.4rem); line-height: 1.04; }
+.vm .results p { margin-top: 0.4rem; max-width: 40ch; }
+/* The drive: one line of words. With script on a wide screen it is pinned and pulled sideways. */
+.vm .strip { padding-left: 0; padding-right: 0; border-top: 1px solid var(--rule); min-height: 100vh; min-height: 100svh; display: grid; grid-template-columns: minmax(0, 1fr); align-content: center; gap: clamp(1.4rem, 5vh, 3rem); overflow: hidden; }
+.vm .strip-head { padding: 0 var(--pad); display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.6rem 3rem; }
+.vm .track { display: flex; gap: clamp(2.4rem, 7vw, 8rem); padding: 0 var(--pad); width: max-content; will-change: transform; }
+.vm .item { width: max-content; min-width: 30vw; flex: none; opacity: calc(0.54 + var(--lit, 1) * 0.46); }
+.vm .track dt { font-size: clamp(3.4rem, 1rem + 9vw, 11rem); line-height: 0.95; white-space: nowrap; }
+.vm .track dd { margin-top: 0.8rem; font-size: clamp(1.2rem, 1.02rem + 0.62vw, 1.6rem); line-height: 1.3; max-width: 24ch; }
+.vm .item.end { align-self: center; width: auto; padding-right: 18vw; }
+.vm .item.end dt { font: 400 clamp(1.5rem, 1rem + 1.6vw, 2.5rem)/1.2 var(--serif); }
+.vm .paths a { display: grid; grid-template-columns: minmax(5.4em, auto) 1fr; gap: 0 1.4rem; align-items: baseline; padding: 1rem 0; border-bottom: 1px solid var(--rule); min-height: 44px; }
+.vm .paths li:first-child a { border-top: 1px solid var(--rule); }
+.vm .paths b { font-size: clamp(1.8rem, 1rem + 2.4vw, 3.4rem); line-height: 1; transition: transform 0.5s var(--ease); }
+.vm .paths a:hover b, .vm .paths a:focus-visible b { transform: translateX(0.3em); }
+.vm footer { padding: 2.4rem var(--pad) 4.6rem; border-top: 1px solid var(--rule); display: grid; gap: 0.9rem; }
+.vm footer .line { font-size: clamp(1.5rem, 1rem + 1.6vw, 2.5rem); }
+.vm footer ul { display: flex; flex-wrap: wrap; gap: 0.3rem 1.6rem; }
+.vm footer li a { display: inline-block; padding: 6px 0; }
+.vm footer small { color: var(--mute); }
+@media (max-width: 860px) {
+  .vm .foot, .vm .cols { grid-template-columns: minmax(0, 1fr); }
+  .vm .strip { min-height: 0; padding: clamp(4rem, 12vh, 7rem) 0; }
+  .vm .track { flex-direction: column; width: auto; gap: 1.6rem; }
+  .vm .item { width: auto; opacity: 1; } .vm .item.end { padding-right: 0; }
+  .vm .track dt { font-size: clamp(2.6rem, 1rem + 9vw, 4.6rem); white-space: normal; }
+  .vm .top nav { gap: 0.6rem; font-size: 0.95rem; }
+}
+@media (prefers-reduced-motion: reduce) { .vm .u, .vm .paths b { transition: none; } .vm .track { flex-wrap: wrap; width: auto; } .vm .item { opacity: 1; } }

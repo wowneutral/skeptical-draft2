@@ -144,6 +144,8 @@ export const VERSIONS = [
   { slug: 'badge', n: 9, name: 'The badge', color: '#eceae4', ink: '#121212', kind: 'New, round two', text: 'A tournament badge on a lanyard you can grab and swing. The rest of the site is printed like a credential.' },
   { slug: 'terminal', n: 10, name: 'The terminal', color: '#050806', ink: '#d7f5dd', kind: 'New, round two', text: 'The site as a command line. Type record, drive, people or join, or just press the keys on screen.' },
   { slug: 'spread', n: 11, name: 'The spread', color: '#03040a', ink: '#f4f4f8', kind: 'New, round two', text: 'The whole site read to you one word at a time, at whatever speed you can flow. The road speeds up with you.' },
-  { slug: 'bento', n: 12, name: 'The bento', color: '#0c0e0d', ink: '#e9efe9', kind: 'New, round two, no centrepiece', text: 'Everything in one grid of tiles, with the numbers counting up and a light that follows the pointer.' },
+  { slug: 'bento', n: 12, name: 'The bento', color: '#0c0e0d', ink: '#e9efe9', kind: 'New, round two, no centrepiece', text: 'Everything on one screen: a grid of tiles with the numbers counting up and a light that follows the pointer.' },
+  { slug: 'server', n: 13, name: 'The server', color: '#101216', ink: '#e8eaf0', kind: 'New, round three', text: 'The site as a group chat. Pick a channel and the team account types it out to you, one message at a time.' },
+  { slug: 'metal', n: 14, name: 'The metal', color: '#050505', ink: '#f0f0ec', kind: 'New, round three', text: 'The wordmark poured in liquid metal, and the drive as one long line of words you scroll sideways through.' },
 ] as const;
 export type VersionSlug = (typeof VERSIONS)[number]['slug'];

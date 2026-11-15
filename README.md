@@ -1,6 +1,6 @@
 # Skeptical, draft 2
 
-Twelve drafts of the [Skeptical](https://skeptical.pages.dev) site in one app, one route each. A design lab, not deployed.
+Fourteen drafts of the [Skeptical](https://skeptical.pages.dev) site in one app, one route each. A design lab, not deployed.
 
 | Route | Version | What it is |
 | --- | --- | --- |
@@ -11,11 +11,13 @@ Twelve drafts of the [Skeptical](https://skeptical.pages.dev) site in one app, o
 | `/cards` | The cards | The site as a speech doc. The first card is cut in front of you; then the highlighter, the reading speed and Shrink are yours. |
 | `/ladder` | The ladder | Sextus's ladder: night, a bank of cloud, sunrise, and then the ladder goes. |
 | `/blocks` | The blocks | A four-colour poster in one variable typeface, with a physics pit at the bottom. |
-| `/board` | The board | A split-flap postings board with a live clock and a globe pinned on the one tournament so far. |
+| `/board` | The board | A split-flap postings board with a live clock. The tiles wrap onto more rows on a phone. |
 | `/badge` | The badge | A tournament badge on a lanyard you can grab and swing; its faces are drawn in the browser. |
 | `/terminal` | The terminal | The site as a command line, with history and on-screen keys. |
 | `/spread` | The spread | A speed reader: the whole site one word at a time, over a night road that keeps pace. |
-| `/bento` | The bento | Everything in one grid of tiles, with counting numbers, a pointer light and the same globe. |
+| `/bento` | The bento | Everything on one screen: a grid of tiles with counting numbers and a light that follows the pointer. |
+| `/server` | The server | The site as a group chat. Each section is a channel that the team account types out to you. |
+| `/metal` | The metal | The wordmark poured in liquid metal, and the drive as one line of words you scroll sideways through. |
 
 `[` and `]` step between versions. Route changes play an ordered-dither cover.
 
@@ -28,7 +30,7 @@ Then open http://localhost:5173. On a Mac, double-clicking `start.command` does 
 
 ## Stack
 
-Vite, React 19, TypeScript. React Three Fiber, drei and postprocessing for the 3D. GSAP (ScrollTrigger, SplitText, DrawSVG) on a Lenis smooth scroll. Tailwind 4 with shadcn/ui components (Accordion, Button, Slider, Switch, ToggleGroup, Tooltip, Kbd). rough-notation for the pen marks, matter.js for the pit, cobe for the globe, and React Bits components (Magnet, VariableProximity, SplitFlapText, Lanyard, FaultyTerminal, Hyperspeed, CountUp, and the live site's own DitherVeil).
+Vite, React 19, TypeScript. React Three Fiber, drei and postprocessing for the 3D. GSAP (ScrollTrigger, SplitText, DrawSVG) on a Lenis smooth scroll. Tailwind 4 with shadcn/ui components (Accordion, Button, Slider, Switch, ToggleGroup, Tooltip, Kbd). rough-notation for the pen marks, matter.js for the pit, and React Bits components (Magnet, VariableProximity, SplitFlapText, Lanyard, FaultyTerminal, Hyperspeed, CountUp, MetallicPaint, and the live site's own DitherVeil).
 
 ## Where things are
 
