@@ -4,7 +4,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Environment, Lightformer, MeshReflectorMaterial, Sparkles, SpotLight } from '@react-three/drei';
-import { Bloom, EffectComposer, HueSaturation, ToneMapping, Vignette } from '@react-three/postprocessing';
+import { EffectComposer, HueSaturation, ToneMapping, Vignette } from '@react-three/postprocessing';
 import { ToneMappingMode } from 'postprocessing';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
@@ -68,9 +68,10 @@ function Lights() {
   });
   return (
     <>
-      <SpotLight ref={key} position={[1.2, 6.2, 2.2]} angle={0.42} penumbra={0.95} distance={9.5} castShadow shadow-mapSize={[1024, 1024]} shadow-bias={-0.0002}
+      <SpotLight ref={key} position={[-1.8, 6.2, 1.6]} angle={0.42} penumbra={0.95} distance={9.5} castShadow shadow-mapSize={[1024, 1024]} shadow-bias={-0.0002}
         volumetric attenuation={6} anglePower={6} opacity={0.11} radiusTop={0.12} radiusBottom={2.3} color="#fff6e8" />
-      <directionalLight position={[-4, 2.5, -5]} intensity={1.6} color="#dfe6ff" />
+      {/* A rim from behind, aimed at the statue only so it never rakes the floor. */}
+      <spotLight position={[-3.5, 3.2, -5]} angle={0.3} penumbra={1} intensity={90} distance={12} color="#dfe6ff" />
     </>
   );
 }
@@ -81,11 +82,11 @@ export default function StatueScene() {
   return (
     <Canvas shadows={{ type: THREE.PCFShadowMap }} dpr={[1, 1.6]} camera={{ fov: 32, near: 0.1, far: 80, position: [3.4, 0.6, 6] }} gl={{ antialias: false, powerPreference: 'high-performance' }}>
       <color attach="background" args={['#050505']} />
-      <fog attach="fog" args={['#050505', 9, 24]} />
+      <fog attach="fog" args={['#050505', 12, 30]} />
       <Statue />
       <mesh rotation-x={-Math.PI / 2} position-y={FLOOR} receiveShadow>
         <planeGeometry args={[70, 70]} />
-        <MeshReflectorMaterial blur={[420, 120]} resolution={floor} mixBlur={1} mixStrength={14} mixContrast={1} roughness={0.9} depthScale={1.1} minDepthThreshold={0.4} maxDepthThreshold={1.3} color="#0b0b0b" metalness={0.55} mirror={0.6} />
+        <MeshReflectorMaterial blur={[420, 120]} resolution={floor} mixBlur={1} mixStrength={14} mixContrast={1} roughness={1} depthScale={1.1} minDepthThreshold={0.4} maxDepthThreshold={1.3} color="#0b0b0b" metalness={0.1} mirror={0.6} envMapIntensity={0} />
       </mesh>
       <Sparkles count={110} scale={[4.5, 5.5, 4.5]} position={[0, 0.9, 0]} size={1.7} speed={still ? 0 : 0.22} opacity={0.45} color="#f0f0ec" noise={0.6} />
       <Lights />
@@ -97,7 +98,6 @@ export default function StatueScene() {
       </Environment>
       <OrbitRig radius={7.2} phoneRadius={11.5} height={0.5} lookY={-0.05} bob={0.2} />
       <EffectComposer multisampling={0}>
-        <Bloom mipmapBlur luminanceThreshold={0.85} luminanceSmoothing={0.2} intensity={0.45} />
         <HueSaturation saturation={-1} />
         <Vignette offset={0.22} darkness={0.8} />
         <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />

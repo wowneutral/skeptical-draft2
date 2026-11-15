@@ -29,7 +29,8 @@ export function Split({ as = 'p', by = 'lines', on = 'view', delay = 0, stagger,
       type: by === 'chars' ? 'words,chars' : by,
       mask: effect === 'rise' ? (by === 'chars' ? 'words' : by) : undefined,
       autoSplit: true,
-      aria: 'auto',
+      // A label is only allowed on a heading; elsewhere the split text is read as it stands.
+      aria: /^h[1-6]$/.test(String(as)) ? 'auto' : 'none',
       onSplit: (self) => {
         const targets = by === 'chars' ? self.chars : by === 'words' ? self.words : self.lines;
         const from = effect === 'blur'

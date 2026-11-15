@@ -43,13 +43,13 @@ export function OrbitPage({ slug, scene, credit }: { slug: 'head' | 'statue'; sc
       const tl = gsap.timeline({ paused: true });
       if (still) return { tl, inner };
       const heads = gsap.utils.toArray<HTMLElement>('[data-letters]', act);
-      const chars = heads.flatMap((h) => SplitText.create(h, { type: 'words,chars', aria: 'auto' }).chars);
+      const chars = heads.flatMap((h) => SplitText.create(h, { type: 'words,chars', aria: h.tagName === 'SPAN' ? 'none' : 'auto' }).chars);
       const rises = gsap.utils.toArray<HTMLElement>('[data-rise]', act);
       if (chars.length) tl.from(chars, { opacity: 0, filter: 'blur(14px)', yPercent: 45, duration: 0.9, ease: 'power3.out', stagger: 0.02 }, 0);
       if (rises.length) tl.from(rises, { opacity: 0, y: 26, duration: 0.85, ease: 'power3.out', stagger: 0.07 }, chars.length ? 0.25 : 0);
       return { tl, inner };
     });
-    const maniWords = gsap.utils.toArray<HTMLElement>('.mani p', el).flatMap((p) => SplitText.create(p, { type: 'words', aria: 'auto', wordsClass: 'mw' }).words as HTMLElement[]);
+    const maniWords = gsap.utils.toArray<HTMLElement>('.mani p', el).flatMap((p) => SplitText.create(p, { type: 'words', aria: 'none', wordsClass: 'mw' }).words as HTMLElement[]);
     const terms = gsap.utils.toArray<HTMLElement>('.dv dt', el), defs = gsap.utils.toArray<HTMLElement>('.dv dd', el);
 
     let current = -1, driveAt = -1, lastY = -1;
@@ -123,7 +123,7 @@ export function OrbitPage({ slug, scene, credit }: { slug: 'head' | 'statue'; sc
       <main id="main">
         <section className="act" id="top" data-side="left" aria-label={SITE.heading}>
           <div className="act-in"><div className="act-col">
-            <h1>{HERO.pitch.map((l) => <span className="l" data-letters key={l}>{l}</span>)}</h1>
+            <h1><span className="sr-only-x">{HERO.pitch.join(' ')}</span>{HERO.pitch.map((l) => <span className="l" data-letters aria-hidden="true" key={l}>{l}</span>)}</h1>
             <p className="lead gap" data-rise>{HERO.statement.join(' ')}</p>
             <p className="doors gap">{HERO.doors.map((d) => <span data-rise key={d.href}><U href={d.href}>{d.label}</U></span>)}</p>
           </div></div>
