@@ -14,7 +14,7 @@ import { OrbitRig, view } from '@/components/three/OrbitRig';
 import { stage } from '@/versions/orbit/stage';
 
 // From the live site's subject.ts.
-const SUBJECT = { src: '/head.jpg', aspect: 1400 / 1939, eyes: { x: 0.65, y: 0.243, w: 0.48, h: 0.105, angle: -10 } satisfies Eyes };
+const SUBJECT = { src: `${import.meta.env.BASE_URL}head.jpg`, aspect: 1400 / 1939, eyes: { x: 0.65, y: 0.243, w: 0.48, h: 0.105, angle: -10 } satisfies Eyes };
 const MASK = { get x() { return view.mx; }, get y() { return view.my; } };
 
 function layout() {

@@ -16,8 +16,8 @@ import { DitherEffect } from './DitherEffect';
 const MASK = { get x() { return view.mx; }, get y() { return view.my; } };
 
 function HeadModel() {
-  const { scene } = useGLTF('/models/head.glb');
-  const normal = useTexture('/models/head-normal.jpg');
+  const { scene } = useGLTF(`${import.meta.env.BASE_URL}models/head.glb`);
+  const normal = useTexture(`${import.meta.env.BASE_URL}models/head-normal.jpg`);
   const geometry = useMemo(() => {
     let g: THREE.BufferGeometry | undefined;
     scene.traverse((o) => { if ((o as THREE.Mesh).isMesh && !g) g = (o as THREE.Mesh).geometry; });
@@ -150,4 +150,4 @@ export default function HeadScene() {
     </Canvas>
   );
 }
-useGLTF.preload('/models/head.glb');
+useGLTF.preload(`${import.meta.env.BASE_URL}models/head.glb`);

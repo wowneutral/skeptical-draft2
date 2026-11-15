@@ -133,7 +133,7 @@ export default function LadderScene() {
       <Sky />
       <Stars />
       <LadderMesh />
-      <Clouds material={THREE.MeshLambertMaterial} texture="/tex/cloud.png" limit={phone ? 120 : 260} frustumCulled={false}>
+      <Clouds material={THREE.MeshLambertMaterial} texture={`${import.meta.env.BASE_URL}tex/cloud.png`} limit={phone ? 120 : 260} frustumCulled={false}>
         <Cloud seed={3} segments={phone ? 30 : 70} bounds={[46, CLOUD_T * 0.5, 46]} volume={26} position={[0, CLOUD_Y, -18]} color="#f4ece8" opacity={0.75} fade={60} speed={still ? 0 : 0.12} growth={5} />
         <Cloud seed={11} segments={phone ? 20 : 50} bounds={[60, CLOUD_T * 0.4, 30]} volume={30} position={[10, CLOUD_Y - 3, -60]} color="#ffd9c2" opacity={0.6} fade={90} speed={still ? 0 : 0.08} growth={6} />
         <Cloud seed={7} segments={phone ? 14 : 34} bounds={[10, CLOUD_T * 0.5, 8]} volume={9} position={[0, CLOUD_Y + 1, 2]} color="#ffffff" opacity={0.5} fade={12} speed={still ? 0 : 0.2} growth={3} />

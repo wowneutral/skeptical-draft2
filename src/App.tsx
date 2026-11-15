@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router';
+import { BrowserRouter, HashRouter, Route, Routes } from 'react-router';
 import { TransitionProvider } from '@/components/Transition';
 import { Switcher } from '@/components/Switcher';
 import { EXTRA_PAGES } from '@/registry';
@@ -21,9 +21,12 @@ const Metal = lazy(() => import('@/versions/metal/Metal'));
 
 const EXTRA = EXTRA_PAGES.map((p) => ({ slug: p.slug, Page: lazy(p.load) }));
 
+// VITE_HASH builds a copy that works from any static host (the phone preview): routes live after the #.
+const Router = import.meta.env.VITE_HASH ? HashRouter : BrowserRouter;
+
 export default function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <TransitionProvider>
         <Suspense fallback={null}>
           <Routes>
@@ -47,6 +50,6 @@ export default function App() {
         </Suspense>
         <Switcher />
       </TransitionProvider>
-    </BrowserRouter>
+    </Router>
   );
 }

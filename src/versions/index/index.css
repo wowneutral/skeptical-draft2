@@ -22,3 +22,7 @@
 .vi footer { padding: 2rem var(--pad) 5rem; color: var(--mute); max-width: 72rem; }
 @media (max-width: 640px) { .vi li a { grid-template-columns: 1fr; } }
 @media (prefers-reduced-motion: reduce) { .vi li a, .vi h2 span, .vi .thumb img { transition: none; } }
+
+.vi .vi-status { margin-top: 1.6rem; padding: 1rem 1.2rem; border: 1px solid currentColor; border-radius: 4px; max-width: 40rem; font-size: 0.95rem; line-height: 1.45; }
+.vi .vi-status p + p { margin-top: 0.35rem; }
+.vi .vi-status .vi-status-time { opacity: 0.7; font-size: 0.85rem; }

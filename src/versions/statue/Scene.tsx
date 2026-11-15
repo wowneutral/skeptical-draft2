@@ -13,7 +13,7 @@ import { still } from '@/lib/utils';
 import { OrbitRig } from '@/components/three/OrbitRig';
 import { stage } from '@/versions/orbit/stage';
 
-const LOCAL = '/models/bronze_horse.glb';
+const LOCAL = `${import.meta.env.BASE_URL}models/bronze_horse.glb`;
 const REMOTE = 'https://api.getlayers.ai/storage/v1/object/public/public/assets/laocoon-59f84455c6/bronze_horse.glb';
 const FLOOR = -1.55, HEIGHT = 3.1;
 
@@ -27,7 +27,7 @@ async function loadStatue(): Promise<THREE.Object3D> {
     if (probe.ok && !/html/.test(probe.headers.get('content-type') ?? '')) return (await gltf.loadAsync(LOCAL)).scene;
   } catch { /* fall through */ }
   try { return (await timeout(gltf.loadAsync(REMOTE), 15000)).scene; } catch { /* fall through */ }
-  const geo = await new PLYLoader().loadAsync('/models/lucy.ply');
+  const geo = await new PLYLoader().loadAsync(`${import.meta.env.BASE_URL}models/lucy.ply`);
   geo.computeVertexNormals();
   return new THREE.Mesh(geo, new THREE.MeshPhysicalMaterial({ color: '#cfcfc9', metalness: 1, roughness: 0.32 }));
 }
