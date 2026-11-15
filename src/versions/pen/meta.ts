@@ -1,0 +1,11 @@
+import type { Version } from '@/content';
+const meta: Version = {
+  slug: 'pen',
+  n: 24,
+  name: 'The pen',
+  color: '#f1eee6',
+  ink: '#17150f',
+  kind: '3D centrepiece',
+  text: 'A gel pen in 3D over a sheet of notes. Flick it, drop it or click it shut; it flies down to write each heading in ink, marks up the record, the drive and the coaches, and lets you change the ink and draw on the page.',
+};
+export default meta;
