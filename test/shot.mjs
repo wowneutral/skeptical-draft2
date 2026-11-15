@@ -1,4 +1,5 @@
 // node test/shot.mjs <route> [--w 1440 --h 900] [--at 0,0.2,..] [--reduced] [--wait 1400] [--first 5000] [--tag x] [--clip x,y,w,h] [--cols n --tw px] [--eval js] [--hover x,y]
+import './_lock.mjs';
 import { chromium } from 'playwright-core';
 import fs from 'node:fs';
 import path from 'node:path';

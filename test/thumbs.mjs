@@ -1,4 +1,5 @@
 // node test/thumbs.mjs <slug> [waitMs=8000] [scroll=0]   (scroll: 0..1 of the page, or pixels if > 1)
+import './_lock.mjs';
 import { chromium } from 'playwright-core';
 import fs from 'node:fs';
 const [slug, first = '8000', f = '0'] = process.argv.slice(2);

@@ -1,4 +1,5 @@
 // Automated checks for every route: errors, axe, reduced motion, phone overflow, copy rules.
+import './_lock.mjs';
 import { chromium } from 'playwright-core';
 import fs from 'node:fs';
 const axeSrc = fs.readFileSync('node_modules/axe-core/axe.min.js', 'utf8');

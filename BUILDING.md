@@ -72,6 +72,7 @@ export default meta;
 - Canvases must not swallow the page scroll: `touch-action: pan-y`, and never `preventDefault` on wheel.
 - No network at runtime: no font CDNs, no remote images or models. You may download assets at build time from `raw.githubusercontent.com` into `public/<slug>/` (3 MB total at most) and must credit the source and licence in the footer's small line.
 - No console errors or warnings of your own.
+- **Everything you draw is original.** No real logos, no clone of a real product's interface (no Discord, Zoom, Word, macOS or Windows look-alikes), no known characters, mascots, emoji sets, memes, album covers or film artwork. Generic objects (a pen, a coin, a vault door, a laptop) are fine; make them yours.
 
 ## 6. 3D notes (learned the hard way)
 
@@ -80,6 +81,11 @@ export default meta;
 - three here is r187: `PCFSoftShadowMap` is gone, use `shadows={{ type: THREE.PCFShadowMap }}`.
 - Bloom can flash white from a single hot pixel. Keep `luminanceThreshold` at 0.9 or more, and do not combine Bloom with `MeshReflectorMaterial`.
 - `dpr={[1, 1.6]}`; lighten the scene on phones (`isPhone()`).
+- **3D must not look cheap.** Earlier 3D was called cheap when it was grey primitives under default lights. Spend on materials (roughness and metalness maps drawn on a canvas, clearcoat, bevels, real thickness), on lighting (one motivated key light, rim light, contact shadows or ambient occlusion with `N8AO`), on a considered camera (long lens, shallow depth of field where it helps) and on motion with weight (springs, damping, overshoot). If a scene still reads as a tech demo, stylise it on purpose (line art, toon, print) instead of shipping half-real.
+- drei's `<Environment preset="...">` downloads an HDR from a CDN, which is not allowed. Build the environment offline: `<Environment resolution={256}><Lightformer .../>...</Environment>`.
+- drei's `<Text>` downloads a default font. Always pass `font` with a local file: `import fontUrl from '@fontsource/anton/files/anton-latin-400-normal.woff?url'` (use `.woff`, not `.woff2`).
+- Extruded 3D type: `node test/glyphs.mjs <font.woff> "TEXT" src/versions/<slug>/glyphs.json` writes outline paths for any installed font; load them with `SVGLoader` (`three/examples/jsm/loaders/SVGLoader.js`) and `ExtrudeGeometry`. The brand question mark is in `src/lib/marks.json`.
+- `@react-three/rapier` works offline (its WebAssembly is bundled). Wrap it in `<Suspense>`.
 - The test browser renders in software, so 3D frames are slow there: wait 12 seconds before the first screenshot. That says nothing about real speed; still keep draw calls and overdraw sane.
 
 ## 7. The bar
@@ -105,6 +111,14 @@ node test/shot.mjs /<slug> --w 390 --h 844 --first 9000 --wait 1800   # phone
 node test/check.mjs /<slug>                          # console errors, axe, reduced motion, phone overflow, copy rules
 ```
 
-`shot.mjs` options: `--at 0,0.2,0.5,1` (scroll fractions) or `--px 0,800` (pixels), `--cols 3 --tw 640` (contact-sheet layout), `--tag name`, `--reduced`, `--hover x,y`, `--eval "js to run first"`, `--clip x,y,w,h`. Open the image it writes and actually look at it, on desktop and on phone, and fix what you see. Do at least two look-and-fix rounds. `check.mjs` must come back with empty `axe`, `errors`, `links`, `copy` and `reduced.invisible`, and `phone.sw` equal to 390.
+```
+node test/play.mjs /<slug> steps.mjs --first 9000    # drive the page like a person: click, drag, type, and photograph each step
+```
+
+`steps.mjs` is a file you write in `/tmp/skep/<slug>/` (not in the repo): `export default async ({ page, snap, wait }) => { await page.mouse.click(700, 400); await wait(600); await snap(); };` where `page` is a Playwright Page. Use it to prove every interaction works, with a mouse on desktop and with `--w 390 --h 844` (touch) on a phone. Test the keyboard path too (`page.keyboard.press('Tab')`).
+
+Only one test browser runs at a time on this machine, so these commands may wait in a queue behind other people's: **run them with a 10 minute timeout** and do not assume a hang. The test server never pushes hot reloads; every command loads the page fresh. If a command says the server is down, run `bash test/serve.sh` and try again. Never start your own server or your own browser.
+
+`shot.mjs` options: `--at 0,0.2,0.5,1` (scroll fractions) or `--px 0,800` (pixels), `--cols 3 --tw 640` (contact-sheet layout), `--tag name`, `--reduced`, `--hover x,y`, `--eval "js to run first"`, `--clip x,y,w,h`. Open the image it writes and actually look at it, on desktop and on phone, and fix what you see. Do at least three look-and-fix rounds, and test your interactions with `play.mjs`. `check.mjs` must come back with empty `axe`, `errors`, `links`, `copy` and `reduced.invisible`, and `phone.sw` equal to 390.
 
 Your final message is a short report: what the version is, what happens in it, what you could not finish, and anything you are unsure of. Be honest; a reviewer will check it against the screenshots.
