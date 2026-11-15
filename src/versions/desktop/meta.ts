@@ -1,0 +1,12 @@
+import type { Version } from '@/content';
+
+const meta: Version = {
+  slug: 'desktop',
+  n: 25,
+  name: 'The desktop',
+  color: '#2a3b52',
+  ink: '#f3f1ea',
+  kind: 'Play with it',
+  text: 'A debater’s laptop with an operating system of its own: drag, resize and shelve the windows, spin the question mark, draw on a flow pad, try the locked drive, and run the join installer to shut it down.',
+};
+export default meta;
