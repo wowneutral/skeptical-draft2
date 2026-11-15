@@ -4,3 +4,4 @@ dist
 *.log
 test-shots
 public/models/bronze_horse.glb
+*.tsbuildinfo
