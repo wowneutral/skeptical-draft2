@@ -133,7 +133,7 @@ export const NAV = [
 
 
 export const VERSIONS = [
-  { slug: 'head', n: 1, name: 'The head', color: '#050505', ink: '#f0f0ec', kind: 'From your prompt', text: 'The Laocoön prompt as Skeptical. A chrome head you orbit once as you scroll, dithered, eyes covered. Move the pointer over it and the dither wipes off.' },
+  { slug: 'head', n: 1, name: 'The head', color: '#050505', ink: '#f0f0ec', kind: 'From your prompt', text: 'The Laocoön prompt as Skeptical, with the live site’s own head, dither and censor. The pointer uncovers the photograph; the scroll spreads the question marks.' },
   { slug: 'statue', n: 2, name: 'The statue', color: '#050505', ink: '#f0f0ec', kind: 'From your prompt', text: 'The prompt’s bronze horse in a dark gallery: one light from above, a reflecting floor, dust in the beam.' },
   { slug: 'question', n: 3, name: 'The question', color: '#07060b', ink: '#f3f0ea', kind: 'New', text: 'A glass question mark that bends the type behind it. At Join the hook leaves and the dot becomes the full stop.' },
   { slug: 'flow', n: 4, name: 'The flow', color: '#f7f4ea', ink: '#1a36a8', kind: 'New', text: 'The site as a flow sheet. The round plays out as you scroll: our case in blue pen, their column in red, and nobody answers it.' },
@@ -144,6 +144,6 @@ export const VERSIONS = [
   { slug: 'badge', n: 9, name: 'The badge', color: '#eceae4', ink: '#121212', kind: 'New, round two', text: 'A tournament badge on a lanyard you can grab and swing. The rest of the site is printed like a credential.' },
   { slug: 'terminal', n: 10, name: 'The terminal', color: '#050806', ink: '#d7f5dd', kind: 'New, round two', text: 'The site as a command line. Type record, drive, people or join, or just press the keys on screen.' },
   { slug: 'spread', n: 11, name: 'The spread', color: '#03040a', ink: '#f4f4f8', kind: 'New, round two', text: 'The whole site read to you one word at a time, at whatever speed you can flow. The road speeds up with you.' },
-  { slug: 'bento', n: 12, name: 'The bento', color: '#0c0e0d', ink: '#e9efe9', kind: 'New, round two, no centrepiece', text: 'Everything on one screen: a grid of tiles with the numbers counting up and a light that follows the pointer.' },
+  { slug: 'bento', n: 12, name: 'The bento', color: '#0c0e0d', ink: '#e9efe9', kind: 'New, round two, no centrepiece', text: 'Everything in one grid of tiles, with the numbers counting up and a light that follows the pointer.' },
 ] as const;
 export type VersionSlug = (typeof VERSIONS)[number]['slug'];

@@ -1,8 +1,9 @@
 #!/bin/bash
 # Double-click on a Mac: installs once, fetches the bronze horse once, then runs the site on localhost.
 cd "$(dirname "$0")" || exit 1
-if [ ! -d node_modules ]; then
-  echo "Installing packages (first run only)..."
+# Install on the first run, and again whenever the package list has changed.
+if [ ! -d node_modules ] || [ package.json -nt node_modules/.package-lock.json ]; then
+  echo "Installing packages..."
   npm install || { echo "npm install failed"; read -r -p "Press Return to close."; exit 1; }
 fi
 HORSE="public/models/bronze_horse.glb"

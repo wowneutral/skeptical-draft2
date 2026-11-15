@@ -1,9 +1,11 @@
 import { chromium } from 'playwright-core';
 import fs from 'node:fs';
-const at = { head: [0, 9000], statue: [0, 16000], question: [0, 12000], flow: [0, 6500], cards: [1300, 3500], ladder: [0.74, 10000], blocks: [0, 5000] };
+const only = process.argv.slice(2);
+const at = { head: [0, 9000], statue: [0, 16000], question: [0, 12000], flow: [0, 6500], cards: [1300, 3500], ladder: [0.74, 10000], blocks: [0, 5000], board: [0, 7000], badge: [0, 7000], terminal: [0, 6500], spread: [0, 6500], bento: [0, 5500] };
 fs.mkdirSync('public/thumbs', { recursive: true });
 const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium-1243/chrome-linux64/chrome', args: ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] });
 for (const [name, [f, first]] of Object.entries(at)) {
+  if (only.length && !only.includes(name)) continue;
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 }, deviceScaleFactor: 0.5 });
   const page = await ctx.newPage();
   await page.route(/^https?:\/\/(?!127\.0\.0\.1)/, (r) => r.abort());

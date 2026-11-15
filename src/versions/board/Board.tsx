@@ -9,6 +9,9 @@ import { useRise } from '@/lib/motion';
 import { still } from '@/lib/utils';
 import { useVersion } from '@/lib/version';
 import SplitFlapText from '@/components/bits/SplitFlapText';
+import { Globe } from '@/components/Globe';
+
+const AMBER: [number, number, number] = [1, 0.69, 0], GREY: [number, number, number] = [0.32, 0.32, 0.31], NIGHT: [number, number, number] = [0.07, 0.07, 0.07];
 
 const CHARSET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,’'-&: ";
 const up = (s: string) => s.toUpperCase();
@@ -42,7 +45,7 @@ function Flap({ text, pad, size = 'var(--flap)', amber }: { text: string; pad?: 
   return (
     <span className="flap" ref={ref}>
       <span className="sr-only-x">{text}</span>
-      <SplitFlapText aria-hidden="true" {...flap} text={on ? up(text) : ''} padTo={pad ?? text.length} fontSize={size} textColor={amber ? '#ffb000' : flap.textColor} intro={false} />
+      <SplitFlapText aria-hidden="true" {...flap} text={on ? up(text) : ''} padTo={window.innerWidth > 900 ? pad ?? text.length : text.length} fontSize={size} textColor={amber ? '#ffb000' : flap.textColor} intro={false} />
     </span>
   );
 }
@@ -51,7 +54,7 @@ function Clock() {
   const [t, setT] = useState(() => new Date());
   useEffect(() => { const id = setInterval(() => setT(new Date()), 15000); return () => clearInterval(id); }, []);
   const s = `${String(t.getHours()).padStart(2, '0')}:${String(t.getMinutes()).padStart(2, '0')}`;
-  return <span className="clock" aria-label={`Local time ${s}`}><SplitFlapText aria-hidden="true" {...flap} charset="0123456789:" text={s} padTo={5} fontSize="1.05rem" intro={false} /></span>;
+  return <span className="clock" role="img" aria-label={`Local time ${s}`}><SplitFlapText aria-hidden="true" {...flap} charset="0123456789:" text={s} padTo={5} fontSize="1.05rem" intro={false} /></span>;
 }
 
 const A = ({ href, children }: { href: string; children: ReactNode }) => <a href={href} rel={href.startsWith('http') ? 'noopener' : undefined}>{children}</a>;
@@ -108,10 +111,12 @@ export default function Board() {
 
         <section id="record">
           <header className="head"><h2>{RECORD.title}</h2><p>{RECORD.rule}</p></header>
+          <div className="with-globe">
+          <div>
           <p className="where" data-rise>{RECORD.when}. {RECORD.name}, {RECORD.where}.</p>
-          <div className="table" role="list">
+          <div className="table">
             {RECORD.results.map((r) => (
-              <div className="row r3" role="listitem" key={r.who} data-rise>
+              <div className="row r3" key={r.who} data-rise>
                 <Flap text={r.who} pad={9} />
                 <Flap text={r.what} pad={26} amber />
                 <p>{r.more}</p>
@@ -119,29 +124,32 @@ export default function Board() {
             ))}
           </div>
           <p className="more" data-rise><A href={RECORD.more.href}>{RECORD.more.label}</A></p>
+          </div>
+          <div className="globe" data-rise><Globe lat={38.04} lng={-84.5} label={`A globe with a pin on ${RECORD.where}`} base={GREY} marker={AMBER} glow={NIGHT} /></div>
+          </div>
         </section>
 
         <section id="drive">
           <header className="head"><h2>{DRIVE.title}</h2><p>{DRIVE.lead}</p></header>
-          <div className="table" role="list">
-            {DRIVE.items.map((d) => <div className="row r2" role="listitem" key={d.term} data-rise><Flap text={d.term} pad={10} /><p>{d.text}</p></div>)}
+          <div className="table">
+            {DRIVE.items.map((d) => <div className="row r2" key={d.term} data-rise><Flap text={d.term} pad={10} /><p>{d.text}</p></div>)}
           </div>
           <p className="more" data-rise><A href={DRIVE.more.href}>{DRIVE.more.label}</A></p>
         </section>
 
         <section id="people">
           <header className="head"><h2>{PEOPLE.title}</h2><p>{PEOPLE.count}</p></header>
-          <div className="table" role="list">
-            {PEOPLE.coaches.map((c) => <div className="row r3" role="listitem" key={c.name} data-rise><Flap text={c.name} pad={14} /><Flap text={c.role} pad={15} amber /><p>{c.bio}</p></div>)}
+          <div className="table">
+            {PEOPLE.coaches.map((c) => <div className="row r3" key={c.name} data-rise><Flap text={c.name} pad={14} /><Flap text={c.role} pad={15} amber /><p>{c.bio}</p></div>)}
           </div>
           <p className="more" data-rise><A href={PEOPLE.more.href}>{PEOPLE.more.label}</A></p>
         </section>
 
         <section id="join">
           <header className="head"><h2>{JOIN.title}</h2><p>{JOIN.lead}</p></header>
-          <div className="table" role="list">
+          <div className="table">
             {JOIN.paths.map((p, i) => (
-              <a className="row r3 go" role="listitem" key={p.id} href={p.href} rel="noopener" data-rise>
+              <a className="row r3 go" key={p.id} href={p.href} rel="noopener" data-rise>
                 <Flap text={p.name} pad={8} />
                 <Flap text={STATUS[i]} pad={9} amber />
                 <p><b>{p.line}</b> {p.text[0]}</p>

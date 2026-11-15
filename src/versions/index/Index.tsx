@@ -17,8 +17,8 @@ export default function Index() {
     <div className="vi" ref={root}>
       <header>
         <p className="mark">skeptical</p>
-        <Split as="h1" on="load" delay={0.5}>Draft 2, seven ways.</Split>
-        <p data-rise>One project, one route per version. None of them is deployed. The copy is the live site’s in all seven.</p>
+        <Split as="h1" on="load" delay={0.5}>Draft 2, twelve ways.</Split>
+        <p data-rise>One project, one route per version. None of them is deployed. The copy is the live site’s in all twelve.</p>
       </header>
       <main>
         <ol>
@@ -37,7 +37,7 @@ export default function Index() {
           ))}
         </ol>
       </main>
-      <footer><p>Versions 1 and 2 follow the live site’s rules. Versions 3 to 7 start from nothing: new fonts, colours and layouts. Facts and privacy rules are the same everywhere. Use [ and ] to step between versions.</p></footer>
+      <footer><p>Versions 1 and 2 follow the live site’s rules. Versions 3 to 12 start from nothing: new fonts, colours and layouts. Facts and privacy rules are the same everywhere. Use [ and ] to step between versions.</p></footer>
     </div>
   );
 }
