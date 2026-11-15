@@ -140,5 +140,10 @@ export const VERSIONS = [
   { slug: 'cards', n: 5, name: 'The cards', color: '#e7e6e2', ink: '#111111', kind: 'New, no centrepiece', text: 'The site as a speech doc. Watch a card get cut as you scroll, then set your own speed and highlighter.' },
   { slug: 'ladder', n: 6, name: 'The ladder', color: '#05060c', ink: '#f1ece1', kind: 'New', text: 'Sextus’s ladder. You climb through the cloud into the sunrise, and at the top the ladder falls away.' },
   { slug: 'blocks', n: 7, name: 'The blocks', color: '#2440ff', ink: '#efece3', kind: 'New, no centrepiece', text: 'A tournament poster. Four flat colours, one typeface that bends toward the pointer, and a footer you can throw around.' },
+  { slug: 'board', n: 8, name: 'The board', color: '#0a0a0a', ink: '#f2f2ee', kind: 'New, round two', text: 'A postings board. Split-flap tiles turn over to show the pitch, the record and the three ways in.' },
+  { slug: 'badge', n: 9, name: 'The badge', color: '#eceae4', ink: '#121212', kind: 'New, round two', text: 'A tournament badge on a lanyard you can grab and swing. The rest of the site is printed like a credential.' },
+  { slug: 'terminal', n: 10, name: 'The terminal', color: '#050806', ink: '#d7f5dd', kind: 'New, round two', text: 'The site as a command line. Type record, drive, people or join, or just press the keys on screen.' },
+  { slug: 'spread', n: 11, name: 'The spread', color: '#03040a', ink: '#f4f4f8', kind: 'New, round two', text: 'The whole site read to you one word at a time, at whatever speed you can flow. The road speeds up with you.' },
+  { slug: 'bento', n: 12, name: 'The bento', color: '#0c0e0d', ink: '#e9efe9', kind: 'New, round two, no centrepiece', text: 'Everything on one screen: a grid of tiles with the numbers counting up and a light that follows the pointer.' },
 ] as const;
 export type VersionSlug = (typeof VERSIONS)[number]['slug'];

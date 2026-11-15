@@ -1,0 +1,48 @@
+/* Version 8. A departures board: black, white tiles, one amber. */
+html[data-v="board"] { background: #0a0a0a; }
+.vbd { --bg: #0a0a0a; --fg: #f2f2ee; --dim: #a3a39c; --rule: #2a2a28; --amber: #ffb000; --pad: clamp(16px, 3.6vw, 52px); --flap: clamp(1rem, 0.7rem + 1.1vw, 1.7rem);
+  min-height: 100vh; background: var(--bg); color: var(--fg); font: 400 clamp(1rem, 0.95rem + 0.25vw, 1.15rem)/1.5 "IBM Plex Mono", ui-monospace, Menlo, monospace; color-scheme: dark; }
+.vbd ::selection { background: var(--amber); color: #000; }
+.vbd :focus-visible { outline: 2px solid var(--amber); outline-offset: 4px; }
+.vbd a { color: inherit; text-decoration: underline; text-underline-offset: 0.2em; text-decoration-color: var(--amber); }
+.vbd a:hover { color: var(--amber); }
+.vbd .split-flap, .vbd .split-flap * { font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace; font-weight: 500; }
+.vbd .top { position: sticky; top: 0; z-index: 20; height: 60px; padding: 0 var(--pad); display: flex; align-items: center; gap: clamp(0.8rem, 2.4vw, 2.2rem); background: rgba(10, 10, 10, 0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--rule); }
+.vbd .top a { text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; }
+.vbd .mark { font-weight: 500; letter-spacing: 0.08em; margin-right: auto; }
+.vbd .top nav { display: flex; gap: clamp(0.7rem, 2vw, 1.8rem); }
+.vbd section { padding: clamp(3rem, 9vh, 6.5rem) var(--pad); border-bottom: 1px solid var(--rule); }
+.vbd .hero { min-height: calc(100vh - 60px); min-height: calc(100svh - 60px); display: grid; align-content: center; gap: clamp(1.6rem, 4vh, 3rem); }
+.vbd .big { font-size: clamp(1.25rem, 0.2rem + 4.6vw, 4.6rem); display: grid; gap: 0.16em; justify-content: start; padding: clamp(0.8rem, 2vw, 1.6rem); background: #101010; border: 1px solid var(--rule); border-radius: 10px; box-shadow: inset 0 0 0 6px #0c0c0c; width: fit-content; max-width: 100%; overflow: hidden; }
+.vbd .under { display: flex; flex-wrap: wrap; gap: 1.2rem 3rem; align-items: end; justify-content: space-between; }
+.vbd .lede { max-width: 46ch; color: var(--dim); }
+.vbd .doors { display: flex; flex-wrap: wrap; gap: 0.7rem; }
+.vbd .btn { display: inline-flex; align-items: center; min-height: 50px; padding: 0 1.2rem; border: 1px solid var(--fg); border-radius: 4px; text-decoration: none; font-weight: 500; text-transform: uppercase; letter-spacing: 0.04em; transition: background 0.2s, color 0.2s; }
+.vbd .btn:first-child { background: var(--fg); color: var(--bg); }
+.vbd .btn:hover { background: var(--amber); border-color: var(--amber); color: #000; }
+.vbd .head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.4rem 2rem; margin-bottom: clamp(1.2rem, 3vw, 2.2rem); }
+.vbd h2 { font-size: clamp(1.6rem, 1rem + 2.4vw, 3.2rem); font-weight: 500; letter-spacing: -0.02em; text-transform: uppercase; line-height: 1; }
+.vbd .head p { color: var(--dim); max-width: 50ch; }
+.vbd .where { color: var(--amber); margin-bottom: 1rem; }
+.vbd .table { border-top: 1px solid var(--rule); }
+.vbd .row { display: grid; align-items: center; gap: 0.6rem clamp(1rem, 3vw, 2.6rem); padding: 0.9rem 0; border-bottom: 1px solid var(--rule); text-decoration: none; }
+.vbd .r2 { grid-template-columns: max-content 1fr; }
+.vbd .r3 { grid-template-columns: max-content max-content 1fr; }
+.vbd .row p { color: var(--dim); min-width: 0; }
+.vbd .row p b { color: var(--fg); font-weight: 500; }
+.vbd .flap { display: inline-block; max-width: 100%; }
+.vbd a.go { transition: background 0.2s; }
+.vbd a.go:hover { background: #121212; color: inherit; }
+.vbd .more { margin-top: 1.4rem; max-width: 80ch; }
+.vbd footer { padding: 2rem var(--pad) 4.5rem; display: grid; gap: 0.7rem; }
+.vbd footer .line { font-size: clamp(1.2rem, 1rem + 1vw, 1.8rem); font-weight: 500; text-transform: uppercase; }
+.vbd footer ul { display: flex; flex-wrap: wrap; gap: 0.2rem 1.5rem; }
+.vbd footer li a { display: inline-block; padding: 6px 0; }
+.vbd footer small { color: var(--dim); }
+@media (max-width: 900px) {
+  .vbd .r3, .vbd .r2 { grid-template-columns: 1fr; }
+  .vbd .clock { display: none; }
+  .vbd .top nav { gap: 0.6rem; font-size: 0.92rem; }
+  .vbd { --flap: 1.05rem; }
+}
+@media (prefers-reduced-motion: reduce) { .vbd .btn, .vbd a.go { transition: none; } }

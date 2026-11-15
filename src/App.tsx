@@ -12,6 +12,11 @@ const Flow = lazy(() => import('@/versions/flow/Flow'));
 const Cards = lazy(() => import('@/versions/cards/Cards'));
 const Ladder = lazy(() => import('@/versions/ladder/Ladder'));
 const Blocks = lazy(() => import('@/versions/blocks/Blocks'));
+const Board = lazy(() => import('@/versions/board/Board'));
+const Badge = lazy(() => import('@/versions/badge/Badge'));
+const Terminal = lazy(() => import('@/versions/terminal/Terminal'));
+const Spread = lazy(() => import('@/versions/spread/Spread'));
+const Bento = lazy(() => import('@/versions/bento/Bento'));
 
 export default function App() {
   return (
@@ -28,6 +33,11 @@ export default function App() {
             <Route path="/cards" element={<Cards />} />
             <Route path="/ladder" element={<Ladder />} />
             <Route path="/blocks" element={<Blocks />} />
+            <Route path="/board" element={<Board />} />
+            <Route path="/badge" element={<Badge />} />
+            <Route path="/terminal" element={<Terminal />} />
+            <Route path="/spread" element={<Spread />} />
+            <Route path="/bento" element={<Bento />} />
             <Route path="*" element={<Index />} />
           </Routes>
         </Suspense>
