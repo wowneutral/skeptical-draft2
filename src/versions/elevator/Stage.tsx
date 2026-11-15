@@ -79,7 +79,7 @@ function cut(text: string, map: (u: number, v: number) => [number, number]) {
 
 function Leaf({ side, geo, M }: { side: -1 | 1; geo: Geo; M: M }) {
   const ref = useRef<THREE.Group>(null);
-  const { door, island, glassGeo, glassPos } = useMemo(() => {
+  const { door, island, glassGeo, glassPos, inner, kick, inlay } = useMemo(() => {
     const { W, H, phone } = geo;
     const half = W / 2, over = 0.05, gap = 0.003;
     const x0 = side < 0 ? -half - over : gap, x1 = side < 0 ? -gap : half + over;
@@ -108,12 +108,21 @@ function Leaf({ side, geo, M }: { side: -1 | 1; geo: Geo; M: M }) {
     const isl = new THREE.ExtrudeGeometry(res.islands, { ...ex, bevelEnabled: false });
     isl.translate(0, 0, -depth / 2);
     const gg = new THREE.PlaneGeometry(gsz[0], gsz[1]);
-    return { door: d, island: isl, glassGeo: gg, glassPos: gpos };
+    // The car side of the leaf: plain brushed steel with a brass kick plate and a brass line by the seam,
+    // so riders never read the name backwards.
+    const lw = x1 - x0, cx0 = (x0 + x1) / 2;
+    const inner = new THREE.BoxGeometry(lw, H - 0.004, 0.004); inner.translate(cx0, (H - 0.004) / 2, 0);
+    const kick = new THREE.BoxGeometry(lw, 0.16, 0.006); kick.translate(cx0, 0.08, 0.002);
+    const inlayX = side < 0 ? -gap - 0.07 : gap + 0.07;
+    const inlay = new THREE.BoxGeometry(0.012, H - 0.36, 0.006); inlay.translate(inlayX, 0.2 + (H - 0.36) / 2, 0.002);
+    return { door: d, island: isl, glassGeo: gg, glassPos: gpos, inner, kick, inlay };
   }, [geo, side]);
-  useEffect(() => () => { door.dispose(); island.dispose(); glassGeo.dispose(); }, [door, island, glassGeo]);
+  useEffect(() => () => { door.dispose(); island.dispose(); glassGeo.dispose(); inner.dispose(); kick.dispose(); inlay.dispose(); }, [door, island, glassGeo, inner, kick, inlay]);
+  const innerRef = useRef<THREE.Group>(null);
   useFrame(() => {
     const g = ref.current; if (!g) return;
     g.position.x = side * lift.doors * (geo.W / 2 + 0.03);
+    if (innerRef.current) innerRef.current.visible = lift.enter > 0.42;
   });
   return (
     <group ref={ref} position={[0, 0, -0.072]}>
@@ -121,6 +130,11 @@ function Leaf({ side, geo, M }: { side: -1 | 1; geo: Geo; M: M }) {
       <mesh geometry={island} material={[M.door, M.edge]} castShadow />
       {/* Frosted glass behind the letters, on the car side. */}
       <mesh geometry={glassGeo} material={M.glass} position={[glassPos[0], glassPos[1], 0.019]} renderOrder={2} />
+      <group ref={innerRef} position={[0, 0, 0.0215]} visible={false}>
+        <mesh geometry={inner} material={M.door} receiveShadow />
+        <mesh geometry={kick} material={M.brassM} />
+        <mesh geometry={inlay} material={M.brassM} />
+      </group>
     </group>
   );
 }

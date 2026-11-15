@@ -15,7 +15,7 @@ export const TOP = FLOORS.length - 1;
 export const RIDE = [1, 2, 3, 4, 5];
 
 /** What each floor's light is: the colour that spills into the car when the doors open. */
-export const LIGHT = ['#2a3140', '#ffcf8a', '#bcd4ff', '#ff9a7a', '#ffc77a', '#fff6e4'];
+export const LIGHT = ['#2a3140', '#ffcf8a', '#ffd9a6', '#ff9a7a', '#ffc77a', '#fff6e4'];
 
 export type Phase = 'outside' | 'calling' | 'entering' | 'inside';
 type Ev = 'arrive' | 'depart' | 'phase' | 'alarm' | 'status' | 'key' | 'lit' | 'doors';
