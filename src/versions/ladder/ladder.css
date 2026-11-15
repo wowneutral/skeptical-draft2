@@ -1,0 +1,80 @@
+/* Version 6. One bookish serif; the sky is the only colour and it changes with altitude. */
+.vl {
+  position: relative; color: var(--fg); font: 400 var(--t-body)/1.45 var(--serif); font-optical-sizing: auto; transition: color 0.6s; color-scheme: dark;
+  --sky: #05060c; --halo: rgba(5, 6, 12, 0.85); --fg: #f1ece1; --soft: #b9b4c6; --line: rgba(241, 236, 225, 0.22);
+  --serif: "Newsreader Variable", "Iowan Old Style", Georgia, serif; --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --pad: clamp(20px, 4.4vw, 68px);
+  --t-huge: clamp(2.8rem, 1.2rem + 6vw, 7.2rem);
+  --t-big: clamp(1.9rem, 1.1rem + 2.7vw, 3.7rem);
+  --t-mid: clamp(1.35rem, 1.05rem + 1vw, 2rem);
+  --t-body: clamp(1.12rem, 1.02rem + 0.36vw, 1.36rem);
+}
+.vl.is-day { --halo: rgba(244, 233, 220, 0.8); --fg: #1c1512; --soft: #5b4a45; --line: rgba(28, 21, 18, 0.28); }
+.vl a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.22em; }
+.vl a:hover { text-decoration-thickness: 2px; }
+.vl :focus-visible { outline: 2px solid var(--fg); outline-offset: 4px; }
+.vl .skip { position: fixed; left: var(--pad); top: 10px; z-index: 30; padding: 8px 12px; background: var(--fg); color: var(--sky); transform: translateY(-220%); }
+.vl .skip:focus { transform: none; }
+
+.vl .stage { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; display: block; }
+
+.vl .top { position: fixed; z-index: 20; inset: 0 0 auto; height: 68px; padding: 0 var(--pad); display: flex; align-items: center; justify-content: space-between; }
+.vl .top::before { content: ""; position: absolute; inset: 0 0 -36px; z-index: -1; background: linear-gradient(var(--halo), transparent); pointer-events: none; transition: opacity 0.6s; }
+.vl .top a { text-decoration: none; }
+.vl .mark { font: italic 500 1.7rem/1 var(--serif); padding: 10px 0; }
+.vl .top nav { display: flex; gap: clamp(0.7rem, 2.2vw, 2rem); }
+.vl .top nav a { display: inline-flex; align-items: center; min-height: 44px; border-bottom: 1px solid transparent; }
+.vl .top nav a:hover { border-bottom-color: currentColor; }
+
+.vl .gauge { position: fixed; z-index: 20; right: var(--pad); bottom: 22px; font: 400 0.95rem/1 var(--mono); color: var(--soft); font-variant-numeric: tabular-nums; transition: color 0.5s; }
+.vl .gauge b { font-weight: 400; color: var(--fg); }
+
+.vl main, .vl footer { position: relative; z-index: 2; }
+.vl section { min-height: 135vh; min-height: 135svh; padding: 22vh var(--pad) 12vh; display: grid; align-content: center; }
+.vl .col { width: min(36rem, 50vw); }
+.vl .huge { font: italic 400 var(--t-huge)/0.98 var(--serif); letter-spacing: -0.03em; text-wrap: balance; }
+.vl .big { font: 400 var(--t-big)/1.06 var(--serif); letter-spacing: -0.02em; text-wrap: balance; }
+.vl .mid { font-size: var(--t-mid); line-height: 1.25; letter-spacing: -0.01em; }
+.vl .soft { color: var(--soft); transition: color 0.5s; }
+.vl .mt { margin-top: clamp(1.3rem, 2.8vw, 2.4rem); } .mt-s { margin-top: 0.7rem; }
+.vl .hero { min-height: 100vh; min-height: 100svh; padding-top: 16vh; align-content: end; padding-bottom: 12vh; }
+.vl .hero .col { width: min(46rem, 56vw); }
+.vl .hero .huge { font-size: clamp(2.5rem, 1rem + 4.6vw, 5.6rem); }
+.vl .doors { display: grid; gap: 0.2em; justify-items: start; font: italic 400 var(--t-big)/1.1 var(--serif); }
+.vl .why p + p { margin-top: 0.9em; }
+.vl .res { padding: 1.1rem 0; border-top: 1px solid var(--line); transition: border-color 0.5s; }
+.vl .res:last-of-type { border-bottom: 1px solid var(--line); }
+.vl .kit div { display: grid; grid-template-columns: 7.2em 1fr; gap: 0 1rem; padding: 0.7rem 0; border-top: 1px solid var(--line); transition: border-color 0.5s; }
+.vl .kit div:last-child { border-bottom: 1px solid var(--line); }
+.vl .kit dt { font-style: italic; font-size: var(--t-mid); line-height: 1.15; }
+.vl .kit dd { align-self: center; }
+.vl .coach + .coach { margin-top: 1.6rem; }
+.vl .paths a { display: grid; grid-template-columns: auto 1fr; align-items: baseline; gap: 0 1rem; padding: 0.8rem 0; border-top: 1px solid var(--line); text-decoration: none; min-height: 44px; transition: border-color 0.5s; }
+.vl .paths a > * { transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.vl .paths li:last-child a { border-bottom: 1px solid var(--line); }
+.vl .paths a:hover > *, .vl .paths a:focus-visible > * { transform: translateX(0.6rem); }
+.vl .paths b { font: italic 400 var(--t-big)/1 var(--serif); min-width: 4.2em; }
+.vl .summit { min-height: 150vh; min-height: 150svh; }
+
+.vl footer { padding: 2rem var(--pad) 2.6rem; border-top: 1px solid var(--line); display: grid; gap: 0.8rem; }
+.vl footer .big { font-style: italic; }
+.vl footer ul { display: flex; flex-wrap: wrap; gap: 0.2rem 1.5rem; }
+.vl footer li a { display: inline-block; padding: 6px 0; }
+.vl footer small { color: var(--soft); font-size: 1rem; max-width: 60ch; }
+
+
+@media (max-width: 760px) {
+  .vl .col, .vl .hero .col { width: 70vw; }
+  .vl main { text-shadow: 0 0 14px var(--halo), 0 0 4px var(--halo); }
+  .vl .top nav { gap: 0.5rem; font-size: 1rem; }
+  .vl .kit div { grid-template-columns: 1fr; }
+  .vl .paths a { grid-template-columns: 1fr; }
+  .vl .gauge { bottom: 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .vl body, .vl .soft, .vl .gauge { transition: none; }
+}
+
+html[data-v="ladder"] { scrollbar-width: none; }
+html[data-v="ladder"]::-webkit-scrollbar { display: none; }
+.vl main, .vl footer { text-shadow: 0 0 18px var(--halo); }
