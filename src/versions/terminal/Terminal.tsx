@@ -70,6 +70,7 @@ export default function Terminal() {
 
   const onKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') { run(value); setValue(''); }
+    else if (e.key === 'Tab' && value) { const hit = [...ORDER, 'all', 'help', 'clear'].find((c) => c.startsWith(value.toLowerCase())); if (hit) { e.preventDefault(); setValue(hit); } }
     else if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
       e.preventDefault();
       cursor.current = Math.max(-1, Math.min(history.current.length - 1, cursor.current + (e.key === 'ArrowUp' ? 1 : -1)));
@@ -97,7 +98,7 @@ export default function Terminal() {
           <label htmlFor="cli" className="ps">skeptical ~ %</label>
           <input id="cli" ref={input} value={typing || value} onChange={(e) => setValue(e.target.value)} onKeyDown={onKey} autoComplete="off" autoCapitalize="off" spellCheck={false} aria-describedby="cli-hint" readOnly={!!typing} />
         </div>
-        <p id="cli-hint" className="hint">Type a command and press Return, or use the keys.</p>
+        <p id="cli-hint" className="hint">Type a command and press Return, or use the keys. Tab completes, the up arrow repeats.</p>
         <div className="keys" role="group" aria-label="Commands">
           {[...ORDER, 'all', 'help', 'clear'].map((c) => <button type="button" key={c} onClick={() => run(c)}>{c}</button>)}
         </div>

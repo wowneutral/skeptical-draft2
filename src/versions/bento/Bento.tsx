@@ -9,10 +9,6 @@ import { gsap, useGSAP } from '@/lib/scroll';
 import { coarse, still } from '@/lib/utils';
 import { useVersion } from '@/lib/version';
 import CountUp from '@/components/bits/CountUp';
-import { Globe } from '@/components/Globe';
-
-const LEX = { lat: 38.04, lng: -84.5 };   // Lexington, Kentucky: where the Season Opener was
-const MINT: [number, number, number] = [0.48, 0.94, 0.77], BASE: [number, number, number] = [0.3, 0.33, 0.31], GLOW: [number, number, number] = [0.08, 0.1, 0.09];
 
 const A = ({ href, children, className }: { href: string; children: ReactNode; className?: string }) => <a className={className} href={href} rel={href.startsWith('http') ? 'noopener' : undefined}>{children}</a>;
 
@@ -73,13 +69,10 @@ export default function Bento() {
           <p className="cap">{MANIFESTO[0]}</p>
         </T>
         <T area="e" className="list" label={RECORD.title}>
-          <div className="rec">
             <h2>{RECORD.title}</h2>
             <p className="cap">{RECORD.when}. {RECORD.name}, {RECORD.where}.</p>
             <div className="pair">{RECORD.results.map((r) => <p key={r.who}><b>{r.what}</b><span>{r.who} {r.more}</span></p>)}</div>
             <A href={RECORD.more.href} className="go">{RECORD.more.label}</A>
-          </div>
-          <div className="globe"><Globe lat={LEX.lat} lng={LEX.lng} label={`A globe with a pin on ${RECORD.where}`} base={BASE} marker={MINT} glow={GLOW} /></div>
         </T>
         <T area="f" className="drive" label={DRIVE.title}>
           <h2>{DRIVE.title}</h2>

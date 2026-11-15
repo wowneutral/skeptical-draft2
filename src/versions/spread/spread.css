@@ -48,5 +48,5 @@ html[data-v="spread"] { background: #03040a; }
 .vs footer ul { display: flex; flex-wrap: wrap; gap: 0.2rem 1.4rem; }
 .vs footer li a { display: inline-block; padding: 6px 0; }
 .vs footer small { color: var(--dim); }
-@media (max-width: 640px) { .vs .rows p { grid-template-columns: 1fr; } .vs .top nav { gap: 0.6rem; font-size: 0.95rem; } .vs .deck { border-radius: 22px; } }
+@media (max-width: 640px) { .vs .reader { padding-bottom: 4.6rem; } .vs .rows p { grid-template-columns: 1fr; } .vs .top nav { gap: 0.6rem; font-size: 0.95rem; } .vs .deck { border-radius: 22px; } }
 @media (prefers-reduced-motion: reduce) { .vs .play, .vs .btn { transition: none; } }

@@ -9,9 +9,6 @@ import { useRise } from '@/lib/motion';
 import { still } from '@/lib/utils';
 import { useVersion } from '@/lib/version';
 import SplitFlapText from '@/components/bits/SplitFlapText';
-import { Globe } from '@/components/Globe';
-
-const AMBER: [number, number, number] = [1, 0.69, 0], GREY: [number, number, number] = [0.32, 0.32, 0.31], NIGHT: [number, number, number] = [0.07, 0.07, 0.07];
 
 const CHARSET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,’'-&: ";
 const up = (s: string) => s.toUpperCase();
@@ -32,20 +29,26 @@ function wrap(text: string, cols: number, rows: number) {
 
 const flap = { charset: CHARSET, tileColor: '#191919', textColor: '#f2f2ee', tileRadius: 3, gap: 3, flipDuration: 0.34, stagger: 0.028, flipsPerChar: 3, loop: false as const };
 
-/** A cell of tiles that stays blank until it is on screen, then flips to its text. */
+/** A cell of tiles that stays blank until it is on screen, then flips to its text. On a narrow screen it wraps onto more rows. */
 function Flap({ text, pad, size = 'var(--flap)', amber }: { text: string; pad?: number; size?: string; amber?: boolean }) {
   const ref = useRef<HTMLSpanElement>(null);
   const [on, setOn] = useState(still);
+  const [cols, setCols] = useState(99);
   useEffect(() => {
-    if (still) return;
-    const io = new IntersectionObserver((e) => { if (e[0].isIntersecting) { setOn(true); io.disconnect(); } }, { rootMargin: '0px 0px -12% 0px' });
-    io.observe(ref.current!);
-    return () => io.disconnect();
+    const el = ref.current!;
+    const measure = () => { const fs = parseFloat(getComputedStyle(el).fontSize); setCols(Math.max(8, Math.floor((el.parentElement!.clientWidth) / (fs * 0.78 + 3)))); };
+    measure();
+    window.addEventListener('resize', measure);
+    let io: IntersectionObserver | null = null;
+    if (!still) { io = new IntersectionObserver((e) => { if (e[0].isIntersecting) { setOn(true); io!.disconnect(); } }, { rootMargin: '0px 0px -12% 0px' }); io.observe(el); }
+    return () => { window.removeEventListener('resize', measure); io?.disconnect(); };
   }, []);
+  const fits = (pad ?? text.length) <= cols;
+  const rows = fits ? [up(text)] : wrap(up(text), cols, 1);
   return (
-    <span className="flap" ref={ref}>
+    <span className="flap" ref={ref} style={{ fontSize: size }}>
       <span className="sr-only-x">{text}</span>
-      <SplitFlapText aria-hidden="true" {...flap} text={on ? up(text) : ''} padTo={window.innerWidth > 900 ? pad ?? text.length : text.length} fontSize={size} textColor={amber ? '#ffb000' : flap.textColor} intro={false} />
+      {rows.map((r, i) => <SplitFlapText key={i} aria-hidden="true" {...flap} text={on ? r : ''} padTo={fits ? pad ?? text.length : r.length} fontSize="1em" textColor={amber ? '#ffb000' : flap.textColor} intro={false} />)}
     </span>
   );
 }
@@ -111,8 +114,6 @@ export default function Board() {
 
         <section id="record">
           <header className="head"><h2>{RECORD.title}</h2><p>{RECORD.rule}</p></header>
-          <div className="with-globe">
-          <div>
           <p className="where" data-rise>{RECORD.when}. {RECORD.name}, {RECORD.where}.</p>
           <div className="table">
             {RECORD.results.map((r) => (
@@ -124,9 +125,6 @@ export default function Board() {
             ))}
           </div>
           <p className="more" data-rise><A href={RECORD.more.href}>{RECORD.more.label}</A></p>
-          </div>
-          <div className="globe" data-rise><Globe lat={38.04} lng={-84.5} label={`A globe with a pin on ${RECORD.where}`} base={GREY} marker={AMBER} glow={NIGHT} /></div>
-          </div>
         </section>
 
         <section id="drive">

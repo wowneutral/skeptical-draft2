@@ -30,7 +30,7 @@ html[data-v="board"] { background: #0a0a0a; }
 .vbd .r3 { grid-template-columns: max-content max-content 1fr; }
 .vbd .row p { color: var(--dim); min-width: 0; }
 .vbd .row p b { color: var(--fg); font-weight: 500; }
-.vbd .flap { display: inline-block; max-width: 100%; }
+.vbd .flap { display: grid; gap: 3px; justify-items: start; max-width: 100%; }
 .vbd a.go { transition: background 0.2s; }
 .vbd a.go:hover { background: #121212; color: inherit; }
 .vbd .more { margin-top: 1.4rem; max-width: 80ch; }
@@ -44,8 +44,6 @@ html[data-v="board"] { background: #0a0a0a; }
   .vbd .clock { display: none; }
   .vbd .top nav { gap: 0.6rem; font-size: 0.92rem; }
   .vbd { --flap: 1.05rem; }
+  .vbd .row > .flap { width: 100%; }
 }
 @media (prefers-reduced-motion: reduce) { .vbd .btn, .vbd a.go { transition: none; } }
-.vbd .with-globe { display: grid; grid-template-columns: minmax(0, 1fr) clamp(12rem, 24vw, 22rem); gap: clamp(1rem, 4vw, 4rem); align-items: center; }
-@media (max-width: 900px) { .vbd .with-globe { grid-template-columns: 1fr; } .vbd .with-globe .globe { max-width: 16rem; } }
-@media (max-width: 520px) { .vbd { --flap: 0.74rem; } .vbd .big { font-size: 1.05rem; padding: 0.6rem; } }
