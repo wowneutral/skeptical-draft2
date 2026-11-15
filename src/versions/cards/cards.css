@@ -1,0 +1,66 @@
+.vc {
+  --desk: #e7e6e2; --page: #ffffff; --ink: #111111; --soft: #55554f; --line: #c9c8c2; --hl: #7df0ee; --link: #0b4fc4;
+  --doc: "Carlito", Calibri, "Segoe UI", Arial, sans-serif;
+  --base: clamp(1.14rem, 1.02rem + 0.42vw, 1.4rem);
+  color-scheme: light;
+}
+.vc { position: relative;  color: var(--ink); font: 400 var(--base)/1.42 var(--doc); }
+.vc a { color: var(--link); text-underline-offset: 0.15em; }
+.vc a:hover { text-decoration-thickness: 2px; }
+.vc :focus-visible { outline: 2px solid var(--link); outline-offset: 3px; border-radius: 2px; }
+.vc .skip { position: fixed; left: 12px; top: 8px; z-index: 40; padding: 6px 12px; background: var(--ink); color: #fff; transform: translateY(-220%); }
+.vc .skip:focus { transform: none; }
+
+.vc .bar { position: sticky; top: 0; z-index: 30; height: 60px; padding: 0 clamp(14px, 2.4vw, 28px); display: flex; align-items: center; gap: 1.2rem; background: var(--page); border-bottom: 1px solid var(--line); }
+.vc .bar .mark { font-weight: 700; font-size: 1.3rem; color: var(--ink); text-decoration: none; margin-right: auto; padding: 8px 0; }
+.vc .count { color: var(--soft); font-size: 1.05rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.vc .count b { color: var(--ink); }
+.vc .toggle { font: 700 1.05rem/1 var(--doc); color: var(--ink); background: var(--page); border: 1.5px solid var(--ink); border-radius: 999px; min-height: 44px; padding: 0 1.1rem; cursor: pointer; transition: background 0.2s, color 0.2s; }
+.vc .toggle:hover { background: #f0efea; }
+.vc .toggle[aria-pressed="true"] { background: var(--ink); color: var(--page); }
+
+.vc .wrap { display: grid; grid-template-columns: minmax(13rem, 17rem) minmax(0, 54rem); justify-content: center; gap: clamp(1rem, 3vw, 3rem); padding: clamp(1rem, 3vw, 2.4rem) clamp(12px, 2.4vw, 28px) 3rem; align-items: start; }
+.vc .pane { position: sticky; top: 84px; font-size: 1.05rem; line-height: 1.25; }
+.vc .pane a { display: block; padding: 0.42rem 0.6rem; color: var(--soft); text-decoration: none; border-left: 3px solid transparent; }
+.vc .pane a:hover { color: var(--ink); }
+.vc .pane a[aria-current="true"] { color: var(--ink); font-weight: 700; border-left-color: var(--ink); background: rgba(17, 17, 17, 0.05); }
+.vc .pane .l1 { font-weight: 700; color: var(--ink); } .pane .l3 { padding-left: 1.5rem; }
+
+.vc .doc { background: var(--page); border: 1px solid var(--line); padding: clamp(1.4rem, 5vw, 4.4rem) clamp(1.1rem, 5vw, 4.6rem) clamp(2rem, 5vw, 4rem); }
+.vc .pocket { font-size: clamp(2.2rem, 1.4rem + 3vw, 3.6rem); font-weight: 700; text-align: center; border: 2.5px solid var(--ink); padding: 0.25em 0.4em; line-height: 1.05; }
+.vc .hat { font-size: clamp(1.8rem, 1.3rem + 2vw, 2.9rem); font-weight: 700; text-align: center; text-decoration: underline double; text-underline-offset: 0.16em; margin-top: 1.6em; line-height: 1.1; }
+.vc .block { font-size: clamp(1.4rem, 1.15rem + 1vw, 2rem); font-weight: 700; text-align: center; text-decoration: underline; text-underline-offset: 0.16em; margin-top: 2.2em; line-height: 1.15; }
+.vc .tag { font-size: 1.24em; font-weight: 700; line-height: 1.22; margin-top: 1.25em; text-wrap: pretty; }
+.vc .cite { margin-top: 0.3em; color: var(--soft); font-size: 0.86em; }
+.vc .cite b { color: var(--ink); font-size: 1.44em; }
+.vc .card { margin-top: 0.45em; text-align: justify; hyphens: auto; }
+.vc .card + .more { margin-top: 0.6em; }
+.vc .card .n { transition: font-size 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), color 0.4s; }
+.vc .card u { text-decoration-thickness: 1.5px; text-underline-offset: 0.14em; }
+.vc .card mark { color: inherit; background: linear-gradient(var(--hl), var(--hl)) no-repeat 0 55% / 100% 86%; padding: 0.04em 0; }
+.vc .card mark { background-size: 0% 86%; }
+.vc .card .em { font-weight: 700; border: 1.5px solid var(--ink); padding: 0 0.12em; }
+.vc .shrunk .card .n { font-size: 0.56em; color: var(--soft); }
+.vc .analytic { margin-top: 0.8em; }
+.vc .plank { margin-top: 1.2em; padding-top: 1.1em; border-top: 1px solid var(--line); }
+.vc .plank h3 { font-size: 1.24em; line-height: 1.2; }
+.vc .plank h3 a { color: var(--ink); text-decoration-color: var(--link); }
+.vc .plank ol { margin-top: 0.4em; counter-reset: p; }
+.vc .plank li { counter-increment: p; display: grid; grid-template-columns: 1.6em 1fr; margin-top: 0.15em; }
+.vc .plank li::before { content: counter(p) "."; color: var(--soft); }
+.vc .doc footer { margin-top: 3em; padding-top: 1.2em; border-top: 1px solid var(--line); display: grid; gap: 0.5em; }
+.vc .doc footer ul { display: flex; flex-wrap: wrap; gap: 0.1em 1.2em; }
+.vc .doc footer li a { display: inline-block; padding: 5px 0; }
+.vc .doc footer small { color: var(--soft); font-size: 0.86em; }
+
+@media (max-width: 900px) {
+  .vc .wrap { grid-template-columns: minmax(0, 1fr); padding-left: 0; padding-right: 0; padding-top: 0; }
+  .vc .pane { display: none; }
+  .vc .doc { border-left: 0; border-right: 0; border-top: 0; }
+  .vc .count span { display: none; }
+  .vc .card { text-align: left; hyphens: manual; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vc .card mark { background-size: 100% 86%; }
+  .vc .card .n, .vc .toggle { transition: none; }
+}

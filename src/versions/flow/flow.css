@@ -1,0 +1,138 @@
+.vf {
+  --paper: #f7f4ea; --blue: #1a36a8; --red: #c4241f; --lead: #33312c; --faint: rgba(26, 54, 168, 0.13); --col: rgba(51, 49, 44, 0.28);
+  --hand: "Kalam", "Comic Sans MS", cursive; --scrawl: "Reenie Beanie", "Kalam", cursive;
+  --pad: clamp(16px, 3vw, 44px); --row: 2.5rem;
+  color-scheme: light;
+}
+.vf { position: relative;  color: var(--blue); font: 400 1.36rem/var(--row) var(--hand); background:
+  linear-gradient(var(--faint) 1.5px, transparent 1.5px) 0 1.1rem / 100% var(--row), var(--paper); }
+.vf a { color: inherit; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.18em; text-decoration-color: var(--red); }
+.vf a:hover { color: var(--red); }
+.vf :focus-visible { outline: 3px solid var(--red); outline-offset: 3px; border-radius: 3px; }
+.vf .skip { position: fixed; left: var(--pad); top: 8px; z-index: 30; padding: 6px 12px; background: var(--blue); color: var(--paper); transform: translateY(-220%); }
+.vf .skip:focus { transform: none; }
+.vf .red { color: var(--red); }
+.vf .scrawl { font-family: var(--scrawl); line-height: 0.9; }
+.vf .b { font-weight: 700; }
+
+.vf .sheet { position: relative; max-width: 1500px; margin: 0 auto; padding: 0 var(--pad); }
+/* The five columns of a flow, ruled down the whole page in pencil. */
+.vf .sheet::before { content: ""; position: absolute; inset: 0 var(--pad); pointer-events: none; z-index: 0;
+  background: linear-gradient(to right, var(--col) 1.5px, transparent 1.5px) 0 0 / 20% 100%; border-right: 1.5px solid var(--col); }
+.vf .sheet > * { position: relative; z-index: 1; }
+
+.vf .top { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; justify-content: space-between; height: 60px; padding: 0 0.7rem; background: var(--paper); border-bottom: 2px solid var(--lead); }
+.vf .top a { text-decoration: none; }
+.vf .mark { font: 400 2.5rem/1 var(--scrawl); color: var(--lead); padding: 4px 0; }
+.vf .top nav { display: flex; gap: clamp(0.5rem, 2vw, 1.8rem); font-weight: 700; }
+.vf .top nav a { display: inline-flex; align-items: center; min-height: 44px; min-width: 44px; justify-content: center; }
+
+.vf .cols { display: grid; grid-template-columns: repeat(5, 1fr); }
+.vf .cols > * { padding: 0 0.7rem; min-width: 0; }
+.vf .speeches { font: 400 2.8rem/1 var(--scrawl); color: var(--lead); padding-top: 1.1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--lead); }
+.vf .speeches span:nth-child(even) { color: var(--red); } .vf .speeches span:nth-child(odd) { color: var(--blue); }
+
+.vf .hero { padding: 1.4rem 0 3rem; }
+.vf .hero h1 { grid-column: 1 / span 3; font: 400 clamp(3.4rem, 1.5rem + 6.4vw, 7.6rem)/0.86 var(--scrawl); color: var(--blue); padding-top: 1.2rem; padding-bottom: 1.4rem; }
+.vf .hero h1 .ring { position: relative; display: inline-block; padding: 0 0.12em; }
+.vf .aside { grid-column: 4 / span 2; align-self: end; padding-bottom: 1.6rem; }
+.vf .claim { grid-column: 1; font-weight: 700; font-size: 1.6rem; padding-top: 1.25rem; padding-bottom: 1.25rem; }
+.vf .claim b { color: var(--lead); margin-right: 0.35em; }
+.vf .resp { grid-column: 2; position: relative; font: 400 3rem/1 var(--scrawl); color: var(--red); padding-top: 1.3rem; }
+.vf .resp .has-arrow { display: inline-block; padding-left: 3.4rem; }
+.vf .ext { grid-column: 3 / span 2; position: relative; padding-top: 1.25rem; padding-bottom: 1.25rem; }
+.vf .ext > span:not(.tag) { display: block; }
+.vf .ext i { font: 400 2.6rem/0.8 var(--scrawl); font-style: normal; margin-right: 0.25em; }
+.vf .last { grid-column: 5; grid-row: 2; align-self: start; padding-top: 1rem; display: grid; gap: 0.9rem; justify-items: start; }
+.vf .last a { position: relative; display: inline-block; font: 400 2.9rem/0.95 var(--scrawl); text-decoration: none; padding: 0.15em 0.3em; }
+.vf .q { font: 400 clamp(5rem, 9vw, 9rem)/0.7 var(--scrawl); color: var(--red); }
+.vf .hr { grid-column: 1 / -1; height: 0; border-top: 1.5px dashed var(--col); padding: 0; margin: 0 0.4rem; }
+
+/* Pen marks: stretched over whatever they annotate. */
+.vf .scr { position: absolute; overflow: visible; pointer-events: none; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.vf .scr path { vector-effect: non-scaling-stroke; }
+.vf .scr.circle { inset: -14% -6% -18% -6%; width: 112%; height: 132%; color: var(--red); }
+.vf .scr.under { left: 0; right: 0; bottom: -0.16em; width: 100%; height: 0.32em; color: var(--red); }
+.vf .scr.arrow { left: 0; top: 0.9rem; width: 2.8rem; height: 1.1rem; }
+.vf .scr.box { inset: -6% -4%; width: 108%; height: 112%; color: var(--blue); }
+.vf .scr.tick { left: -0.1rem; top: 0.15rem; width: 1.5rem; height: 1.5rem; color: var(--red); position: absolute; }
+.vf .has-arrow { position: relative; }
+
+.vf section { padding: 3.2rem 0 3.4rem; border-top: 2px solid var(--lead); }
+.vf section h2 { font: 400 clamp(3.6rem, 2rem + 5vw, 6.6rem)/0.84 var(--scrawl); color: var(--blue); display: inline-block; position: relative; margin-bottom: 1.4rem; }
+.vf section h2 { grid-column: 1 / -1; justify-self: start; }
+.vf .c12 { grid-column: 1 / span 2; } .vf .c1 { grid-column: 1; } .vf .c3 { grid-column: 3; } .vf .c23 { grid-column: 2 / span 2; } .vf .c45 { grid-column: 4 / span 2; } .vf .c35 { grid-column: 3 / span 3; }
+.vf .note-t { font: 400 2.5rem/1 var(--scrawl); color: var(--lead); max-width: 24ch; }
+.vf .where { color: var(--lead); }
+.vf .won + .won { margin-top: 1.5rem; }
+.vf .won h3 { position: relative; display: inline-block; font: 400 clamp(2.6rem, 1.6rem + 2.6vw, 4.2rem)/0.9 var(--scrawl); color: var(--blue); padding: 0 0.15em; }
+.vf .won p { margin-top: 0.5rem; }
+.vf .more { margin-top: 1.4rem; font-weight: 700; }
+.vf .stuff { margin: 0; }
+.vf .stuff div { position: relative; padding-left: 2rem; display: grid; grid-template-columns: minmax(6.6em, auto) 1fr; column-gap: 1rem; }
+.vf .stuff dt { font-weight: 700; }
+.vf .stuff dd { color: var(--lead); }
+.vf .who h3 { font: 400 clamp(2.6rem, 1.6rem + 2.4vw, 3.9rem)/0.9 var(--scrawl); position: relative; display: inline-block; }
+.vf .who .role { font-weight: 700; color: var(--red); }
+.vf .who p + p { color: var(--lead); }
+.vf .ways li { margin-top: 0.3rem; }
+.vf .ways a { position: relative; display: grid; grid-template-columns: 2.6rem 8.6rem 1fr; align-items: center; column-gap: 0.6rem; text-decoration: none; padding: 0.35rem 0; min-height: 3.2rem; }
+.vf .ways .sq { position: relative; width: 1.9rem; height: 1.9rem; }
+.vf .ways .sq .scr { inset: 0; width: 100%; height: 100%; }
+.vf .ways .sq .scr.tick { color: var(--red); inset: -30% -30% 10% 5%; width: 125%; height: 120%; opacity: 0; transition: opacity 0.2s; }
+.vf .ways a:hover .tick, .vf .ways a:focus-visible .tick { opacity: 1; }
+.vf .ways b { font: 400 3.2rem/0.9 var(--scrawl); }
+.vf .ways span.t { color: var(--lead); }
+.vf .fine { margin-top: 1.3rem; color: var(--lead); max-width: 52ch; }
+.vf .fine a { color: var(--blue); }
+
+.vf footer { border-top: 2px solid var(--lead); padding: 1.6rem 0.7rem 2.6rem; display: grid; gap: 0.4rem; }
+.vf footer .line { font: 400 2.6rem/1 var(--scrawl); color: var(--lead); }
+.vf footer ul { display: flex; flex-wrap: wrap; gap: 0 1.5rem; }
+.vf footer li a { display: inline-block; padding: 4px 0; }
+.vf footer small { font-size: 1rem; color: var(--lead); }
+
+.vf .tag { display: none; }
+@media (max-width: 900px) {
+  .vf .sheet::before { background: none; border: 0; }
+  .vf .speeches { display: none; }
+  .vf .cols { grid-template-columns: 1fr; }
+  .vf .cols > *, .vf .hero h1, .vf .aside, .vf .claim, .vf .resp, .vf .ext, .vf .last, .vf section h2, .vf .c12, .vf .c1, .vf .c3, .vf .c23, .vf .c45, .vf .c35 { grid-column: 1; grid-row: auto; }
+  .vf .cols > div + div { margin-top: 1.2rem; }
+  .vf .claim { padding-bottom: 0.2rem; }
+  .vf .resp .has-arrow { padding-left: 2.6rem; }
+  .vf .resp, .vf .ext { padding-left: 1.6rem; padding-top: 0.1rem; padding-bottom: 0.2rem; }
+  .vf .resp { font-size: 2.4rem; }
+  .vf .ext { padding-bottom: 0.9rem; }
+  .vf .tag { display: inline; font: 700 1rem/1 var(--hand); color: var(--lead); margin-right: 0.5em; vertical-align: 0.25em; }
+  .vf .scr.arrow { width: 2rem; top: 0.7rem; }
+  .vf .q { display: none; }
+  .vf .last { margin-top: 1rem; }
+  .vf .mark { font-size: 2.1rem; }
+  .vf .top nav { font-size: 1.05rem; gap: 0.2rem; }
+  .vf .stuff div { grid-template-columns: 1fr; }
+  .vf .ways a { grid-template-columns: 2.6rem 1fr; }
+  .vf .ways span.t { grid-column: 2; }
+}
+/* Writing on: each line is uncovered left to right, the way a pen moves. */
+@media (prefers-reduced-motion: reduce) { .js [data-write] { clip-path: none; } }
+
+/* New in the rebuild. */
+html[data-v="flow"] { background: #f7f4ea; }
+.vf { min-height: 100vh; }
+/* Paper tooth: a still texture, multiplied over the sheet. */
+.vf::after { content: ""; position: fixed; inset: 0; z-index: 40; pointer-events: none; opacity: 0.5; mix-blend-mode: multiply;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.42 0 0 0 0 0.35 0 0 0 0.09 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E"); }
+.vf .round { background: linear-gradient(var(--faint) 1.5px, transparent 1.5px) 0 1.1rem / 100% var(--row); padding-bottom: 1.5rem; }
+.vf .note { position: relative; display: inline-block; }
+.vf h1 .note { padding: 0 0.1em; }
+.vf .last a { text-decoration: none; }
+.vf .who .note { padding: 0 0.3em; }
+.vf .rough-annotation { overflow: visible; pointer-events: none; }
+.vf [data-write] { clip-path: inset(-25% 100% -25% -6%); }
+.vf .hero h1 [data-write] { display: inline-block; }
+@media (prefers-reduced-motion: reduce) { .vf [data-write] { clip-path: none; } }
+.vf .args { grid-column: 1 / span 4; grid-row: 2; display: grid; grid-template-columns: repeat(4, 1fr); padding: 0; align-content: start; }
+.vf .args > * { padding-left: 0.7rem; padding-right: 0.7rem; min-width: 0; }
+.vf .args .ext { grid-column: 3 / span 2; }
+@media (max-width: 900px) { .vf .args, .vf .last { grid-column: 1; grid-row: auto; } .vf .args { grid-template-columns: 1fr; } .vf .args > *, .vf .args .ext { grid-column: 1; } }
