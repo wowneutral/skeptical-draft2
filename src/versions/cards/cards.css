@@ -24,26 +24,25 @@
 .vc .pane a { display: block; padding: 0.42rem 0.6rem; color: var(--soft); text-decoration: none; border-left: 3px solid transparent; }
 .vc .pane a:hover { color: var(--ink); }
 .vc .pane a[aria-current="true"] { color: var(--ink); font-weight: 700; border-left-color: var(--ink); background: rgba(17, 17, 17, 0.05); }
-.vc .pane .l1 { font-weight: 700; color: var(--ink); } .pane .l3 { padding-left: 1.5rem; }
+.vc .pane .l1 { font-weight: 700; color: var(--ink); } .vc .pane .l3 { padding-left: 1.5rem; }
 
 .vc .doc { background: var(--page); border: 1px solid var(--line); padding: clamp(1.4rem, 5vw, 4.4rem) clamp(1.1rem, 5vw, 4.6rem) clamp(2rem, 5vw, 4rem); }
 .vc .pocket { font-size: clamp(2.2rem, 1.4rem + 3vw, 3.6rem); font-weight: 700; text-align: center; border: 2.5px solid var(--ink); padding: 0.25em 0.4em; line-height: 1.05; }
 .vc .hat { font-size: clamp(1.8rem, 1.3rem + 2vw, 2.9rem); font-weight: 700; text-align: center; text-decoration: underline double; text-underline-offset: 0.16em; margin-top: 1.6em; line-height: 1.1; }
-.vc .block { font-size: clamp(1.4rem, 1.15rem + 1vw, 2rem); font-weight: 700; text-align: center; text-decoration: underline; text-underline-offset: 0.16em; margin-top: 2.2em; line-height: 1.15; }
+.vc .blockh { font-size: clamp(1.4rem, 1.15rem + 1vw, 2rem); font-weight: 700; text-align: center; text-decoration: underline; text-underline-offset: 0.16em; margin-top: 2.2em; line-height: 1.15; }
 .vc .tag { font-size: 1.24em; font-weight: 700; line-height: 1.22; margin-top: 1.25em; text-wrap: pretty; }
 .vc .cite { margin-top: 0.3em; color: var(--soft); font-size: 0.86em; }
 .vc .cite b { color: var(--ink); font-size: 1.44em; }
 .vc .card { margin-top: 0.45em; text-align: justify; hyphens: auto; }
 .vc .card + .more { margin-top: 0.6em; }
 .vc .card .n { transition: font-size 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), color 0.4s; }
-.vc .card u { text-decoration-thickness: 1.5px; text-underline-offset: 0.14em; }
+.vc .card u { text-decoration: none; background: linear-gradient(currentColor, currentColor) no-repeat 0 96% / 100% 1.5px; padding-bottom: 0.06em; }
 .vc .card mark { color: inherit; background: linear-gradient(var(--hl), var(--hl)) no-repeat 0 55% / 100% 86%; padding: 0.04em 0; }
-.vc .card mark { background-size: 0% 86%; }
-.vc .card .em { font-weight: 700; border: 1.5px solid var(--ink); padding: 0 0.12em; }
+.vc .card .em { font-weight: 700; box-shadow: 0 0 0 1.5px rgba(17, 17, 17, var(--box, 1)); padding: 0 0.12em; margin: 0 0.1em; }
 .vc .shrunk .card .n { font-size: 0.56em; color: var(--soft); }
 .vc .analytic { margin-top: 0.8em; }
 .vc .plank { margin-top: 1.2em; padding-top: 1.1em; border-top: 1px solid var(--line); }
-.vc .plank h3 { font-size: 1.24em; line-height: 1.2; }
+.vc .plank h3 { font-size: 1.24em; line-height: 1.2; font-weight: 700; }
 .vc .plank h3 a { color: var(--ink); text-decoration-color: var(--link); }
 .vc .plank ol { margin-top: 0.4em; counter-reset: p; }
 .vc .plank li { counter-increment: p; display: grid; grid-template-columns: 1.6em 1fr; margin-top: 0.15em; }
@@ -64,3 +63,35 @@
   .vc .card mark { background-size: 100% 86%; }
   .vc .card .n, .vc .toggle { transition: none; }
 }
+
+/* New in the rebuild: the ribbon, the meter and the cutting sequence. */
+html[data-v="cards"] { background: #e7e6e2; }
+.vc { min-height: 100vh; background: var(--desk);
+  --background: #ffffff; --foreground: #111111; --primary: #111111; --primary-foreground: #ffffff; --border: #c9c8c2; --input: #b9b8b2; --ring: #0b4fc4;
+  --muted: #eceae4; --muted-foreground: #55554f; --accent: #eceae4; --accent-foreground: #111111; --popover: #111111; --popover-foreground: #ffffff; --secondary: #eceae4; --secondary-foreground: #111111; --radius: 0.5rem; }
+.vc .bar { height: 64px; gap: clamp(0.6rem, 1.6vw, 1.4rem); }
+.vc .keys { display: flex; gap: 0.3rem; }
+.vc .key { display: inline-flex; align-items: center; gap: 0.4rem; min-height: 36px; padding: 0 0.6rem; border-radius: 8px; font: 400 0.98rem/1 var(--doc); color: var(--soft); background: none; border: 1px solid transparent; cursor: help; transition: background 0.2s, color 0.2s, border-color 0.2s; }
+.vc .key:hover, .vc .key[data-on] { color: var(--ink); background: #f1f0eb; border-color: var(--line); }
+.vc .key kbd { font-family: var(--doc); font-size: 0.8rem; height: 1.3rem; }
+.vc .inks { gap: 2px; }
+.vc .ink { width: 36px; height: 36px; padding: 0; border-radius: 8px; }
+.vc .ink span { display: block; width: 18px; height: 18px; border-radius: 4px; border: 1px solid rgba(0, 0, 0, 0.25); }
+.vc .ink[data-state="on"] { background: #f1f0eb; box-shadow: inset 0 0 0 1.5px var(--ink); }
+.vc .shrinker { display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 700; cursor: pointer; min-height: 44px; }
+.vc .meter { margin-top: 1.6rem; padding: 1rem 0.6rem 0; border-top: 1px solid var(--line); display: grid; gap: 0.5rem; }
+.vc .meter .count { font-size: 1rem; white-space: normal; }
+.vc .meter [data-slot="slider"] { margin-top: 0.4rem; }
+.vc .pane { top: 92px; }
+.vc .cutting { background: var(--page); padding: 0.4em 0 1.2em; }
+/* Hover a key in the ribbon and every mark of that kind in the document lights up. */
+.vc .tag, .vc .cite, .vc .card u, .vc .card .em, .vc .card mark { transition: outline-color 0.2s, opacity 0.2s; outline: 2px solid transparent; outline-offset: 2px; }
+.vc[data-peek="tag"] .tag, .vc[data-peek="cite"] .cite { outline-color: var(--link); }
+.vc[data-peek="u"] .card u { background-image: linear-gradient(var(--link), var(--link)); background-size: 100% 3px; }
+.vc[data-peek="em"] .card .em { outline-color: var(--link); }
+.vc[data-peek="hl"] .card mark { outline-color: var(--link); }
+.vc[data-peek] .card .n { opacity: 0.45; }
+.vc .card .n { transition: font-size 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), color 0.4s, opacity 0.2s; }
+@media (max-width: 1100px) { .vc .keys { display: none; } }
+@media (max-width: 900px) { .vc .inks { margin-left: auto; } .vc .bar .mark { margin-right: 0; } }
+@media (prefers-reduced-motion: reduce) { .vc .key, .vc .tag, .vc .cite, .vc .card u, .vc .card .em, .vc .card mark { transition: none; } }
