@@ -1,0 +1,1 @@
+var e={v:0,angle:-.5,drag:!1,kick:0,p:0};export{e as t};

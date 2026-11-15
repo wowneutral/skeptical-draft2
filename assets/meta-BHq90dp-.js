@@ -1,0 +1,1 @@
+var e={slug:`elevator`,n:16,name:`The elevator`,color:`#16130f`,ink:`#efe6d2`,kind:`Play with it`,text:`The elevator pitch, taken literally. Call the lift, ride it floor by floor with the panel or the scroll, turn a key for the basement, and the doors open on each part of the team.`};export{e as default};
