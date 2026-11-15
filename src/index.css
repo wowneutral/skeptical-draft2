@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+/* shadcn/ui tokens. Each version sets these on its own root, so the same
+   Button, Slider or Accordion takes on that version's ink and paper. */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+}
+
+:root {
+  --background: #050505; --foreground: #f0f0ec;
+  --primary: #f0f0ec; --primary-foreground: #050505;
+  --secondary: #1a1a19; --secondary-foreground: #f0f0ec;
+  --muted: #161615; --muted-foreground: #8f8f8a;
+  --accent: #1a1a19; --accent-foreground: #f0f0ec;
+  --popover: #0c0c0b; --popover-foreground: #f0f0ec;
+  --destructive: #c4241f; --border: #262624; --input: #262624; --ring: #f0f0ec;
+  --radius: 0.5rem;
+}
+
+html { overflow-x: clip; -webkit-text-size-adjust: 100%; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+body { margin: 0; -webkit-font-smoothing: antialiased; }
+
+.sr-only-x { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.skip-x { position: fixed; left: 16px; top: 10px; z-index: 300; padding: 8px 12px; background: #f0f0ec; color: #050505; transform: translateY(-240%); font: 500 1rem/1 system-ui, sans-serif; }
+.skip-x:focus { transform: none; }
