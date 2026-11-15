@@ -1,0 +1,12 @@
+import type { Version } from '@/content';
+
+const meta: Version = {
+  slug: 'crossex',
+  n: 14,
+  name: 'The cross-ex',
+  color: '#0b0b0c',
+  ink: '#f4f1ea',
+  kind: 'Debate-native',
+  text: 'The whole site is a cross-examination: you ask in orange italics, the team answers in its own words, and the back-and-forth quickens as you scroll. Type your own questions to the witness, a glossy 3D question mark that gets knocked round by each one, watch the transcript build, then say no further questions and the page asks you one back.',
+};
+export default meta;
