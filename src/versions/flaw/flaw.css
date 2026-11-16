@@ -1,0 +1,150 @@
+html[data-v="flaw"] { background: #0c0c0d; }
+
+.v-flaw {
+  --bg: #0c0c0d; --ink: #ece9e2; --dim: #aaa59b; --line: #3b3a37; --bone: #d6cfbf;
+  --serif: 'Bodoni Moda Variable', 'Bodoni Moda', Didot, serif;
+  --sans: 'Hanken Grotesk Variable', 'Hanken Grotesk', system-ui, sans-serif;
+  --background: var(--bg); --foreground: var(--ink); --primary: var(--ink); --primary-foreground: var(--bg);
+  --border: var(--line); --input: var(--line); --ring: var(--ink); --muted: #1a1a1b; --muted-foreground: var(--dim);
+  --accent: #1a1a1b; --accent-foreground: var(--ink); --popover: var(--bg); --popover-foreground: var(--ink); --radius: 0;
+  --colw: min(35.5vw, 600px); --colx: max(28px, 5.5vw);
+  background: var(--bg); color: var(--ink);
+  font-family: var(--sans); font-size: 18px; line-height: 1.55;
+  min-height: 100svh;
+}
+.v-flaw ::selection { background: var(--ink); color: var(--bg); }
+.v-flaw a:focus-visible, .v-flaw button:focus-visible { outline: 1.5px solid var(--ink); outline-offset: 5px; }
+
+/* The stone, behind everything on wide screens. */
+.v-flaw .stage { position: fixed; inset: 0; z-index: 0; background: var(--bg); }
+.v-flaw .stage canvas { display: block; }
+.v-flaw .flat { position: absolute; right: 4vw; top: 50%; width: 52vw; transform: translateY(-50%); }
+
+.v-flaw .top { position: fixed; top: 0; left: 0; right: 0; z-index: 4; display: flex; justify-content: space-between; align-items: center; padding: 14px var(--colx); pointer-events: none; background: var(--bg); }
+.v-flaw .brand { font-family: var(--serif); font-style: italic; font-size: 1.45rem; letter-spacing: 0.005em; pointer-events: auto; }
+.v-flaw .top nav { display: flex; gap: 6px; pointer-events: auto; }
+.v-flaw .top nav a { padding: 12px 12px; min-height: 44px; display: inline-flex; align-items: center; font-size: 1rem; letter-spacing: 0.04em; color: var(--dim); transition: color 0.25s; }
+.v-flaw .top nav a:hover, .v-flaw .top nav a:focus-visible { color: var(--ink); }
+
+.v-flaw main { position: relative; z-index: 1; pointer-events: none; }
+.v-flaw .col { pointer-events: auto; width: var(--colw); margin-left: var(--colx); }
+.v-flaw .sec { padding: 16vh 0 10vh; }
+
+/* Opening */
+.v-flaw .hero { min-height: 100svh; display: flex; align-items: center; padding: 14vh 0 10vh; }
+.v-flaw .pitch { font-family: var(--serif); font-weight: 500; font-size: clamp(2.4rem, 3.55vw, 4.8rem); line-height: 1.04; letter-spacing: -0.022em; font-variation-settings: 'opsz' 96; }
+.v-flaw .pitch .pl { display: block; text-wrap: balance; }
+.v-flaw .pitch .pl + .pl { font-style: italic; font-weight: 400; color: var(--ink); }
+.v-flaw .statement { display: flex; flex-wrap: wrap; gap: 0 22px; margin: 34px 0 40px; font-size: 1.02rem; letter-spacing: 0.02em; color: var(--dim); }
+.v-flaw .statement li { position: relative; }
+.v-flaw .statement li + li::before { content: ''; position: absolute; left: -13px; top: 50%; width: 4px; height: 1px; background: var(--line); }
+.v-flaw .doors { display: grid; gap: 6px; max-width: 460px; }
+
+.v-flaw .door { display: block; position: relative; padding: 12px 0 16px; min-height: 44px; }
+.v-flaw .door-t { font-family: var(--serif); font-size: 1.7rem; line-height: 1.1; font-variation-settings: 'opsz' 48; display: inline-flex; align-items: baseline; gap: 14px; transition: transform 0.5s cubic-bezier(.16,1,.3,1); }
+.v-flaw .door-t::after { content: ''; width: 0.5em; height: 1px; background: currentColor; transform: translateY(-0.28em); transition: width 0.5s cubic-bezier(.16,1,.3,1); }
+.v-flaw .door-u { position: absolute; left: 0; right: 0; bottom: 4px; width: 100%; height: 12px; overflow: visible; }
+.v-flaw .door-u path { fill: none; stroke: var(--ink); vector-effect: non-scaling-stroke; }
+.v-flaw .door-u .calm { stroke: var(--line); stroke-width: 1; transition: opacity 0.2s; }
+.v-flaw .door-u .cut { stroke-width: 1.1; clip-path: inset(-20px 100% -20px 0); transition: clip-path 0.38s cubic-bezier(.3,.7,.1,1); }
+.v-flaw .door:hover .cut, .v-flaw .door:focus-visible .cut { clip-path: inset(-20px 0 -20px 0); }
+.v-flaw .door:hover .calm, .v-flaw .door:focus-visible .calm { opacity: 0; }
+.v-flaw .door:hover .door-t::after, .v-flaw .door:focus-visible .door-t::after { width: 1.3em; }
+
+.v-flaw .strike { margin-top: 30px; display: inline-flex; align-items: center; gap: 12px; min-height: 44px; padding: 0 2px; background: none; border: 0; color: var(--dim); font: inherit; font-size: 1rem; letter-spacing: 0.03em; cursor: pointer; transition: color 0.25s; }
+.v-flaw .strike svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.1; }
+.v-flaw .strike:hover { color: var(--ink); }
+
+/* Rules that are cracks */
+.v-flaw .rule { display: block; width: 100%; height: 14px; margin-bottom: 7vh; overflow: visible; }
+.v-flaw .rule path { fill: none; stroke: #77736b; stroke-width: 1; vector-effect: non-scaling-stroke; clip-path: inset(-20px 100% -20px 0); transition: clip-path 1.1s cubic-bezier(.2,.8,.1,1); }
+.v-flaw .rule.on path { clip-path: inset(-20px 0 -20px 0); }
+
+.v-flaw .title { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(3.4rem, 6vw, 6rem); line-height: 0.95; letter-spacing: -0.03em; margin-bottom: 30px; font-variation-settings: 'opsz' 96; }
+.v-flaw .title.big { font-size: clamp(4.6rem, 10vw, 9.5rem); }
+.v-flaw .lead, .v-flaw .rule-line { font-size: 1.15rem; color: var(--ink); max-width: 34ch; }
+
+/* Manifesto */
+.v-flaw .manifesto ul { display: grid; gap: 7vh; }
+.v-flaw .manifesto li { font-family: var(--serif); font-size: clamp(1.9rem, 2.7vw, 2.9rem); line-height: 1.12; letter-spacing: -0.015em; font-variation-settings: 'opsz' 72; text-wrap: balance; }
+
+/* Record */
+.v-flaw .event { margin: 36px 0 44px; display: grid; gap: 2px; font-size: 1rem; letter-spacing: 0.03em; color: var(--dim); }
+.v-flaw .event .ev-name { color: var(--ink); font-size: 1.15rem; letter-spacing: 0; }
+.v-flaw .results { display: grid; gap: 0; border-top: 1px solid var(--line); }
+.v-flaw .results li { display: grid; grid-template-columns: 1fr auto; gap: 4px 20px; padding: 26px 0 28px; border-bottom: 1px solid var(--line); }
+.v-flaw .results .what { grid-column: 1 / -1; font-family: var(--serif); font-size: clamp(2rem, 3vw, 3rem); line-height: 1.05; letter-spacing: -0.02em; }
+.v-flaw .results .who { font-weight: 600; letter-spacing: 0.02em; }
+.v-flaw .results .more { color: var(--dim); text-align: right; }
+
+.v-flaw .more-link { display: inline-flex; align-items: center; gap: 12px; margin-top: 34px; min-height: 44px; font-family: var(--serif); font-style: italic; font-size: 1.35rem; border-bottom: 1px solid var(--line); transition: border-color 0.25s, gap 0.4s cubic-bezier(.16,1,.3,1); }
+.v-flaw .more-link::after { content: ''; width: 18px; height: 1px; background: currentColor; }
+.v-flaw .more-link:hover, .v-flaw .more-link:focus-visible { border-color: var(--ink); gap: 20px; }
+
+/* Drive */
+.v-flaw .items { margin-top: 40px; border-top: 1px solid var(--line); }
+.v-flaw .item { display: grid; grid-template-columns: minmax(8.5rem, 34%) 1fr; gap: 18px; padding: 18px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+.v-flaw .item dt { font-family: var(--serif); font-style: italic; font-size: 1.75rem; line-height: 1.1; }
+.v-flaw .item dd { color: var(--ink); }
+
+/* People */
+.v-flaw .coaches { display: grid; gap: 44px; margin-top: 10px; }
+.v-flaw .coach h3 { font-family: var(--serif); font-size: clamp(2.2rem, 3.4vw, 3.4rem); line-height: 1; letter-spacing: -0.02em; }
+.v-flaw .coach .role { margin: 10px 0 8px; font-size: 1rem; letter-spacing: 0.08em; color: var(--dim); }
+.v-flaw .coach .bio { max-width: 36ch; }
+.v-flaw .count { margin-top: 48px; font-family: var(--serif); font-style: italic; font-size: clamp(1.8rem, 2.6vw, 2.6rem); line-height: 1.1; }
+
+/* Join */
+.v-flaw .paths { margin-top: 40px; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.v-flaw .path { padding: 30px 0 34px; border-bottom: 1px solid var(--line); }
+.v-flaw .path h3 { font-family: var(--serif); font-weight: 500; font-size: clamp(2.6rem, 4vw, 4rem); line-height: 1; letter-spacing: -0.025em; }
+.v-flaw .path .door { margin: 6px 0 10px; max-width: 420px; }
+.v-flaw .path .door-t { font-size: 1.35rem; font-style: italic; }
+.v-flaw .path ul { display: grid; gap: 8px; color: var(--ink); }
+.v-flaw .path ul li { padding-left: 20px; position: relative; }
+.v-flaw .path ul li::before { content: ''; position: absolute; left: 0; top: 0.78em; width: 9px; height: 1px; background: var(--dim); }
+.v-flaw .after { margin-top: 40px; display: grid; gap: 10px; }
+.v-flaw .after a { border-bottom: 1px solid var(--dim); padding: 10px 0 2px; transition: border-color 0.2s; }
+.v-flaw .after a:hover, .v-flaw .after a:focus-visible { border-color: var(--ink); }
+
+/* Footer */
+.v-flaw .foot { padding: 18vh 0 120px; }
+.v-flaw .foot-line { font-family: var(--serif); font-size: clamp(2.4rem, 4vw, 4.2rem); line-height: 1.02; letter-spacing: -0.025em; text-wrap: balance; }
+.v-flaw .links, .v-flaw .pages { display: flex; flex-wrap: wrap; gap: 0 22px; margin-top: 30px; }
+.v-flaw .links a, .v-flaw .pages a { display: inline-flex; align-items: center; min-height: 44px; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+.v-flaw .pages { margin-top: 8px; }
+.v-flaw .pages a { color: var(--dim); font-size: 1rem; }
+.v-flaw .links a:hover, .v-flaw .pages a:hover, .v-flaw .links a:focus-visible, .v-flaw .pages a:focus-visible { border-color: currentColor; color: var(--ink); }
+.v-flaw .draft { margin-top: 28px; font-size: 1rem; color: var(--dim); }
+
+/* Phone: the stone holds the top of the screen, you read beneath it. */
+.v-flaw.is-phone { font-size: 16.5px; --colw: auto; --colx: 20px; }
+.v-flaw.is-phone .stage { bottom: auto; height: 43svh; z-index: 3; border-bottom: 1px solid #22211f; }
+.v-flaw.is-phone .flat { position: static; width: 100%; height: 100%; transform: none; padding: 50px 16px 10px; }
+.v-flaw.is-phone .top { padding: 12px 20px; background: transparent; }
+.v-flaw.is-phone .top nav { display: none; }
+.v-flaw.is-phone .brand { font-size: 1.2rem; }
+.v-flaw.is-phone main { padding-top: 43svh; }
+.v-flaw.is-phone .col { margin: 0 20px; }
+.v-flaw.is-phone .hero { min-height: 57svh; padding: 26px 0 40px; align-items: flex-start; }
+.v-flaw.is-phone .pitch { font-size: clamp(2.1rem, 9.6vw, 3rem); }
+.v-flaw.is-phone .statement { margin: 18px 0 16px; font-size: 1rem; gap: 0 20px; }
+.v-flaw.is-phone .door { padding: 8px 0 12px; }
+.v-flaw.is-phone .door-t { font-size: 1.4rem; }
+.v-flaw.is-phone .strike { margin-top: 12px; }
+.v-flaw.is-phone .sec { padding: 64px 0 28px; }
+.v-flaw.is-phone .hero { padding: 26px 0 40px; }
+.v-flaw.is-phone .rule { margin-bottom: 36px; }
+.v-flaw.is-phone .title { font-size: 3.3rem; }
+.v-flaw.is-phone .title.big { font-size: 5.4rem; }
+.v-flaw.is-phone .manifesto ul { gap: 40px; }
+.v-flaw.is-phone .manifesto li { font-size: 1.85rem; }
+.v-flaw.is-phone .item { grid-template-columns: 1fr; gap: 4px; }
+.v-flaw.is-phone .results li { grid-template-columns: 1fr; }
+.v-flaw.is-phone .results .more { text-align: left; }
+.v-flaw.is-phone .foot { padding: 80px 0 110px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .v-flaw .rule path { clip-path: none; transition: none; }
+  .v-flaw .door-u .cut, .v-flaw .door-t, .v-flaw .door-t::after { transition: none; }
+}
