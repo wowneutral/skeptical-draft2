@@ -1,0 +1,1 @@
+var e={slug:`bend`,n:43,name:`The bend`,color:`#0b0c0d`,ink:`#ecebe6`,kind:`3D centrepiece`,text:`A steel rule stands in a glass of water and looks broken at the surface. Drag it up and lean it, pull it out to see it straight, drop it back for the rings; scrolling circles the glass, and at the record the rule lifts out and lies straight across the top.`};export{e as default};

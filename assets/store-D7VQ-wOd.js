@@ -1,0 +1,1 @@
+var e={hand:{x:0,z:0,on:0,seen:!1},pts:Array.from({length:10},()=>({x:0,z:0,s:0,r:.22})),glyph:0,glyphOn:0,side:0,top:0,lean:{x:0,z:0,s:0},open:0,strip:0,screen:{x:0,y:0,r:0},ready:!1};export{e as t};

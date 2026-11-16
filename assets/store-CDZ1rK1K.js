@@ -1,0 +1,1 @@
+var e={keys:[],strikes:[],nudges:[],pointer:{x:0,y:0,in:!1},over:!1,settle:0,struck:0,onStrike:null,onOver:null};export{e as t};

@@ -1,0 +1,1 @@
+var e={slug:`arch`,n:49,name:`The arch`,color:`#e6e1d6`,ink:`#16130f`,kind:`3D centrepiece`,text:`A limestone arch whose keystone is cut with the question mark. Drag the keystone out and the crown comes down; let go and it builds itself again, stone by stone, the keystone last. Scrolling walks you through the opening, and at Join you look back through it.`};export{e as default};

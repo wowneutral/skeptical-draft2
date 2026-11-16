@@ -1,0 +1,1 @@
+var e={f:0,px:0,py:0,asks:0,ready:!1,onReady:null};export{e as t};

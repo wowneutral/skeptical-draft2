@@ -1,0 +1,1 @@
+var e={slug:`veil`,n:44,name:`The veil`,color:`#0e0d0c`,ink:`#efebe3`,kind:`3D centrepiece`,text:`A question mark in black stone stands under a heavy silk sheet in a dark gallery: take hold of the sheet and pull it off, throw it back over, and walk round the plinth as you scroll. At Join the sheet lifts on a draught and settles over it again.`};export{e as default};

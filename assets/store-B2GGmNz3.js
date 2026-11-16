@@ -1,0 +1,1 @@
+var e={az:-12,el:6,d:10.5,auto:0,lift:0,lean:1,held:!1,out:!1,opened:!1,waves:[],over:!1,onOut:null};export{e as t};

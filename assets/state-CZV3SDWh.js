@@ -1,0 +1,1 @@
+var e={stop:0,delta:0,count:0,hover:!1,drag:null,bookPush:0,t:0,ready:!1,onReady:null};function t(){e.stop=0,e.delta=0,e.count=0,e.hover=!1,e.drag=null,e.bookPush=0,e.t=0,e.ready=!1}function n(t){if(e.stop===5)return;let n=e.stop<=4?e.stop+1:0;e.delta=Math.max(0,Math.min(11,n+e.delta+t))-n}export{t as n,e as r,n as t};

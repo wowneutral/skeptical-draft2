@@ -1,0 +1,1 @@
+var e={slug:`roadmap`,n:57,name:`The roadmap`,color:`#111111`,ink:`#efebe3`,kind:`Debate-native`,text:`The site gives its own off-time roadmap: five huge words you can press to jump. Scroll and each word leaves the stack to headline its section, then drops back struck through, until Join fills the screen and opens into the three ways in.`};export{e as default};

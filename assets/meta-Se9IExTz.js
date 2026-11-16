@@ -1,0 +1,1 @@
+var e={slug:`knot`,n:58,name:`The knot`,color:`#f3ede1`,ink:`#121110`,kind:`3D centrepiece`,text:`Two heavy ropes, bone and black, tied in one knot on a paper sweep. Grab the loose end and pull, and it gives; scroll and it comes undone one crossing at a time, jams at the drive, and ends with the two ropes lying apart as a question mark.`};export{e as default};

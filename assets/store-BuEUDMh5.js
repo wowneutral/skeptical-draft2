@@ -1,0 +1,1 @@
+var e={f:0,shown:0,ready:!1,give:0,hold:!1,jam:!1,pointer:{x:.7,y:.6,in:!1},drag:null,near:!1,endPx:{x:-999,y:-999},phone:!1,onOpen:null};export{e as t};

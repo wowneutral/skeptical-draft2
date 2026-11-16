@@ -1,0 +1,1 @@
+var e={slug:`vein`,n:62,name:`The vein`,color:`#0d0d0c`,ink:`#ede9e0`,kind:`3D centrepiece`,text:`A block of white marble on a black plinth. Each section cuts one slice off it, and you can drag slices off yourself, while a black vein inside gathers into a question mark; at Join the block opens at the centre cut like a book.`};export{e as default};

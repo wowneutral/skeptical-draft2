@@ -1,0 +1,1 @@
+var e={slug:`clock`,n:47,name:`The clock`,color:`#080808`,ink:`#f1eee7`,kind:`Debate-native`,text:`One enormous Bodoni speech clock, and scrolling spends the time: seven sections take the seven LD speeches, each runs down to Time. in red before the next resets. Press the numerals to run the clock for real, hold Prep to drain a second one.`};export{e as default};
