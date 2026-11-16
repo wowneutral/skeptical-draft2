@@ -1,0 +1,256 @@
+html[data-v="stickers"] { background: #121214; }
+
+.v-stickers {
+  --desk: #121214; --ink: #efe9dc; --mute: #b9b2a3; --red: #ff4a2e; --red-t: #ff6a50; --black: #141414; --bone: #efe9dc; --paper: #e6dfcf;
+  --anton: Anton, sans-serif; --serif: 'Bodoni Moda Variable', 'Bodoni Moda', serif;
+  --u: min(0.54vw, 0.86vh);
+  --background: #121214; --foreground: #efe9dc; --primary: #ff4a2e; --primary-foreground: #141414; --border: #34343a; --input: #34343a; --ring: #ff6a50; --muted: #222226; --muted-foreground: #b9b2a3; --accent: #efe9dc; --accent-foreground: #141414; --popover: #121214; --popover-foreground: #efe9dc; --radius: 6px;
+  position: relative; min-height: 100vh; color: var(--ink); background: var(--desk);
+  font-family: var(--serif); font-optical-sizing: auto; font-weight: 500; font-size: 19px; line-height: 1.45;
+  overflow-x: clip;
+}
+/* the desk lamp: one warm pool of light over the lid, nothing else */
+.v-stickers::before {
+  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background: radial-gradient(ellipse 60% 70% at 26% 40%, rgba(255, 240, 215, 0.075), rgba(255, 240, 215, 0) 70%);
+}
+.v-stickers ::selection { background: var(--red); color: var(--black); }
+.v-stickers a:focus-visible, .v-stickers button:focus-visible { outline: 3px solid var(--red-t); outline-offset: 4px; }
+
+/* bar */
+.v-stickers .bar { position: fixed; top: 0; left: 0; right: 0; z-index: 60; height: 72px; display: flex; align-items: center; gap: 28px; padding: 0 28px; background: linear-gradient(#121214 60%, rgba(18, 18, 20, 0)); }
+.v-stickers .brand { font: italic 800 32px/1 var(--serif); color: var(--ink); letter-spacing: -0.01em; }
+.v-stickers .brand b { color: var(--red); font-weight: 800; }
+.v-stickers .bar-nav { display: flex; gap: 2px; }
+.v-stickers .bar-nav a { font: 400 17px/1 var(--anton); letter-spacing: 0.09em; text-transform: uppercase; color: var(--mute); padding: 12px 10px; min-height: 44px; display: inline-flex; align-items: center; transition: color 0.2s; }
+.v-stickers .bar-nav a:hover { color: var(--ink); }
+.v-stickers .bar-tools { margin-left: auto; display: flex; align-items: center; gap: 18px; }
+
+/* buttons are stickers too: a die-cut edge, a slight tilt, a lift on hover */
+.v-stickers .btn { min-height: 46px; padding: 0 20px; border-radius: 5px; font: 400 21px/1 var(--anton); letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; color: var(--black);
+  box-shadow: 0 0 0 3px #fff, 0 3px 6px rgba(0, 0, 0, 0.45); transition: transform 0.25s cubic-bezier(0.3, 1.6, 0.5, 1), box-shadow 0.25s; }
+.v-stickers .btn-stick { background: var(--red); transform: rotate(-2deg); }
+.v-stickers .btn-peel { background: var(--bone); transform: rotate(1.5deg); }
+.v-stickers .btn:hover { transform: translateY(-3px) rotate(0); box-shadow: 0 0 0 3px #fff, 0 12px 18px rgba(0, 0, 0, 0.5); }
+.v-stickers .btn:active { transform: scale(0.95); box-shadow: 0 0 0 3px #fff, 0 1px 2px rgba(0, 0, 0, 0.5); }
+
+/* stage */
+.v-stickers .stage { position: relative; z-index: 1; display: grid; grid-template-columns: calc(var(--u) * 100 + 8vw) 1fr; }
+.v-stickers .lid-col { position: sticky; top: 0; height: 100vh; display: flex; align-items: center; justify-content: center; z-index: 5; }
+.v-stickers .lid-wrap { display: flex; flex-direction: column; align-items: center; gap: 22px; padding-top: 48px; }
+.v-stickers .lid-help { font: italic 500 18px/1.2 var(--serif); color: var(--mute); text-align: center; }
+.v-stickers .lid-help .ph { display: none; }
+
+/* the lid: dark anodised aluminium under one warm lamp */
+.v-stickers .lid {
+  position: relative; width: calc(var(--u) * 100); height: calc(var(--u) * 66); border-radius: calc(var(--u) * 3.2);
+  background:
+    radial-gradient(ellipse 70% 80% at 24% 8%, rgba(255, 238, 214, 0.16), rgba(255, 238, 214, 0) 62%),
+    linear-gradient(164deg, #3a3b40 0%, #2a2b30 46%, #1f2024 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22), inset 0 0 0 1px rgba(255, 255, 255, 0.05), inset 0 -2px 6px rgba(0, 0, 0, 0.5),
+    0 calc(var(--u) * 5) calc(var(--u) * 8) rgba(0, 0, 0, 0.6), 0 calc(var(--u) * 0.8) calc(var(--u) * 1.4) rgba(0, 0, 0, 0.55);
+  touch-action: pan-y; isolation: isolate;
+}
+.v-stickers .lid-grain {
+  position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0.42; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.v-stickers .deboss { position: absolute; left: 50%; top: 50%; height: calc(var(--u) * 18); width: calc(var(--u) * 11); transform: translate(-50%, -50%); fill: rgba(0, 0, 0, 0.36); filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.12)); pointer-events: none; }
+.v-stickers .lid-lip { position: absolute; left: 50%; bottom: 0; width: calc(var(--u) * 14); height: calc(var(--u) * 0.9); transform: translateX(-50%); border-radius: 999px 999px 0 0; background: #141518; box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08); pointer-events: none; }
+
+/* stickers */
+.v-stickers .stk { position: absolute; width: calc(var(--u) * var(--w)); height: calc(var(--u) * var(--h)); user-select: none; -webkit-user-select: none; -webkit-user-drag: none; -webkit-touch-callout: none; }
+.v-stickers .lid, .v-stickers .sheet, .v-stickers .held-layer { user-select: none; -webkit-user-select: none; }
+.v-stickers .stk-fly, .v-stickers .stk-rot, .v-stickers .stk-peel { position: relative; width: 100%; height: 100%; }
+.v-stickers .art { display: block; width: 100%; height: 100%; overflow: visible; }
+.v-stickers .stk-peel { filter: drop-shadow(0 calc(var(--u) * 0.2) calc(var(--u) * 0.2) rgba(0, 0, 0, 0.5)); transition: transform 0.28s cubic-bezier(0.3, 1.5, 0.5, 1), filter 0.28s; transform-origin: 30% 30%; }
+.v-stickers .stk.at-lid { transform: translate(-50%, -50%); touch-action: none; cursor: grab; }
+.v-stickers .stk.at-slot { inset: 0; touch-action: pan-y; cursor: grab; }
+.v-stickers .stk.at-slot::after, .v-stickers .stk.at-lid::after { content: ''; position: absolute; inset: -6px; }
+.v-stickers .stk.at-static { position: absolute; transform: translate(-50%, -50%); }
+.v-stickers .stk:focus-visible { outline: none; }
+.v-stickers .stk:focus-visible .stk-rot { outline: 3px solid var(--red-t); outline-offset: 8px; border-radius: 10px; }
+.v-stickers .at-slot:hover .stk-peel { transform: translateY(calc(var(--u) * -0.8)) rotate(-1.5deg) scale(1.03); filter: drop-shadow(0 calc(var(--u) * 1.6) calc(var(--u) * 1.4) rgba(0, 0, 0, 0.32)); }
+.v-stickers .at-lid:hover .stk-peel { transform: scale(1.02); }
+.v-stickers .is-kb .stk-peel { transform: translateY(calc(var(--u) * -1.2)) scale(1.08); filter: drop-shadow(0 calc(var(--u) * 2.4) calc(var(--u) * 2) rgba(0, 0, 0, 0.55)); }
+.v-stickers .is-sel .stk-rot::after { content: ''; position: absolute; inset: calc(var(--u) * -1.2); border: 2px dashed rgba(239, 233, 220, 0.7); border-radius: calc(var(--u) * 1.4); pointer-events: none; }
+.v-stickers .landed .stk-peel { animation: stk-land 0.5s ease-out; }
+@keyframes stk-land { from { filter: drop-shadow(0 calc(var(--u) * 2) calc(var(--u) * 2) rgba(0, 0, 0, 0.55)); } }
+
+/* the peel: the white back of the corner folding over, with its own shadow */
+.v-stickers .curl { position: absolute; right: 0; bottom: 0; width: calc(var(--u) * 7); height: calc(var(--u) * 7); transform-origin: 100% 100%; transform: scale(0); transition: transform 0.3s cubic-bezier(0.3, 1.5, 0.5, 1); pointer-events: none;
+  background: linear-gradient(135deg, #ffffff 0%, #f1ede4 30%, #c9c3b5 49%, transparent 50%); filter: drop-shadow(-2px -2px 3px rgba(0, 0, 0, 0.35)); border-radius: 0 0 40% 0; }
+.v-stickers .at-slot:hover .curl, .v-stickers .at-lid:hover .curl { transform: scale(0.55); }
+.v-stickers .held .curl, .v-stickers .is-kb .curl { transform: scale(1); }
+.v-stickers .lifts .curl { animation: curl-lift 3.4s ease-in-out infinite; }
+@keyframes curl-lift { 0%, 100% { transform: scale(0.5); } 50% { transform: scale(0.95); } }
+
+.v-stickers .rot-h { position: absolute; top: -26px; right: -26px; width: 46px; height: 46px; border-radius: 50%; background: var(--bone); color: var(--black); display: grid; place-items: center; box-shadow: 0 0 0 3px #fff, 0 6px 12px rgba(0, 0, 0, 0.45); cursor: grab; touch-action: none; z-index: 2; }
+.v-stickers .rot-h svg { width: 24px; height: 24px; }
+
+.v-stickers .held-layer { position: fixed; inset: 0; z-index: 80; pointer-events: none; }
+.v-stickers .held { position: absolute; left: 0; top: 0; will-change: transform; }
+.v-stickers .held .stk { position: relative; }
+.v-stickers .held .stk-peel { transform: perspective(700px) rotateX(12deg) rotateY(-9deg) scale(1.1); filter: drop-shadow(calc(var(--u) * 1.2) calc(var(--u) * 3.2) calc(var(--u) * 2.4) rgba(0, 0, 0, 0.55)); }
+
+.v-stickers .puff { position: absolute; width: 0; height: 0; z-index: 9999; pointer-events: none; }
+.v-stickers .puff::before { content: ''; position: absolute; left: 0; top: 0; width: calc(var(--u) * var(--s) * 0.9); height: calc(var(--u) * var(--s) * 0.9); border-radius: 50%; border: 2px solid rgba(239, 233, 220, 0.45); transform: translate(-50%, -50%) scale(0.6); animation: puff-ring 0.5s ease-out forwards; }
+.v-stickers .puff i { position: absolute; left: 0; top: 0; width: calc(var(--u) * 1.2); height: calc(var(--u) * 1.2); margin: calc(var(--u) * -0.6); border-radius: 50%; background: rgba(239, 233, 220, 0.7); animation: puff-dot 0.6s cubic-bezier(0.2, 0.8, 0.3, 1) forwards; }
+@keyframes puff-ring { to { transform: translate(-50%, -50%) scale(1.5); opacity: 0; } }
+@keyframes puff-dot { from { transform: rotate(var(--a)) translateX(calc(var(--u) * var(--s) * 0.38)) scale(1); opacity: 0.9; } to { transform: rotate(var(--a)) translateX(calc(var(--u) * (var(--s) * 0.38 + 8))) scale(0.2); opacity: 0; } }
+
+/* the one holographic sticker: foil that turns with the pointer */
+.v-stickers .holo { position: absolute; inset: 0; border-radius: 50%; background: #fff; }
+.v-stickers .holo-foil { position: absolute; inset: calc(var(--u) * 0.9); border-radius: 50%; overflow: hidden;
+  background:
+    radial-gradient(circle at calc(var(--mx, 0.5) * 100%) calc(var(--my, 0.5) * 100%), rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0) 40%),
+    repeating-linear-gradient(calc(45deg + var(--mx, 0.5) * 40deg), rgba(255, 255, 255, 0.18) 0 2px, rgba(255, 255, 255, 0) 2px 7px),
+    conic-gradient(from calc(var(--mx, 0.5) * 300deg + var(--my, 0.5) * 140deg), #f6b7c8, #f3dc9a, #b6f0d6, #a9c8f5, #d4b8f2, #f6b7c8);
+}
+.v-stickers .holo-q { position: absolute; left: 14%; top: 10%; width: 72%; height: 80%; filter: drop-shadow(0 2px 0 rgba(255, 255, 255, 0.6)); }
+
+/* the column */
+.v-stickers .col { padding: 0 5vw 0 1vw; min-width: 0; }
+.v-stickers .sec { padding: 18vh 0 4vh; }
+.v-stickers .sec.hero { padding-top: 116px; }
+.v-stickers h1 { margin: 0 0 20px; }
+.v-stickers .h1-big { display: block; font: italic 900 clamp(76px, 7.4vw, 132px)/0.86 var(--serif); color: var(--ink); letter-spacing: -0.03em; }
+.v-stickers .h1-big b { color: var(--red); font-weight: 900; }
+.v-stickers .h1-small { display: block; margin-top: 14px; font: 400 clamp(17px, 1.3vw, 21px)/1.2 var(--anton); text-transform: uppercase; color: var(--mute); letter-spacing: 0.08em; }
+.v-stickers .pitch span { display: block; font: 400 clamp(36px, 3.3vw, 56px)/1 var(--anton); text-transform: uppercase; letter-spacing: 0.005em; }
+.v-stickers .pitch span + span { color: var(--red); }
+.v-stickers .statement { margin: 20px 0 0; display: flex; flex-wrap: wrap; gap: 0 0.4em; font: italic 600 clamp(22px, 1.8vw, 28px)/1.25 var(--serif); }
+.v-stickers .doors { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 30px; }
+.v-stickers .door { display: inline-flex; align-items: center; gap: 12px; min-height: 54px; padding: 0 22px; border-radius: 5px; font: 400 24px/1 var(--anton); letter-spacing: 0.04em; text-transform: uppercase; color: var(--black); box-shadow: 0 0 0 4px #fff, 0 6px 12px rgba(0, 0, 0, 0.5); transition: transform 0.25s cubic-bezier(0.3, 1.6, 0.5, 1), box-shadow 0.25s; }
+.v-stickers .door svg { width: 22px; height: 22px; }
+.v-stickers .door0 { background: var(--red); transform: rotate(-2deg); }
+.v-stickers .door1 { background: var(--bone); transform: rotate(1.5deg); }
+.v-stickers .door:hover { transform: rotate(0) translateY(-4px); box-shadow: 0 0 0 4px #fff, 0 16px 22px rgba(0, 0, 0, 0.5); }
+
+.v-stickers .h2 { font: 400 clamp(64px, 6.4vw, 120px)/0.86 var(--anton); text-transform: uppercase; letter-spacing: -0.005em; margin-bottom: 28px; }
+.v-stickers .lead { font-size: clamp(21px, 1.7vw, 27px); line-height: 1.3; max-width: 32ch; margin: 0 0 20px; }
+.v-stickers .lines { display: grid; gap: 22px; }
+.v-stickers .lines li { display: grid; grid-template-columns: 56px 1fr; align-items: baseline; font: 600 clamp(23px, 2vw, 31px)/1.18 var(--serif); letter-spacing: -0.01em; }
+.v-stickers .lines b { font: 400 50px/0.8 var(--anton); color: var(--red); }
+.v-stickers .event { display: grid; margin: 4px 0 26px; padding: 16px 0; border-top: 1px solid #3a3a40; border-bottom: 1px solid #3a3a40; }
+.v-stickers .event span { font: 400 28px/1.1 var(--anton); letter-spacing: 0.03em; text-transform: uppercase; }
+.v-stickers .event span:first-child, .v-stickers .event span:last-child { color: var(--mute); font-size: 20px; letter-spacing: 0.1em; }
+.v-stickers .results { display: grid; gap: 24px; margin-bottom: 22px; }
+.v-stickers .results li { display: grid; gap: 2px; }
+.v-stickers .results b { font: 400 clamp(38px, 3.4vw, 56px)/0.95 var(--anton); text-transform: uppercase; }
+.v-stickers .results span { font: italic 700 30px/1.15 var(--serif); color: var(--red-t); }
+.v-stickers .results em { font-style: normal; color: var(--mute); }
+.v-stickers .more { display: inline-flex; align-items: center; min-height: 44px; font: 400 22px/1 var(--anton); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink); text-decoration: underline; text-decoration-color: var(--red); text-decoration-thickness: 3px; text-underline-offset: 8px; transition: color 0.2s; }
+.v-stickers .more:hover { color: var(--red-t); }
+.v-stickers .drive { display: grid; margin-bottom: 16px; }
+.v-stickers .drive > div { display: grid; grid-template-columns: 160px 1fr; gap: 14px; padding: 12px 0; border-top: 1px solid #333338; align-items: baseline; }
+.v-stickers .drive dt { font: 400 32px/1 var(--anton); letter-spacing: 0.02em; text-transform: uppercase; }
+.v-stickers .coaches { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 24px; }
+.v-stickers .coach h3 { font: italic 800 clamp(32px, 2.8vw, 44px)/1.02 var(--serif); letter-spacing: -0.01em; }
+.v-stickers .coach .role { font: 400 19px/1.2 var(--anton); letter-spacing: 0.1em; text-transform: uppercase; color: var(--red-t); margin: 6px 0 10px; }
+
+/* sheets: backing paper with the die-cut ghosts left behind */
+.v-stickers .sheet { --u: min(0.36vw, 0.6vh); position: relative; margin-top: 52px; padding: calc(var(--u) * 2) 14px calc(var(--u) * 3); border-radius: 10px;
+  background: var(--paper); box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), 0 4px 10px rgba(0, 0, 0, 0.35), inset 0 0 0 1px rgba(255, 255, 255, 0.5); transform: rotate(-0.8deg); }
+.v-stickers .sec:nth-child(even) .sheet { transform: rotate(0.9deg); }
+.v-stickers .sheet::after { content: ''; position: absolute; right: 0; top: 0; width: 46px; height: 46px; border-radius: 0 10px 0 0; background: linear-gradient(225deg, var(--desk) 0 50%, #cfc7b4 50%, #f5f0e4 100%); box-shadow: -3px 3px 6px rgba(0, 0, 0, 0.18); pointer-events: none; }
+.v-stickers .sheet-slots { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: calc(var(--u) * 2.6) calc(var(--u) * 3); padding: calc(var(--u) * 2) calc(var(--u) * 1.5) calc(var(--u) * 1); }
+.v-stickers .slot { position: relative; width: calc(var(--u) * var(--w)); height: calc(var(--u) * var(--h)); }
+.v-stickers .at-ghost { inset: 0; opacity: 0.16; filter: grayscale(1) contrast(0.6); pointer-events: none; }
+.v-stickers .sheet .slot > .at-slot { transition: opacity 0.4s ease-out calc(var(--i) * 80ms), transform 0.8s cubic-bezier(0.2, 1.25, 0.35, 1) calc(var(--i) * 80ms); }
+.v-stickers .sheet:not(.dealt) .slot > .at-slot { opacity: 0; transform: translate(calc(var(--u) * -30), calc(var(--u) * -26)) rotate(-50deg) scale(1.3); }
+
+/* finale: the lid opens a crack, the light comes out, Join is inside */
+.v-stickers .finale { position: relative; z-index: 2; padding: 10vh 5vw 8vh; }
+.v-stickers .f-stage { position: relative; display: grid; place-items: center; perspective: 1700px; perspective-origin: 50% 0%; }
+.v-stickers .f-stage { min-height: 100vh; }
+.v-stickers .laptop { position: relative; width: min(1060px, 90vw, (100vh - 150px) * 1.515); aspect-ratio: 100 / 66; }
+.v-stickers .f-light { position: absolute; left: 50%; top: 50%; width: min(1500px, 140vw); height: 150%; transform: translate(-50%, -50%); pointer-events: none;
+  background: radial-gradient(ellipse 50% 40% at 50% 62%, rgba(255, 240, 210, 0.42), rgba(255, 228, 180, 0.12) 50%, rgba(255, 228, 180, 0) 75%); transform-origin: 50% 90%; }
+.v-stickers .f-crack { position: absolute; left: 3%; right: 3%; bottom: -2px; height: 6px; border-radius: 50%; background: #fff6e4; box-shadow: 0 0 30px 14px rgba(255, 236, 200, 0.85), 0 0 140px 70px rgba(255, 226, 170, 0.4); pointer-events: none; opacity: 0; z-index: 3; }
+.v-stickers .f-screen { position: absolute; inset: 0; border-radius: 2.4%; padding: 4.4% 5%; display: flex; flex-direction: column; color: var(--black);
+  background: #f3eee2; box-shadow: 0 0 0 10px #0c0c0e, 0 0 0 11px #34343a, 0 30px 80px rgba(0, 0, 0, 0.6); }
+.v-stickers .j-title { font: 400 clamp(72px, 10vw, 160px)/0.84 var(--anton); text-transform: uppercase; }
+.v-stickers .j-lead { font: italic 600 clamp(20px, 1.8vw, 28px)/1.2 var(--serif); margin: 12px 0 0; max-width: 34ch; }
+.v-stickers .j-paths { margin-top: auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 3%; }
+.v-stickers .j-path { position: relative; display: grid; align-content: start; gap: 6px; padding: 20px 20px 24px; border-radius: 8px; color: var(--bone); box-shadow: 0 0 0 5px #fff, 0 10px 18px rgba(0, 0, 0, 0.25); transition: transform 0.3s cubic-bezier(0.3, 1.6, 0.5, 1), box-shadow 0.3s; }
+.v-stickers .jp0 { background: #c8321c; transform: rotate(-1.5deg); }
+.v-stickers .jp1 { background: var(--black); transform: rotate(1deg); }
+.v-stickers .jp2 { background: var(--black); transform: rotate(-0.6deg); }
+.v-stickers .j-path:hover { transform: translateY(-6px) rotate(0); box-shadow: 0 0 0 5px #fff, 0 22px 30px rgba(0, 0, 0, 0.3); }
+.v-stickers .j-name { font: 400 clamp(40px, 3.8vw, 64px)/0.9 var(--anton); text-transform: uppercase; }
+.v-stickers .j-line { font: italic 700 24px/1.1 var(--serif); }
+.v-stickers .jp1 .j-line, .v-stickers .jp2 .j-line { color: var(--red-t); }
+.v-stickers .j-first { font-size: 17px; line-height: 1.3; }
+.v-stickers .j-go { position: absolute; right: 16px; top: 16px; width: 30px; height: 30px; }
+.v-stickers .f-lid { position: absolute; inset: 0; pointer-events: none; transform-origin: 50% 0%; container-type: inline-size; will-change: transform; }
+.v-stickers .lid-static { --u: 1cqw; width: 100%; height: 100%; }
+.v-stickers .lid-static .stk { pointer-events: none; }
+.v-stickers .j-more { position: relative; max-width: 1060px; margin: 10vh auto 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; }
+.v-stickers .j-full h3 { font: 400 44px/1 var(--anton); text-transform: uppercase; margin-bottom: 12px; }
+.v-stickers .j-full h3 span { display: block; margin-top: 6px; font: italic 700 25px/1.2 var(--serif); color: var(--red-t); text-transform: none; }
+.v-stickers .j-full ul { display: grid; gap: 10px; margin-bottom: 12px; }
+.v-stickers .j-full li { padding-left: 20px; position: relative; }
+.v-stickers .j-full li::before { content: ''; position: absolute; left: 0; top: 0.62em; width: 9px; height: 2px; background: var(--red); }
+.v-stickers .j-small { grid-column: 1 / -1; display: grid; gap: 4px; padding-top: 24px; border-top: 1px solid #3a3a40; font-size: 20px; }
+.v-stickers .j-small a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--red); text-underline-offset: 5px; display: inline-block; padding: 8px 0; }
+
+/* footer */
+.v-stickers .foot { position: relative; z-index: 2; padding: 12vh 5vw 130px; text-align: center; display: grid; justify-items: center; gap: 22px; }
+.v-stickers .foot-bumper { --u: min(1.2vw, 13px); width: calc(var(--u) * 74); height: calc(var(--u) * 12); transform: rotate(-2deg); }
+.v-stickers .foot-bumper .stk { position: relative; transform: none; left: auto; top: auto; }
+.v-stickers .foot-bumper .stk-rot { filter: drop-shadow(0 16px 20px rgba(0, 0, 0, 0.55)); }
+.v-stickers .foot-links, .v-stickers .foot-pages { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 22px; }
+.v-stickers .foot-links a { font: 400 21px/1 var(--anton); letter-spacing: 0.06em; text-transform: uppercase; display: inline-flex; min-height: 44px; align-items: center; }
+.v-stickers .foot-links a:hover, .v-stickers .foot-pages a:hover { color: var(--red-t); }
+.v-stickers .foot-pages a { color: var(--mute); display: inline-flex; min-height: 44px; align-items: center; }
+.v-stickers .foot-small { font-size: 16px; color: var(--mute); }
+
+/* phone */
+@media (max-width: 820px) {
+  .v-stickers { --u: min(0.94vw, 0.4vh); font-size: 17px; }
+  .v-stickers .bar { height: 64px; padding: 0 14px; gap: 10px; background: #121214; }
+  .v-stickers .bar-nav { display: none; }
+  .v-stickers .brand { display: none; }
+  .v-stickers .bar-tools { gap: 16px; width: 100%; margin: 0; justify-content: center; }
+  .v-stickers .btn { font-size: 19px; padding: 0 14px; min-height: 44px; flex: 1; white-space: nowrap; }
+  .v-stickers .stage { display: block; }
+  .v-stickers .lid-col { top: 64px; height: auto; padding: 10px 0 14px; background: linear-gradient(#121214 92%, rgba(18, 18, 20, 0)); z-index: 30; }
+  .v-stickers .lid-wrap { padding-top: 0; gap: 10px; }
+  .v-stickers .lid-help { font-size: 16px; }
+  .v-stickers .lid-help .dk { display: none; }
+  .v-stickers .lid-help .ph { display: inline; }
+  .v-stickers .col { padding: 0 16px; }
+  .v-stickers .sec { padding: 12vh 0 2vh; }
+  .v-stickers .sec.hero { padding-top: 64px; }
+  .v-stickers .h1-big { font-size: 78px; }
+  .v-stickers .sheet { --u: min(0.88vw, 0.42vh); margin-left: -4px; margin-right: -4px; }
+  .v-stickers .pitch span { font-size: 38px; }
+  .v-stickers .statement { font-size: 22px; }
+  .v-stickers .door { font-size: 21px; min-height: 50px; }
+  .v-stickers .h2 { font-size: 68px; }
+  .v-stickers .lines li { grid-template-columns: 40px 1fr; font-size: 22px; }
+  .v-stickers .lines b { font-size: 40px; }
+  .v-stickers .drive > div { grid-template-columns: 1fr; gap: 2px; }
+  .v-stickers .coaches { grid-template-columns: 1fr; }
+  .v-stickers .finale { padding: 12vh 12px 6vh; }
+  .v-stickers .laptop { width: min(100%, (100vh - 120px) * 0.735); aspect-ratio: 100 / 136; }
+  .v-stickers .f-screen { padding: 22px 16px; }
+  .v-stickers .j-title { font-size: 76px; }
+  .v-stickers .j-lead { font-size: 19px; }
+  .v-stickers .j-paths { grid-template-columns: 1fr; gap: 14px; }
+  .v-stickers .j-path { padding: 12px 14px; gap: 2px; }
+  .v-stickers .j-name { font-size: 38px; }
+  .v-stickers .j-line { font-size: 19px; }
+  .v-stickers .j-first { font-size: 16px; }
+  .v-stickers .j-go { top: 14px; width: 26px; height: 26px; }
+  .v-stickers .j-more { grid-template-columns: 1fr; gap: 28px; }
+  .v-stickers .foot-bumper { --u: calc((100vw - 40px) / 76); }
+  .v-stickers .f-screen .j-first { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v-stickers .lifts .curl { animation: none; transform: scale(0.7); }
+  .v-stickers .f-lid { display: none; }
+  .v-stickers .sheet .slot > .at-slot { transition: none; }
+}
