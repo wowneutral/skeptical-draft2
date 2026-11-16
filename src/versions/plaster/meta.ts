@@ -1,0 +1,3 @@
+import type { Version } from '@/content';
+const meta: Version = { slug: 'plaster', n: 33, name: 'The plaster', color: '#e8e4dc', ink: '#151310', kind: '3D centrepiece', text: 'SKEPTICAL? cast as a deep relief in a white plaster wall, there only as light and shadow. Scroll and one raking light swings round it while the sections sit on the bare wall; move the pointer to nudge the light, and at Join it comes straight on and the word almost disappears.' };
+export default meta;
