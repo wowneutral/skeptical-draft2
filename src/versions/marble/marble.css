@@ -1,0 +1,177 @@
+/* Version 38: the marble. Grey walls, bone labels, one bronze plaque. */
+html[data-v="marble"] { background: #d6d2cb; }
+
+.v-marble {
+  --wall: #cbc7c0; --bone: #f6f4f0; --bone2: #ebe7e0; --ink: #141210; --soft: #4b463f; --line: rgba(20, 18, 16, 0.18);
+  --bronze: #2a231b; --bronze2: #3a3127; --brass: #eadfc8; --brass2: #c9b896;
+  --gut: clamp(16px, 4vw, 72px);
+  --serif: 'Bodoni Moda Variable', 'Bodoni 72', Didot, Georgia, serif;
+  --sans: 'Instrument Sans Variable', 'Helvetica Neue', Arial, sans-serif;
+  --background: var(--bone); --foreground: var(--ink); --primary: var(--ink); --primary-foreground: var(--bone);
+  --border: var(--line); --input: var(--line); --ring: var(--ink); --muted: var(--bone2); --muted-foreground: var(--soft);
+  --accent: var(--bone2); --accent-foreground: var(--ink); --popover: var(--bone); --popover-foreground: var(--ink); --radius: 0px;
+  position: relative; color: var(--ink); background: #d6d2cb;
+  font: 400 1.0625rem/1.55 var(--sans); font-synthesis: none; overflow-x: clip;
+}
+.v-marble ::selection { background: var(--ink); color: var(--bone); }
+.v-marble :focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+.v-marble a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.22em; text-decoration-color: rgba(20, 18, 16, 0.4); transition: text-decoration-color 0.25s; }
+.v-marble a:hover { text-decoration-color: currentColor; }
+.v-marble .arr { width: 22px; height: 12px; flex: none; transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.v-marble a:hover .arr, .v-marble a:focus-visible .arr { transform: translateX(5px); }
+
+/* The room is the whole screen, behind the labels. */
+.v-marble .room { position: fixed; inset: 0; z-index: 0; background: var(--wall); cursor: grab; touch-action: pan-y; }
+.v-marble.grabbing .room { cursor: grabbing; }
+.v-marble .room canvas { display: block; touch-action: pan-y; opacity: 0; transition: opacity 1.4s ease; }
+.v-marble.lit .room canvas, .v-marble .room canvas { opacity: 1; }
+.v-marble main, .v-marble footer { position: relative; z-index: 2; pointer-events: none; }
+.v-marble .label { pointer-events: auto; }
+
+.v-marble .flat-room { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding-left: 40vw; }
+.v-marble .flat-room svg { width: min(22vw, 220px); height: auto; }
+.v-marble .flat-plinth { width: min(26vw, 260px); height: 38vh; background: #efece6; box-shadow: 0 30px 50px -30px rgba(0, 0, 0, 0.4); }
+
+/* The top line. */
+.v-marble .top { position: fixed; z-index: 1; inset: 0 0 auto 0; display: flex; justify-content: space-between; align-items: center; padding: 14px var(--gut) 0; pointer-events: none; }
+.v-marble .top a { pointer-events: auto; text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
+.v-marble .mark { font: 500 1.6rem/1 var(--serif); letter-spacing: -0.01em; }
+.v-marble .mark span { font-style: italic; margin-left: 0.04em; }
+.v-marble .top nav { display: flex; gap: clamp(14px, 2vw, 30px); }
+.v-marble .top nav a { font: 500 0.9375rem/1 var(--sans); text-transform: uppercase; letter-spacing: 0.14em; position: relative; }
+.v-marble .top nav a::after { content: ''; position: absolute; left: 0; right: 0; bottom: 10px; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.v-marble .top nav a:hover::after, .v-marble .top nav a:focus-visible::after { transform: scaleX(1); }
+
+/* Sections: each one is a view of the sculpture, with its label on the free side. */
+.v-marble .sec { min-height: 150vh; display: flex; align-items: center; padding: 18vh var(--gut); }
+.v-marble .s-hero { min-height: 112vh; padding-top: 12vh; align-items: center; }
+.v-marble .side-r { justify-content: flex-end; }
+
+.v-marble .label {
+  width: min(540px, 40vw); background: var(--bone); padding: clamp(26px, 2.8vw, 46px);
+  box-shadow: 0 1px 1px rgba(20, 18, 16, 0.08), 0 22px 40px -26px rgba(20, 18, 16, 0.45);
+}
+.v-marble .ttl { font: 500 clamp(3.6rem, 7.4vw, 6rem)/0.92 var(--serif); letter-spacing: -0.035em; margin: 0 0 0.32em -0.04em; }
+.v-marble .h2 { font: 500 clamp(3rem, 5.6vw, 5.2rem)/0.95 var(--serif); letter-spacing: -0.03em; margin: 0 0 0.35em -0.03em; }
+.v-marble .meta { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 12px 0; margin-bottom: 22px; }
+.v-marble .meta p { font: 500 1rem/1.55 var(--sans); text-transform: uppercase; letter-spacing: 0.12em; }
+.v-marble .meta p:last-child { color: var(--soft); }
+.v-marble .say { font: 400 clamp(1.5rem, 2.1vw, 1.95rem)/1.25 var(--serif); letter-spacing: -0.01em; margin-bottom: 26px; }
+.v-marble .say span { display: block; }
+.v-marble .doors { display: flex; flex-direction: column; border-top: 1px solid var(--line); }
+.v-marble .door { display: flex; justify-content: space-between; align-items: center; min-height: 58px; border-bottom: 1px solid var(--line); text-decoration: none; font: 500 1.125rem/1.2 var(--sans); padding: 0 2px; transition: padding 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), background 0.3s; }
+.v-marble .door:hover, .v-marble .door:focus-visible { padding: 0 10px; background: var(--bone2); }
+.v-marble .turn { margin-top: 20px; min-height: 44px; padding: 0; background: none; border: 0; font: 500 1rem/1 var(--sans); color: var(--soft); text-decoration: underline; text-decoration-color: rgba(20, 18, 16, 0.3); text-underline-offset: 0.25em; cursor: pointer; }
+.v-marble .turn:hover { color: var(--ink); text-decoration-color: currentColor; }
+
+/* The opening: the label is set once the lights are up. */
+.v-marble .hero-label > * { transition: opacity 1s ease, transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.v-marble:not(.lit) .hero-label > * { opacity: 0; transform: translateY(14px); }
+.v-marble .hero-label > :nth-child(2) { transition-delay: 0.12s; }
+.v-marble .hero-label > :nth-child(3) { transition-delay: 0.24s; }
+.v-marble .hero-label > :nth-child(4) { transition-delay: 0.36s; }
+.v-marble .hero-label > :nth-child(5) { transition-delay: 0.5s; }
+.v-marble .hero-label { transition: opacity 0.8s ease; }
+.v-marble:not(.lit) .hero-label { opacity: 0.001; }
+
+/* Wall text: the four lines, set large. */
+.v-marble .wall-label { width: min(620px, 44vw); }
+.v-marble .wall { display: flex; flex-direction: column; gap: 0.7em; }
+.v-marble .wall li { font: 400 clamp(1.6rem, 2.5vw, 2.35rem)/1.14 var(--serif); letter-spacing: -0.015em; text-wrap: balance; }
+.v-marble .wall li:first-child { font-weight: 600; }
+
+.v-marble .rule, .v-marble .lead { font-size: 1.0625rem; color: var(--soft); margin-bottom: 24px; max-width: 42ch; }
+
+/* The record: a bronze accession plaque. */
+.v-marble .plaque { background: linear-gradient(var(--bronze2), var(--bronze)); padding: 8px; box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5), 0 14px 26px -16px rgba(0, 0, 0, 0.7); }
+.v-marble .pl-in { border: 1px solid rgba(234, 223, 200, 0.28); padding: clamp(20px, 2.2vw, 30px); color: var(--brass); }
+.v-marble .pl-in p, .v-marble .pl-in span { text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.7), 0 1px 0 rgba(255, 240, 210, 0.08); }
+.v-marble .pl-meta { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font: 500 0.9375rem/1.4 var(--sans); text-transform: uppercase; letter-spacing: 0.14em; color: var(--brass2); }
+.v-marble .pl-meta span { color: var(--brass2); }
+.v-marble .pl-name { font: 500 clamp(1.5rem, 2vw, 1.85rem)/1.12 var(--serif); margin: 10px 0 18px; padding-bottom: 18px; border-bottom: 1px solid rgba(234, 223, 200, 0.24); }
+.v-marble .pl-res { display: flex; flex-direction: column; gap: 16px; }
+.v-marble .pl-res li { display: grid; grid-template-columns: 1fr; }
+.v-marble .who { font: 600 clamp(1.7rem, 2.4vw, 2.2rem)/1.05 var(--serif); }
+.v-marble .what { font: 500 1.0625rem/1.4 var(--sans); margin-top: 4px; }
+.v-marble .more { font: 400 1rem/1.4 var(--sans); color: var(--brass2); }
+
+.v-marble .more-l { display: inline-flex; align-items: center; gap: 12px; min-height: 48px; margin-top: 16px; font: 500 1.0625rem/1 var(--sans); }
+
+/* The drive: a cabinet of drawers that stay shut. */
+.v-marble .cab { display: flex; flex-direction: column; gap: 6px; background: #d3cec5; padding: 6px; box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.18); }
+.v-marble .dr-front {
+  width: 100%; min-height: 56px; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 18px;
+  background: linear-gradient(#efebe4, #e4dfd6); border: 0; cursor: pointer; color: var(--ink);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset, 0 -1px 0 rgba(0, 0, 0, 0.1) inset, 0 1px 2px rgba(0, 0, 0, 0.12);
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.5s;
+}
+.v-marble .dr-front:hover { transform: translateY(-1px); box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset, 0 -1px 0 rgba(0, 0, 0, 0.1) inset, 0 6px 12px -6px rgba(0, 0, 0, 0.35); }
+.v-marble .dr.on .dr-front { transform: translateY(-2px) scale(1.012); box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset, 0 12px 18px -10px rgba(0, 0, 0, 0.45); }
+.v-marble .holder { border: 1px solid rgba(20, 18, 16, 0.45); padding: 3px; background: rgba(255, 255, 255, 0.4); }
+.v-marble .holder span { display: block; min-width: 9.5em; padding: 4px 10px; background: #fbfaf7; font: 500 0.9375rem/1.2 var(--sans); text-transform: uppercase; letter-spacing: 0.14em; text-align: left; }
+.v-marble .pull { width: 54px; height: 10px; border: 1.5px solid rgba(20, 18, 16, 0.55); border-top: 0; flex: none; transition: transform 0.5s; }
+.v-marble .dr.on .pull { transform: translateY(2px); }
+.v-marble .dr-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.v-marble .dr.on .dr-body { grid-template-rows: 1fr; }
+.v-marble .dr-in { overflow: hidden; background: #c9c3b9; box-shadow: inset 0 8px 10px -6px rgba(0, 0, 0, 0.35); }
+.v-marble .card { margin: 16px 18px 6px; background: #fdfcf9; padding: 14px 16px; font: 400 1.25rem/1.3 var(--serif); transform: rotate(-0.6deg); box-shadow: 0 2px 4px rgba(0, 0, 0, 0.14); }
+.v-marble .seal { margin: 8px 18px 14px; font: 500 0.9375rem/1.2 var(--sans); text-transform: uppercase; letter-spacing: 0.14em; color: #2f2b26; }
+
+/* The people. */
+.v-marble .coaches { display: flex; flex-direction: column; border-top: 1px solid var(--line); }
+.v-marble .coaches li { padding: 18px 0; border-bottom: 1px solid var(--line); }
+.v-marble .c-name { font: 500 clamp(1.9rem, 2.6vw, 2.5rem)/1 var(--serif); letter-spacing: -0.02em; }
+.v-marble .c-role { font: 500 1rem/1.4 var(--sans); text-transform: uppercase; letter-spacing: 0.12em; margin: 8px 0 6px; color: var(--soft); }
+.v-marble .c-bio { max-width: 40ch; }
+.v-marble .count { font: 400 1.5rem/1.2 var(--serif); margin-top: 20px; }
+
+/* Join. */
+.v-marble .join-label { width: min(600px, 44vw); }
+.v-marble .paths { border-top: 1px solid var(--line); }
+.v-marble .path { padding: 20px 0 22px; border-bottom: 1px solid var(--line); }
+.v-marble .p-name { font: 500 clamp(2.2rem, 3.4vw, 3.1rem)/1 var(--serif); letter-spacing: -0.025em; }
+.v-marble .p-go { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; font: 600 1.0625rem/1 var(--sans); }
+.v-marble .p-text p { color: var(--soft); max-width: 46ch; }
+.v-marble .p-text p + p { margin-top: 6px; }
+.v-marble .also { margin-top: 22px; display: flex; flex-direction: column; gap: 6px; }
+.v-marble .also a { display: inline-block; padding: 10px 0; margin: -10px 0; }
+
+/* The end. */
+.v-marble .s-end { min-height: 130vh; align-items: flex-end; padding-bottom: 7rem; }
+.v-marble .end-label { width: min(560px, 42vw); }
+.v-marble .end-line { font: 500 clamp(2.4rem, 4.8vw, 4.4rem)/1 var(--serif); letter-spacing: -0.03em; text-wrap: balance; margin-bottom: 26px; }
+.v-marble .f-links, .v-marble .f-pages { display: flex; flex-wrap: wrap; column-gap: 24px; }
+.v-marble .f-links a, .v-marble .f-pages a { display: inline-flex; align-items: center; min-height: 44px; }
+.v-marble .f-links a { font: 500 1.0625rem/1 var(--sans); }
+.v-marble .f-pages { margin-top: 4px; }
+.v-marble .again { display: inline-flex; align-items: center; gap: 12px; min-height: 48px; margin: -8px 0 18px; font: 600 1.0625rem/1 var(--sans); }
+.v-marble .again .arr { transform: rotate(180deg); }
+.v-marble .again:hover .arr { transform: rotate(180deg) translateX(5px); }
+.v-marble .f-pages a { font: 400 1rem/1 var(--sans); color: var(--soft); }
+.v-marble .small { margin-top: 18px; font-size: 1rem; color: var(--soft); }
+
+/* Phone: the sculpture holds the top of the screen; labels come up from the floor below it. */
+@media (max-width: 820px) {
+  .v-marble { font-size: 1rem; }
+  .v-marble .top .mark { display: none; }
+  .v-marble .top { z-index: 5; justify-content: flex-end; padding: 0 16px; background: #e4e0d9; box-shadow: 0 1px 0 rgba(20, 18, 16, 0.12); }
+  .v-marble .top nav { gap: 16px; }
+  .v-marble .top nav a { font-size: 0.8125rem; letter-spacing: 0.12em; }
+  .v-marble .sec { min-height: 125svh; align-items: flex-end; padding: 52svh 16px 16px; justify-content: stretch; }
+  .v-marble .s-hero { min-height: 100svh; padding-top: 50svh; }
+  .v-marble .label, .v-marble .wall-label, .v-marble .join-label { width: 100%; padding: 24px 20px; }
+  .v-marble .ttl { font-size: clamp(3.6rem, 18vw, 4.6rem); }
+  .v-marble .h2 { font-size: clamp(2.9rem, 14vw, 3.6rem); }
+  .v-marble .say { font-size: 1.45rem; }
+  .v-marble .wall li { font-size: 1.55rem; }
+  .v-marble .holder span { min-width: 0; }
+  .v-marble .s-end { min-height: 110svh; padding-bottom: 6rem; }
+  .v-marble .end-line { font-size: 2.4rem; }
+  .v-marble .flat-room { padding: 70px 0 0; justify-content: flex-start; }
+  .v-marble .flat-room svg { width: 34vw; }
+  .v-marble .flat-plinth { width: 40vw; height: 24svh; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v-marble *, .v-marble *::before, .v-marble *::after { transition: none !important; }
+}
