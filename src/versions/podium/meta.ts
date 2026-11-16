@@ -1,0 +1,3 @@
+import type { Version } from '@/content';
+const meta: Version = { slug: 'podium', n: 40, name: 'The podium', color: '#070707', ink: '#f1ede6', kind: 'Debate-native', text: 'An empty hall with one black lectern under one spotlight, and the site is the speech given from it, a line at a time as you scroll down the aisle. The house lights come up for the record, the speaker’s cards fan out for the drive, and at Join three spots find three marks on the stage for you to pick from.' };
+export default meta;
