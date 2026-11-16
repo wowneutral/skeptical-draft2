@@ -1,0 +1,1 @@
+var e={ready:!1,heroSlot:null,joinSlot:null,joinSec:null,phone:!1,openReq:-2,shakeReq:!1,onOpen:null,onHover:null};export{e as t};

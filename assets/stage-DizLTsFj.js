@@ -1,0 +1,1 @@
+var e={f:0,open:0,way:-1,dot:null,take:0,drawn:!1,onDrawn:null};export{e as t};
