@@ -1,0 +1,1 @@
+var e={ready:!1,cell:28,censor:0,end:0,lx:.62,ly:.32,touched:!1};export{e as t};

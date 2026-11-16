@@ -1,0 +1,1 @@
+var e={slug:`shadow`,n:34,name:`The shadow`,color:`#0c0b0a`,ink:`#efe9dd`,kind:`3D centrepiece`,text:`A bronze of bent bars stands on a plinth under one spotlight. Drag it or scroll to turn it, and at one angle its shadow on the wall snaps into a question mark.`};export{e as default};
