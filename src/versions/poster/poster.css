@@ -1,0 +1,274 @@
+html[data-v="poster"] { background: #f1ede4; }
+
+.v-poster {
+  --bone: #f1ede4; --black: #121212; --red: #ef3b24; --blue: #1b2fa6;
+  --hd-bg: var(--bone); --hd-fg: var(--black);
+  --background: var(--bone); --foreground: var(--black); --primary: var(--black); --primary-foreground: var(--bone);
+  --border: var(--black); --ring: var(--black); --radius: 0;
+  font-family: 'Archivo Variable', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.4;
+  color: var(--black);
+  background: var(--bone);
+  -webkit-font-smoothing: antialiased;
+}
+.v-poster ::selection { background: var(--black); color: var(--bone); }
+.v-poster .c-kb ::selection, .v-poster .c-kr ::selection, .v-poster .c-ub ::selection { background: var(--bone); color: var(--black); }
+
+.v-poster .c-bk { --bg: var(--bone); --fg: var(--black); }
+.v-poster .c-kb { --bg: var(--black); --fg: var(--bone); }
+.v-poster .c-rk { --bg: var(--red); --fg: var(--black); }
+.v-poster .c-kr { --bg: var(--black); --fg: var(--red); }
+.v-poster .c-ub { --bg: var(--blue); --fg: var(--bone); }
+.v-poster .c-bu { --bg: var(--bone); --fg: var(--blue); }
+
+.v-poster a, .v-poster button { color: inherit; font: inherit; }
+.v-poster button { background: none; border: 0; padding: 0; cursor: pointer; text-align: inherit; }
+.v-poster :focus-visible { outline: 3px solid var(--fg, var(--black)); outline-offset: 4px; }
+
+/* Header: a strip in the inks of the sheet under it. */
+.v-poster .top {
+  position: fixed; inset: 0 0 auto 0; z-index: 50; height: 56px;
+  display: flex; align-items: center; justify-content: space-between; padding: 0 28px;
+  background: var(--hd-bg); color: var(--hd-fg);
+  transition: background-color .25s steps(1, end), color .25s steps(1, end);
+}
+.v-poster .top :focus-visible { outline-color: var(--hd-fg); }
+.v-poster .mark { font-weight: 900; font-stretch: 112%; text-transform: uppercase; font-size: 20px; letter-spacing: .01em; min-height: 44px; display: inline-flex; align-items: center; }
+.v-poster .top nav { display: flex; gap: 4px; }
+.v-poster .top nav a { min-height: 44px; display: inline-flex; align-items: center; padding: 0 10px; font-weight: 800; text-transform: uppercase; font-size: 15px; letter-spacing: .04em; }
+.v-poster .top nav a:hover { text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 6px; }
+
+/* Every sheet. */
+.v-poster .pst {
+  position: sticky; top: 0;
+  min-height: 100vh; min-height: 100svh;
+  background: var(--bg); color: var(--fg);
+  overflow: clip;
+  padding: 84px 40px 88px;
+  box-shadow: 0 -18px 40px -10px rgba(18, 18, 18, .32);
+}
+.v-poster .pst:first-child { box-shadow: none; }
+.v-poster .fit {
+  display: block; width: max-content; white-space: nowrap;
+  font-weight: 900; line-height: .8; text-transform: uppercase; letter-spacing: -.012em;
+  will-change: transform;
+}
+.v-poster .fw { display: inline; }
+.v-poster .h2 { font-weight: 900; text-transform: uppercase; font-stretch: 100%; font-size: clamp(44px, 5.4vw, 92px); line-height: .86; letter-spacing: -.01em; }
+.v-poster .lnk { font-weight: 800; text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 6px; display: inline-flex; align-items: center; min-height: 44px; }
+.v-poster .lnk:hover { text-decoration-thickness: 6px; }
+.v-poster .btn {
+  display: inline-flex; align-items: center; min-height: 58px; padding: 0 26px;
+  background: var(--fg); color: var(--bg); border: 3px solid var(--fg);
+  font-weight: 900; text-transform: uppercase; font-size: 17px; letter-spacing: .03em;
+  transition: background-color .15s, color .15s;
+}
+.v-poster .btn:hover { background: var(--bg); color: var(--fg); }
+.v-poster .btn.alt { background: transparent; color: var(--fg); }
+.v-poster .btn.alt:hover { background: var(--fg); color: var(--bg); }
+
+/* 1. The name. */
+.v-poster .hero { display: grid; grid-template-rows: auto 1fr auto; gap: 24px; transition: background-color 0s; }
+.v-poster .wipe { position: absolute; inset: 0; z-index: 0; visibility: hidden; pointer-events: none; }
+.v-poster .hero > *:not(.wipe):not(.run) { position: relative; z-index: 1; }
+.v-poster .run { position: fixed; inset: 0; z-index: 60; pointer-events: none; }
+.v-poster .run i { position: absolute; inset: 0; }
+.v-poster .run .r-k { background: var(--black); }
+.v-poster .run .r-u { background: var(--blue); }
+.v-poster .run .r-r { background: var(--red); }
+.v-poster .hero-top { display: flex; justify-content: flex-end; }
+.v-poster .pitch { display: grid; font-weight: 900; text-transform: uppercase; font-size: clamp(22px, 2.3vw, 38px); line-height: 1; text-align: right; letter-spacing: -.005em; }
+.v-poster .name { position: relative; align-self: end; margin: 0 -6px; }
+.v-poster .name h1 { display: grid; }
+.v-poster .nrow { display: block; }
+.v-poster .n1, .v-poster .n2 { font-stretch: 125%; }
+.v-poster .q {
+  position: absolute; left: 80%; top: 50%;
+  font-weight: 900; font-stretch: 125%; line-height: .8;
+  color: var(--fg); min-width: 44px; min-height: 44px; padding: 0 .04em;
+}
+.v-poster .qg { display: block; transform-origin: 50% 90%; transition: transform .45s cubic-bezier(.2, 1.5, .4, 1); }
+.v-poster .q:hover .qg { transform: rotate(-9deg); }
+.v-poster .q:active .qg { transform: rotate(6deg) scale(.94); transition-duration: .1s; }
+.v-poster .hero-foot { display: flex; justify-content: flex-end; align-items: center; gap: 28px; flex-wrap: wrap-reverse; }
+.v-poster .doors { display: flex; gap: 12px; flex-wrap: wrap; }
+.v-poster .hint { font-weight: 700; font-size: 16px; text-transform: uppercase; letter-spacing: .06em; }
+
+/* 2. The statement. */
+.v-poster .stmt { display: flex; align-items: center; }
+.v-poster .rot { width: 100%; display: grid; gap: 1.6vh; }
+.v-poster .srow { overflow: visible; }
+.v-poster .stmt .fit { font-stretch: 88%; }
+
+/* 3 to 6. The manifesto. */
+.v-poster .man { display: flex; }
+.v-poster .mline {
+  font-weight: 900; text-transform: uppercase; font-stretch: 72%;
+  font-size: min(9.4vw, 16vh); line-height: .84; letter-spacing: -.015em; text-wrap: balance;
+}
+.v-poster .m0 { align-items: flex-end; }
+.v-poster .m0 .mline { max-width: 11ch; }
+.v-poster .m1 { justify-content: flex-end; align-items: flex-start; text-align: right; }
+.v-poster .m1 .mline { max-width: 12ch; }
+.v-poster .m2 { align-items: center; }
+.v-poster .m2 .mline { font-stretch: 62%; font-size: min(11.2vw, 18vh); max-width: 13ch; }
+.v-poster .m3 { align-items: flex-end; justify-content: flex-end; text-align: right; }
+.v-poster .m3 .mline { max-width: 12ch; }
+
+/* 7. The record. */
+.v-poster .rec { display: flex; flex-direction: column; gap: 3vh; }
+.v-poster .rec-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; }
+.v-poster .ev { display: grid; text-align: right; font-weight: 900; text-transform: uppercase; font-size: clamp(18px, 1.6vw, 26px); line-height: 1.05; }
+.v-poster .results { display: grid; gap: 3.2vh; }
+.v-poster .results li:nth-child(2) { text-align: right; }
+.v-poster .results li:nth-child(2) .fit { margin-left: auto; }
+.v-poster .who { font-weight: 900; text-transform: uppercase; font-size: clamp(24px, 2.6vw, 44px); line-height: 1; margin-bottom: .5vh; }
+.v-poster .what .fit { font-stretch: 62%; }
+.v-poster .more { font-weight: 700; font-size: clamp(18px, 1.5vw, 24px); margin-top: .8vh; }
+.v-poster .rec-foot { margin-top: auto; display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; border-top: 3px solid var(--fg); padding-top: 14px; }
+.v-poster .rule { font-weight: 700; max-width: 44ch; }
+
+/* 8. The drive. */
+.v-poster .drv { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 40px; align-items: stretch; }
+.v-poster .words { display: flex; flex-direction: column; justify-content: center; margin-left: -40px; }
+.v-poster .word { display: block; width: 100%; padding: 0 0 0 40px; min-height: 44px; transition: background-color .12s, color .12s, padding .35s cubic-bezier(.2, .9, .2, 1); }
+.v-poster .wt {
+  display: block; font-weight: 900; text-transform: uppercase; font-stretch: 78%;
+  font-size: min(calc((100vh - 190px) / 7 / .86), 9.2vw); line-height: .86; letter-spacing: -.01em;
+}
+.v-poster .wx { display: none; }
+.v-poster .word[aria-pressed="true"] { background: var(--fg); color: var(--bg); padding-left: 64px; }
+.v-poster .word:focus-visible { outline-offset: -6px; outline-color: var(--red); }
+.v-poster .fine { display: flex; flex-direction: column; justify-content: center; gap: 18px; max-width: 34rem; }
+.v-poster .lead { font-weight: 700; font-size: clamp(18px, 1.4vw, 22px); }
+.v-poster .list { display: grid; border-top: 3px solid var(--fg); }
+.v-poster .list div { display: grid; grid-template-columns: 7.5rem 1fr; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--fg); font-size: 17px; line-height: 1.3; }
+.v-poster .list dt { font-weight: 900; text-transform: uppercase; }
+.v-poster .list div.on { background: var(--fg); color: var(--bg); padding-left: 10px; padding-right: 10px; }
+
+/* 9. The people. */
+.v-poster .ppl { display: flex; flex-direction: column; gap: 3vh; }
+.v-poster .coach { display: grid; gap: 1.4vh; }
+.v-poster .cname { margin: 0 -4px; }
+.v-poster .cname .fit { font-stretch: 70%; }
+.v-poster .cbody { display: grid; grid-template-columns: 14rem minmax(0, 40ch); gap: 20px; font-size: clamp(18px, 1.4vw, 22px); }
+.v-poster .coach:nth-of-type(2) .cbody { justify-content: end; }
+.v-poster .role { font-weight: 900; text-transform: uppercase; }
+.v-poster .ppl-foot { margin-top: auto; display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; border-top: 3px solid var(--fg); padding-top: 14px; }
+.v-poster .count { font-weight: 900; text-transform: uppercase; font-stretch: 90%; font-size: clamp(30px, 4vw, 64px); line-height: .9; }
+
+/* 10. Join. */
+.v-poster .jn { display: flex; flex-direction: column; gap: 24px; padding-bottom: 96px; }
+.v-poster .jn-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; }
+.v-poster .jt { font-weight: 900; text-transform: uppercase; font-stretch: 125%; font-size: min(17vw, 26vh); line-height: .78; letter-spacing: -.02em; margin-left: -6px; }
+.v-poster .jn-side { max-width: 30rem; display: grid; gap: 10px; padding-bottom: 6px; }
+.v-poster .small { font-size: 17px; }
+.v-poster .trip { display: flex; min-height: min(72vh, 760px); margin: 0 -40px; }
+.v-poster .sheet {
+  flex: 1 1 0; min-width: 0; container-type: inline-size;
+  background: var(--bg); color: var(--fg);
+  padding: 26px 28px 28px; display: flex; flex-direction: column; gap: 14px;
+  transition: flex-grow .6s cubic-bezier(.2, .9, .2, 1);
+}
+.v-poster .sheet.open { flex-grow: 1.9; }
+.v-poster .sname button {
+  display: block; width: 100%; min-height: 44px;
+  font-weight: 900; text-transform: uppercase; font-stretch: 100%; line-height: .8; letter-spacing: -.015em;
+  font-size: calc(100cqw / var(--n) / .8); white-space: nowrap; overflow: visible;
+}
+.v-poster .sline { font-weight: 900; text-transform: uppercase; font-size: clamp(22px, 2vw, 32px); line-height: 1; }
+.v-poster .stext { display: grid; gap: 10px; max-width: 42ch; }
+.v-poster .sheet:not(.open) .rest { display: none; }
+.v-poster .sgo {
+  margin-top: auto; align-self: flex-start; display: inline-flex; align-items: center; gap: 10px; min-height: 56px; padding: 0 22px;
+  background: var(--fg); color: var(--bg); font-weight: 900; text-transform: uppercase; letter-spacing: .03em; border: 3px solid var(--fg);
+}
+.v-poster .sgo:hover { background: var(--bg); color: var(--fg); }
+.v-poster .jn-foot { display: flex; gap: 12px 40px; flex-wrap: wrap; justify-content: flex-end; font-size: 17px; }
+.v-poster .jn-foot p { display: flex; align-items: center; flex-wrap: wrap; column-gap: 6px; }
+
+/* 11. The last sheet. */
+.v-poster .end { display: flex; flex-direction: column; gap: 2vh; padding-bottom: 104px; justify-content: center; }
+.v-poster .end .fit { font-stretch: 100%; }
+.v-poster .eline:nth-of-type(2) .fit { margin-left: auto; }
+.v-poster .end-row { margin-top: 4vh; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 40px; border-top: 3px solid var(--fg); padding-top: 10px; }
+.v-poster .links { display: flex; flex-wrap: wrap; column-gap: 22px; }
+.v-poster .links a { min-height: 44px; display: inline-flex; align-items: center; font-weight: 800; font-size: 18px; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 5px; }
+.v-poster .links a:hover { text-decoration-thickness: 5px; }
+.v-poster .end-low { display: flex; justify-content: flex-end; align-items: center; gap: 24px; flex-wrap: wrap; }
+.v-poster .draft { font-size: 16px; font-weight: 600; }
+
+/* The phone: the sheets are tall now, so the type re-sets for a tall format. */
+@media (max-width: 760px) {
+  .v-poster .top { padding: 0 8px 0 16px; height: 52px; }
+  .v-poster .mark { font-size: 17px; }
+  .v-poster .top nav { gap: 0; }
+  .v-poster .top nav a { font-size: 13px; padding: 0 7px; letter-spacing: .02em; }
+  .v-poster .pst { padding: 72px 16px 32px; }
+
+  .v-poster .hero { grid-template-rows: auto 1fr auto; padding-bottom: 88px; }
+  .v-poster .hero-top { justify-content: flex-start; }
+  .v-poster .pitch { text-align: left; font-size: 34px; line-height: .98; }
+  .v-poster .name { margin: 0 -3px; align-self: center; }
+  .v-poster .n1, .v-poster .n2, .v-poster .q { font-stretch: 62%; }
+  .v-poster .hero-foot { justify-content: flex-start; align-items: flex-start; flex-direction: column; gap: 12px; }
+  .v-poster .doors { flex-direction: column; width: 100%; }
+  .v-poster .btn { justify-content: center; }
+
+  /* The statement turns on its side to run the long way up the screen. */
+  .v-poster .stmt { padding: 0; }
+  .v-poster .stmt .rot {
+    position: absolute; left: 50%; top: 50%; width: calc(100svh - 120px); height: 100vw;
+    transform: translate(-50%, -50%) rotate(-90deg); align-content: center; padding: 0 16px;
+  }
+  .v-poster .stmt .fit { font-stretch: 70%; }
+
+  .v-poster .mline, .v-poster .m2 .mline { font-size: 15vw; font-stretch: 62%; max-width: none; }
+  .v-poster .m0 .mline { font-size: 16vw; }
+
+  .v-poster .rec-head { flex-direction: column; }
+  .v-poster .ev { text-align: left; font-size: 18px; }
+  .v-poster .results li:nth-child(2) .fw { margin-left: auto; }
+  .v-poster .fit.split { width: auto; }
+  .v-poster .fit.split .fw { display: block; width: max-content; }
+  .v-poster .rec-foot, .v-poster .ppl-foot { flex-direction: column; align-items: flex-start; padding-bottom: 60px; }
+
+  .v-poster .drv { grid-template-columns: 1fr; gap: 28px; }
+  .v-poster .words { margin: 0 -16px; }
+  .v-poster .word { padding: 6px 16px 8px; }
+  .v-poster .word[aria-pressed="true"] { padding-left: 24px; }
+  .v-poster .wt { font-size: 18vw; font-stretch: 62%; }
+  .v-poster .wx { display: block; font-size: 16px; font-weight: 600; line-height: 1.3; margin-top: 6px; max-width: 32ch; }
+  .v-poster .list { display: none; }
+  .v-poster .fine { order: -1; }
+
+  .v-poster .cbody { grid-template-columns: 1fr; gap: 6px; }
+  .v-poster .coach:nth-of-type(2) { text-align: right; }
+  .v-poster .coach:nth-of-type(2) .fw { margin-left: auto; }
+  .v-poster .cname .fit { font-stretch: 62%; }
+
+  .v-poster .jn-head { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .v-poster .jt { font-size: 38vw; font-stretch: 62%; }
+  .v-poster .trip { flex-direction: column; margin: 0 -16px; }
+  .v-poster .sheet { min-height: 380px; display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-rows: auto auto auto 1fr; column-gap: 16px; padding: 20px 16px 22px 10px; container-type: normal; }
+  .v-poster .sname { grid-row: 1 / span 4; }
+  .v-poster .sname button {
+    writing-mode: vertical-rl; transform: rotate(180deg); width: auto; height: 100%;
+    font-size: 19vw; font-stretch: 62%; line-height: .8; min-height: 0;
+  }
+  .v-poster .sheet:not(.open) .rest { display: block; }
+  .v-poster .sgo { margin-top: 8px; }
+  .v-poster .jn-foot { justify-content: flex-start; flex-direction: column; gap: 4px; }
+
+  .v-poster .end { padding-bottom: 96px; }
+  .v-poster .end .fit { font-stretch: 62%; }
+  .v-poster .end-row { flex-direction: column; }
+  .v-poster .end-low { justify-content: flex-start; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v-poster .word, .v-poster .sheet, .v-poster .q, .v-poster .btn { transition: none; }
+  .v-poster .q:hover .qg, .v-poster .q:active .qg { transform: none; }
+}

@@ -1,0 +1,11 @@
+import type { Version } from '@/content';
+const meta: Version = {
+  slug: 'poster',
+  n: 36,
+  name: 'The poster',
+  color: '#f1ede4',
+  ink: '#121212',
+  kind: 'Big type',
+  text: 'A run of tournament posters in four flat inks, pasted one over the next as you scroll, with the type sliding in to set. Press the question mark to reprint the first poster, pick through the seven words of the drive, and pull one of the three Join posters forward.',
+};
+export default meta;
