@@ -1,0 +1,3 @@
+import type { Version } from '@/content';
+const meta: Version = { slug: 'whiteboard', n: 26, name: 'The whiteboard', color: '#26282d', ink: '#15171c', kind: 'Play with it', text: 'A glossy whiteboard where an unseen coach writes the team up in black and red marker as you scroll, boxes and arrows included. Take a marker or the eraser from the tray, draw or wipe anywhere, and tick the ways in at the end.' };
+export default meta;
