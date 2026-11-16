@@ -1,0 +1,156 @@
+html[data-v="regress"] { background: #0a0a0a; }
+
+.v-regress {
+  --bg: #0a0a0a;
+  --ink: #ece8df;
+  --dim: #b4afa5;
+  --rule: rgba(236, 232, 223, 0.16);
+  --glass: #9cc3ab;
+  --col: clamp(420px, 41vw, 660px);
+  --pad: clamp(28px, 4vw, 72px);
+  --serif: 'Bodoni Moda Variable', 'Bodoni Moda', Didot, serif;
+  --sans: 'Hanken Grotesk Variable', 'Hanken Grotesk', system-ui, sans-serif;
+  --background: var(--bg); --foreground: var(--ink); --primary: var(--ink); --primary-foreground: var(--bg);
+  --border: var(--rule); --input: var(--rule); --ring: var(--glass); --muted: #161616; --muted-foreground: var(--dim);
+  --accent: #161616; --accent-foreground: var(--ink); --popover: var(--bg); --popover-foreground: var(--ink); --radius: 0;
+  position: relative;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 18px;
+  line-height: 1.55;
+}
+.v-regress ::selection { background: var(--ink); color: var(--bg); }
+.v-regress :focus-visible { outline: 2px solid var(--glass); outline-offset: 4px; }
+.v-regress a { color: inherit; }
+
+/* The gallery sits behind everything, fixed. */
+.v-regress .rg-stage { position: fixed; inset: 0; z-index: 0; }
+.v-regress .rg-canvas { position: absolute !important; inset: 0; touch-action: pan-y; }
+.v-regress .rg-canvas { cursor: grab; }
+.v-regress .rg-canvas:active { cursor: grabbing; }
+body[data-rg-cur="press"] .v-regress .rg-canvas { cursor: pointer; }
+
+.v-regress .rg-flat { position: absolute; inset: 0 0 0 var(--col); display: grid; place-items: center; }
+.v-regress .rg-flat svg { position: absolute; max-width: 34vh; fill: var(--ink); }
+
+/* The calm column: a solid dark field at the side; the scene keeps the rest. */
+.v-regress .rg-main { position: relative; z-index: 1; pointer-events: none; }
+.v-regress .rg-sec, .v-regress .rg-foot { pointer-events: none; width: var(--col); background: var(--bg); }
+.v-regress .rg-panel, .v-regress .rg-foot > * { pointer-events: auto; }
+.v-regress .rg-sec { min-height: 140vh; padding: 24vh var(--pad) 12vh; border-right: 1px solid var(--rule); }
+.v-regress .rg-hero { min-height: 100vh; padding-top: 0; display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 9vh; }
+.v-regress .rg-join { min-height: 170vh; }
+
+.v-regress .rg-h1 { margin: 0 0 3.2vh; }
+.v-regress .rg-word {
+  display: block; font-family: var(--serif); font-weight: 500; font-variation-settings: 'opsz' 96;
+  font-size: clamp(4.6rem, 8.6vw, 10rem); line-height: 0.86; letter-spacing: -0.035em; margin-left: -0.05em;
+}
+.v-regress .rg-sub { display: block; margin-top: 1.4rem; font-size: 1rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dim); font-weight: 500; }
+.v-regress .rg-pitch { margin: 0 0 2.4vh; font-family: var(--serif); font-style: italic; font-size: clamp(1.6rem, 2.3vw, 2.4rem); line-height: 1.12; }
+.v-regress .rg-pitch span { display: block; }
+.v-regress .rg-state { list-style: none; padding: 0; margin: 0 0 3.4vh; display: flex; flex-wrap: wrap; gap: 0.2rem 1.6rem; color: var(--dim); }
+.v-regress .rg-doors { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 3.6vh; }
+.v-regress .rg-door {
+  display: inline-flex; align-items: center; min-height: 52px; padding: 0 24px; border: 1px solid var(--ink);
+  background: var(--ink); color: var(--bg); font-weight: 600; letter-spacing: 0.01em;
+  transition: background 0.25s, color 0.25s;
+}
+.v-regress .rg-door-b { background: transparent; color: var(--ink); }
+.v-regress .rg-door:hover { background: transparent; color: var(--ink); }
+.v-regress .rg-door-b:hover { background: var(--ink); color: var(--bg); }
+.v-regress .rg-hint { margin: 0; color: var(--dim); font-size: 1rem; }
+.v-regress .rg-word-btn {
+  min-height: 44px; padding: 0 2px; color: var(--ink); font: inherit; font-family: var(--serif); font-style: italic; font-size: 1.3em;
+  background: none; border: 0; border-bottom: 1px solid var(--glass); cursor: pointer;
+}
+.v-regress .rg-word-btn:hover, .v-regress .rg-word-btn[aria-pressed="true"] { color: var(--glass); }
+
+.v-regress .rg-depth { margin: 0 0 1.2rem; font-size: 0.95rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--glass); }
+.v-regress .rg-h2 {
+  margin: 0 0 2rem; font-family: var(--serif); font-weight: 500; font-variation-settings: 'opsz' 96;
+  font-size: clamp(3.6rem, 6.4vw, 7.4rem); line-height: 0.9; letter-spacing: -0.03em; margin-left: -0.04em;
+}
+.v-regress .rg-lead { margin: 0 0 2rem; max-width: 32ch; font-size: 1.2rem; }
+
+.v-regress .rg-man { list-style: none; padding: 0; margin: 0; display: grid; gap: 7vh; }
+.v-regress .rg-man li { font-family: var(--serif); font-size: clamp(2rem, 3.1vw, 3.3rem); line-height: 1.08; letter-spacing: -0.01em; }
+.v-regress .rg-man li:nth-child(even) { font-style: italic; padding-left: 8%; }
+
+.v-regress .rg-event { display: flex; flex-direction: column; margin: 0 0 3rem; color: var(--dim); border-left: 1px solid var(--glass); padding-left: 1rem; }
+.v-regress .rg-event span:nth-child(2) { color: var(--ink); }
+.v-regress .rg-results { list-style: none; padding: 0; margin: 0 0 2.6rem; display: grid; gap: 3rem; }
+.v-regress .rg-results li { display: grid; gap: 0.2rem; }
+.v-regress .rg-what { font-family: var(--serif); font-style: italic; font-size: clamp(2.4rem, 4vw, 4.4rem); line-height: 0.98; letter-spacing: -0.02em; }
+.v-regress .rg-who { font-weight: 600; font-size: 1.15rem; margin-top: 0.6rem; }
+.v-regress .rg-more-t { color: var(--dim); }
+
+.v-regress .rg-more {
+  display: inline-flex; align-items: center; min-height: 44px; gap: 0.6rem; font-weight: 600;
+  border-bottom: 1px solid var(--ink); transition: color 0.2s, border-color 0.2s;
+}
+.v-regress .rg-more::after { content: '?'; font-family: var(--serif); font-style: italic; font-size: 1.4em; line-height: 1; transition: transform 0.35s cubic-bezier(.2,.8,.2,1); }
+.v-regress .rg-more:hover { color: var(--glass); border-color: var(--glass); }
+.v-regress .rg-more:hover::after { transform: scaleX(-1); }
+
+.v-regress .rg-drive { margin: 0 0 2.6rem; border-top: 1px solid var(--rule); }
+.v-regress .rg-drive > div { display: grid; grid-template-columns: minmax(7.5rem, 32%) 1fr; gap: 1.4rem; padding: 1.1rem 0; border-bottom: 1px solid var(--rule); align-items: baseline; }
+.v-regress .rg-drive dt { font-family: var(--serif); font-size: 1.8rem; line-height: 1.05; }
+.v-regress .rg-drive dd { margin: 0; color: var(--dim); }
+
+.v-regress .rg-people { list-style: none; padding: 0; margin: 0 0 2.6rem; display: grid; gap: 3.4rem; }
+.v-regress .rg-people li { display: grid; gap: 0.4rem; }
+.v-regress .rg-role { font-size: 0.95rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--dim); }
+.v-regress .rg-name { font-family: var(--serif); font-size: clamp(2.6rem, 4.4vw, 4.8rem); line-height: 0.95; letter-spacing: -0.02em; }
+.v-regress .rg-bio { max-width: 34ch; }
+.v-regress .rg-count { font-family: var(--serif); font-style: italic; font-size: 2rem; margin: 0 0 1.4rem; }
+
+.v-regress .rg-paths { list-style: none; padding: 0; margin: 0 0 3rem; border-top: 1px solid var(--rule); }
+.v-regress .rg-paths > li { padding: 1.6rem 0 1.8rem; border-bottom: 1px solid var(--rule); }
+.v-regress .rg-path { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.2rem 1.2rem; min-height: 44px; }
+.v-regress .rg-path-n { font-family: var(--serif); font-size: clamp(3rem, 5.2vw, 5.8rem); line-height: 0.95; letter-spacing: -0.025em; transition: transform 0.45s cubic-bezier(.2,.8,.2,1), color 0.25s; }
+.v-regress .rg-path-l { font-family: var(--serif); font-style: italic; font-size: 1.5rem; color: var(--dim); }
+.v-regress .rg-path:hover .rg-path-n, .v-regress .rg-path:focus-visible .rg-path-n { transform: translateX(0.12em); color: var(--glass); }
+.v-regress .rg-path-t { margin-top: 0.8rem; color: var(--dim); max-width: 40ch; }
+.v-regress .rg-path-t p { margin: 0 0 0.35rem; }
+.v-regress .rg-path-t p:first-child { color: var(--ink); }
+.v-regress .rg-after p { margin: 0 0 0.6rem; }
+.v-regress .rg-after a { border-bottom: 1px solid var(--ink); display: inline-block; padding: 10px 0 2px; }
+.v-regress .rg-after a:hover { color: var(--glass); border-color: var(--glass); }
+
+.v-regress .rg-foot { padding: 14vh var(--pad) 120px; border-right: 1px solid var(--rule); border-top: 1px solid var(--rule); }
+.v-regress .rg-foot-line { font-family: var(--serif); font-style: italic; font-size: clamp(2rem, 3.2vw, 3.4rem); line-height: 1.05; margin: 0 0 3rem; }
+.v-regress .rg-foot ul { list-style: none; padding: 0; margin: 0 0 1.4rem; display: flex; flex-wrap: wrap; gap: 0 1.6rem; }
+.v-regress .rg-foot li a { display: inline-flex; align-items: center; min-height: 44px; }
+.v-regress .rg-foot li a:hover { color: var(--glass); }
+.v-regress .rg-foot-pages { color: var(--dim); }
+.v-regress .rg-draft { color: var(--dim); font-size: 0.95rem; margin: 2rem 0 0; }
+
+/* Phone: the scene owns the top of the screen; each section is a solid sheet that rises into it. */
+@media (max-width: 759px) {
+  .v-regress { font-size: 16.5px; --pad: 20px; }
+  .v-regress .rg-sec, .v-regress .rg-foot { width: 100%; border-right: 0; background: transparent; }
+  .v-regress .rg-sec { min-height: 0; padding: 62svh 0 0; }
+  .v-regress .rg-panel { background: var(--bg); padding: 28px var(--pad) 56px; border-top: 1px solid var(--rule); }
+  .v-regress .rg-hero { min-height: 100svh; padding: 56svh 0 0; justify-content: flex-start; }
+  .v-regress .rg-hero .rg-panel { border-top: 0; padding-top: 4px; box-shadow: 0 -40px 40px -10px var(--bg); }
+  .v-regress .rg-join { min-height: 0; padding-top: 70svh; }
+  .v-regress .rg-foot { background: var(--bg); padding: 12vh var(--pad) 140px; }
+  .v-regress .rg-word { font-size: 21.5vw; }
+  .v-regress .rg-sub { font-size: 0.85rem; margin-top: 0.9rem; }
+  .v-regress .rg-pitch { font-size: 1.6rem; }
+  .v-regress .rg-h2 { font-size: 16vw; }
+  .v-regress .rg-man { gap: 2.4rem; }
+  .v-regress .rg-man li { font-size: 1.85rem; }
+  .v-regress .rg-man li:nth-child(even) { padding-left: 0; }
+  .v-regress .rg-drive > div { grid-template-columns: 1fr; gap: 0.2rem; }
+  .v-regress .rg-drive dt { font-size: 1.6rem; }
+  .v-regress .rg-path-n { font-size: 15vw; }
+  .v-regress .rg-flat { inset: 0 0 45% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v-regress * { transition: none !important; }
+}
