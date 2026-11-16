@@ -1,0 +1,12 @@
+import type { Version } from '@/content';
+
+const meta: Version = {
+  slug: 'quotes',
+  n: 45,
+  name: 'The quotes',
+  color: '#ebe6dc',
+  ink: '#121110',
+  kind: 'Big type',
+  text: 'Every claim arrives in a doubtful italic, hung between two huge red quotation marks. Pull the marks off and the line stands upright; throw them back onto any line to doubt it again, until the last pair becomes the full stop.',
+};
+export default meta;
