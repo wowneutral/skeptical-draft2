@@ -1,0 +1,149 @@
+html[data-v="shell"] { background: #0b0b0a; }
+
+.v-shell {
+  --bg: #0b0b0a; --ink: #eee9df; --dim: #a8a194; --line: rgba(238, 233, 223, 0.16); --pearl: #f6f1e7;
+  --background: 40 6% 4%; --foreground: 40 30% 90%; --primary: 40 30% 90%; --primary-foreground: 40 6% 4%;
+  --border: 40 8% 20%; --input: 40 8% 20%; --ring: 40 30% 90%; --muted: 40 6% 12%; --muted-foreground: 40 6% 62%;
+  --accent: 40 6% 14%; --accent-foreground: 40 30% 90%; --popover: 40 6% 6%; --popover-foreground: 40 30% 90%; --radius: 0;
+  --serif: 'Bodoni Moda Variable', 'Bodoni Moda', Didot, serif;
+  --sans: 'Hanken Grotesk Variable', 'Hanken Grotesk', system-ui, sans-serif;
+  --colw: 44vw;
+  background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 18px; line-height: 1.55;
+  min-height: 100vh; position: relative;
+}
+.v-shell ::selection { background: var(--ink); color: var(--bg); }
+.v-shell a { color: inherit; text-decoration: none; }
+.v-shell :focus-visible { outline: 1px solid var(--ink); outline-offset: 4px; }
+.v-shell .skip-x { position: absolute; left: 12px; top: -80px; z-index: 50; background: var(--ink); color: var(--bg); padding: 12px 16px; }
+.v-shell .skip-x:focus { top: 12px; }
+
+/* The case: the shell lives here, and no text ever sits on it. */
+.v-shell .case { position: fixed; top: 0; right: 0; width: calc(100vw - var(--colw)); height: 100vh; z-index: 2; background: var(--bg); }
+.v-shell .glass { position: absolute; inset: 0; touch-action: pan-y; cursor: grab; opacity: 0; transition: opacity 1.6s cubic-bezier(.2,.7,.2,1); }
+.v-shell .glass:active { cursor: grabbing; }
+.v-shell .glass canvas { touch-action: pan-y; }
+.v-shell.is-lit .glass, .v-shell .glass { opacity: 1; }
+.v-shell .flatq { position: absolute; left: 50%; top: 50%; height: 56%; transform: translate(-50%, -50%); fill: var(--ink); }
+.v-shell .press {
+  position: absolute; right: clamp(16px, 2.4vw, 40px); bottom: clamp(16px, 3vh, 36px); min-height: 44px; padding: 10px 0 10px 0;
+  font: 500 15px/1.2 var(--sans); letter-spacing: 0.02em; color: var(--dim); background: none; border: 0; cursor: pointer;
+  transition: color .3s, opacity .5s;
+}
+.v-shell .press span { border-bottom: 1px solid var(--line); padding-bottom: 3px; transition: border-color .3s; }
+.v-shell .press:hover, .v-shell .press:focus-visible { color: var(--ink); }
+.v-shell .press:hover span { border-color: var(--ink); }
+.v-shell[data-cut="1"] .press { opacity: 0; pointer-events: none; }
+
+/* The column: a calm dark field beside the specimen. */
+.v-shell .col { position: relative; z-index: 3; width: var(--colw); background: var(--bg); border-right: 1px solid var(--line); padding: 0 clamp(24px, 3.6vw, 64px); }
+.v-shell .mast { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 22px 0; position: sticky; top: 0; background: var(--bg); z-index: 4; border-bottom: 1px solid var(--line); }
+.v-shell .brand { font: 600 22px/1 var(--serif); letter-spacing: -0.01em; min-height: 44px; display: inline-flex; align-items: center; }
+.v-shell .brand em { font-style: italic; font-weight: 400; margin-left: 1px; }
+.v-shell .mast nav { display: flex; gap: clamp(12px, 1.6vw, 26px); }
+.v-shell .mast nav a { font-size: 15px; color: var(--dim); min-height: 44px; display: inline-flex; align-items: center; transition: color .25s; }
+.v-shell .mast nav a:hover { color: var(--ink); }
+
+.v-shell section { padding: clamp(80px, 16vh, 180px) 0; }
+.v-shell .hero { min-height: calc(100vh - 89px); display: flex; flex-direction: column; justify-content: flex-end; padding: 8vh 0 clamp(40px, 8vh, 90px); }
+.v-shell .pitch { font: 400 clamp(46px, 5.6vw, 96px)/0.98 var(--serif); font-variation-settings: 'opsz' 96; letter-spacing: -0.025em; text-wrap: balance; }
+.v-shell .pitch span, .v-shell .pitch em { display: block; }
+.v-shell .pitch em { font-style: italic; color: var(--ink); margin-top: 0.12em; }
+.v-shell .statement { margin-top: clamp(28px, 5vh, 52px); display: grid; gap: 2px; font-size: 20px; color: var(--ink); }
+.v-shell .statement span:nth-child(2) { color: var(--dim); }
+.v-shell .doors { margin-top: clamp(28px, 4vh, 44px); display: flex; flex-wrap: wrap; gap: 0; border-top: 1px solid var(--line); }
+.v-shell .doors a { flex: 1 1 220px; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 20px 0; font: 400 clamp(22px, 1.9vw, 30px)/1.1 var(--serif); border-bottom: 1px solid var(--line); transition: padding .35s cubic-bezier(.2,.7,.2,1); }
+.v-shell .doors a + a { margin-left: 28px; }
+.v-shell .doors a:hover { padding-left: 10px; }
+.v-shell .arr { width: 26px; height: 13px; flex: none; transition: transform .35s cubic-bezier(.2,.7,.2,1); }
+.v-shell a:hover .arr { transform: translateX(6px); }
+
+/* The manifesto grows like the shell: every line one chamber larger. */
+.v-shell .say { padding-top: clamp(90px, 20vh, 220px); }
+.v-shell .grow { counter-reset: none; display: grid; gap: clamp(26px, 4vh, 44px); }
+.v-shell .grow li { font-family: var(--serif); font-size: calc(clamp(22px, 1.75vw, 30px) * (1 + 0.2 * var(--k))); line-height: 1.12; letter-spacing: -0.015em; text-wrap: balance; }
+.v-shell .grow li:nth-child(2n) { font-style: italic; }
+
+.v-shell .title { font: italic 400 clamp(64px, 7.6vw, 136px)/0.92 var(--serif); font-variation-settings: 'opsz' 96; letter-spacing: -0.035em; margin-bottom: clamp(26px, 4vh, 44px); }
+.v-shell .lead { font-size: 20px; max-width: 34ch; color: var(--ink); }
+.v-shell .event { margin-top: 40px; display: grid; gap: 2px; padding: 18px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.v-shell .event span:first-child { color: var(--dim); font-size: 16px; letter-spacing: .04em; }
+.v-shell .event span:nth-child(2) { font: 400 26px/1.15 var(--serif); }
+.v-shell .event span:last-child { color: var(--dim); }
+.v-shell .results { margin: 18px 0 36px; }
+.v-shell .results li { padding: 26px 0; border-bottom: 1px solid var(--line); }
+.v-shell .results h3 { font: 400 clamp(34px, 3.3vw, 54px)/1 var(--serif); letter-spacing: -0.02em; }
+.v-shell .results p { margin-top: 10px; color: var(--dim); }
+.v-shell .results b { color: var(--ink); font-weight: 600; margin-right: 6px; }
+.v-shell .more { display: inline-flex; align-items: center; gap: 14px; min-height: 44px; border-bottom: 1px solid var(--line); font-weight: 500; transition: border-color .3s; }
+.v-shell .more:hover { border-color: var(--ink); }
+
+.v-shell .drive { margin: 34px 0 30px; border-top: 1px solid var(--line); }
+.v-shell .drive li { border-bottom: 1px solid var(--line); }
+.v-shell .drive button { width: 100%; text-align: left; display: grid; grid-template-columns: minmax(8ch, 0.9fr) 2fr; gap: 6px 22px; align-items: baseline; padding: 18px 0; background: none; border: 0; color: inherit; font: inherit; cursor: pointer; position: relative; transition: padding .4s cubic-bezier(.2,.7,.2,1); }
+.v-shell .drive .term { font: 400 clamp(24px, 2.1vw, 34px)/1.05 var(--serif); letter-spacing: -0.01em; }
+.v-shell .drive .txt { color: var(--dim); font-size: 17px; transition: color .3s; }
+.v-shell .drive button::after { content: ''; position: absolute; left: 0; bottom: -1px; height: 1px; width: 100%; background: var(--ink); transform: scaleX(0); transform-origin: left; transition: transform .5s cubic-bezier(.2,.7,.2,1); }
+.v-shell .drive button.on { padding-left: 14px; }
+.v-shell .drive button.on .term { font-style: italic; }
+.v-shell .drive button.on .txt { color: var(--ink); }
+.v-shell .drive button.on::after { transform: scaleX(1); }
+
+.v-shell .coaches { display: grid; gap: 0; border-top: 1px solid var(--line); }
+.v-shell .coaches li { padding: 30px 0; border-bottom: 1px solid var(--line); }
+.v-shell .coaches h3 { font: 400 clamp(36px, 3.4vw, 58px)/1 var(--serif); letter-spacing: -0.02em; }
+.v-shell .coaches .role { font-style: italic; font-family: var(--serif); font-size: 21px; margin: 8px 0 12px; }
+.v-shell .coaches p:last-child { max-width: 38ch; color: var(--dim); }
+.v-shell .count { font: italic 400 clamp(30px, 2.8vw, 46px)/1.1 var(--serif); margin: 40px 0 22px; }
+
+.v-shell .join .title { font-size: clamp(90px, 11vw, 190px); }
+.v-shell .paths { margin: 36px 0 34px; border-top: 1px solid var(--line); }
+.v-shell .paths li { padding: 26px 0 30px; border-bottom: 1px solid var(--line); }
+.v-shell .path { display: block; }
+.v-shell .path .name { display: flex; justify-content: space-between; align-items: center; font: 400 clamp(44px, 4.4vw, 76px)/1 var(--serif); letter-spacing: -0.03em; transition: font-style .2s; }
+.v-shell .path .name .arr { width: 40px; height: 20px; }
+.v-shell .path:hover .name { font-style: italic; }
+.v-shell .path .line { display: block; font: italic 400 22px/1.3 var(--serif); margin-top: 6px; }
+.v-shell .more-text { margin-top: 12px; color: var(--dim); font-size: 17px; display: grid; gap: 6px; max-width: 46ch; }
+.v-shell .aside { color: var(--dim); margin-top: 12px; max-width: 44ch; }
+.v-shell .aside a { color: var(--ink); border-bottom: 1px solid var(--line); padding: 10px 0 2px; transition: border-color .3s; overflow-wrap: anywhere; }
+.v-shell .aside a:hover { border-color: var(--ink); }
+
+.v-shell .foot { padding: clamp(80px, 18vh, 200px) 0 120px; border-top: 1px solid var(--line); }
+.v-shell .last { font: italic 400 clamp(40px, 4.6vw, 80px)/1 var(--serif); letter-spacing: -0.03em; text-wrap: balance; max-width: 12ch; }
+.v-shell .links, .v-shell .pages { display: flex; flex-wrap: wrap; gap: 0 24px; margin-top: 34px; }
+.v-shell .pages { margin-top: 8px; }
+.v-shell .links a, .v-shell .pages a { min-height: 44px; display: inline-flex; align-items: center; transition: color .25s; }
+.v-shell .pages a { color: var(--dim); }
+.v-shell .links a:hover, .v-shell .pages a:hover { color: var(--pearl); text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 1px; }
+.v-shell .draft { margin-top: 40px; font-size: 16px; color: var(--dim); }
+
+/* No WebGL: the column stays, the case shows a plain question mark. */
+.v-shell.no-gl .press { display: none; }
+
+/* Phone: the case is a window across the top; the column slides beneath it. */
+@media (max-width: 820px) {
+  .v-shell { --colw: 100vw; font-size: 17px; }
+  .v-shell .case { width: 100vw; height: 46svh; border-bottom: 1px solid var(--line); z-index: 6; }
+  .v-shell .col { width: 100%; border-right: 0; padding: 46svh 20px 0; }
+  .v-shell .mast { position: static; padding: 14px 0; }
+  .v-shell .mast nav { gap: 14px; }
+  .v-shell .mast nav a { font-size: 15px; }
+  .v-shell .hero { min-height: 0; padding: 26px 0 64px; }
+  .v-shell .pitch { font-size: clamp(40px, 11.4vw, 60px); }
+  .v-shell .statement { font-size: 18px; }
+  .v-shell .doors { flex-direction: column; }
+  .v-shell .doors a + a { margin-left: 0; }
+  .v-shell .doors a { flex: none; }
+  .v-shell section { padding: 72px 0; }
+  .v-shell .say { padding-top: 80px; }
+  .v-shell .grow li { font-size: calc(21px * (1 + 0.16 * var(--k))); }
+  .v-shell .title { font-size: clamp(60px, 17vw, 88px); }
+  .v-shell .join .title { font-size: clamp(84px, 26vw, 120px); }
+  .v-shell .drive button { grid-template-columns: 1fr; padding: 16px 0; }
+  .v-shell .press { right: 0; bottom: 0; font-size: 15px; background: var(--bg); padding: 10px 16px; }
+  .v-shell .foot { padding-bottom: 110px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v-shell *, .v-shell *::after { transition: none !important; }
+}

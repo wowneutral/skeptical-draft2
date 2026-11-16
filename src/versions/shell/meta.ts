@@ -1,0 +1,3 @@
+import type { Version } from '@/content';
+const meta: Version = { slug: 'shell', n: 69, name: 'The shell', color: '#0b0b0a', ink: '#eee9df', kind: '3D centrepiece', text: 'A bone white chambered shell on a black stand under museum light: drag it to turn it, press it and it parts along its plane, and the cut spiral over a pearl reads as a question mark. Scrolling walks the camera into the cut half one chamber per section, and at Join the shell closes and turns to show its edge.' };
+export default meta;
