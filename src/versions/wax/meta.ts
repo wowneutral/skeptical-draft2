@@ -1,0 +1,3 @@
+import type { Version } from '@/content';
+const meta: Version = { slug: 'wax', n: 56, name: 'The wax', color: '#0e0c0a', ink: '#efe8da', kind: '3D centrepiece', text: 'A question mark cast in bone white wax stands on black stone under a warm lamp. Press and hold it and it slumps where you hold; scroll and it melts to a pool, then at Join it draws itself back up.' };
+export default meta;
