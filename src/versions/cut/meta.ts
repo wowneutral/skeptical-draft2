@@ -1,0 +1,12 @@
+import type { Version } from '@/content';
+
+const meta: Version = {
+  slug: 'cut',
+  n: 55,
+  name: 'The cut',
+  color: '#ece8df',
+  ink: '#111010',
+  kind: 'Big type',
+  text: 'Every headline is set enormous in black Bodoni and sliced through by a red line; the halves part and the section is printed in the gap. Drag across any big word to cut it yourself, open the seven words of the drive one at a time, and try to cut the last line.',
+};
+export default meta;
