@@ -1,0 +1,12 @@
+import type { Version } from '@/content';
+
+const meta: Version = {
+  slug: 'angle',
+  n: 64,
+  name: 'The angle',
+  color: '#ebe6db',
+  ink: '#121110',
+  kind: 'Big type',
+  text: 'The whole site printed on ribbed lenticular plastic, so every huge line reads one way from the left and another from the right. Move the pointer or drag to change where you stand, scroll and each strip flips as it crosses the middle, or press any strip to turn it over.',
+};
+export default meta;
