@@ -1,0 +1,173 @@
+html[data-v='bend'] { background: #0b0c0d; }
+
+.v-bend {
+  --bg: #0b0c0d; --ink: #ecebe6; --dim: #a9a8a1; --line: #2c2d2e; --steel: #c9ccce;
+  --serif: 'Bodoni Moda Variable', 'Bodoni Moda', Georgia, serif;
+  --sans: 'Instrument Sans Variable', 'Instrument Sans', system-ui, sans-serif;
+  --background: #0b0c0d; --foreground: #ecebe6; --primary: #ecebe6; --primary-foreground: #0b0c0d; --border: #2c2d2e; --input: #2c2d2e; --ring: #ecebe6; --muted: #17181a; --muted-foreground: #a9a8a1; --accent: #17181a; --accent-foreground: #ecebe6; --popover: #0b0c0d; --popover-foreground: #ecebe6; --radius: 0;
+  position: relative; background: var(--bg); color: var(--ink);
+  font-family: var(--sans); font-size: 18px; line-height: 1.5; font-weight: 400;
+  overflow-x: clip; -webkit-font-smoothing: antialiased;
+}
+.v-bend ::selection { background: var(--ink); color: var(--bg); }
+.v-bend a { color: inherit; text-decoration: none; }
+.v-bend :focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+.v-bend button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+
+/* ── the stage: fixed behind everything ── */
+.v-bend .stage { position: fixed; inset: 0; z-index: 0; touch-action: pan-y; opacity: 0; transition: opacity 1.2s ease 0.1s; }
+.v-bend .stage canvas { touch-action: pan-y; }
+.v-bend .stage canvas.is-over { cursor: grab; }
+.v-bend .stage canvas.is-grab { cursor: grabbing; }
+.v-bend.is-live .stage { opacity: 1; }
+/* A calm field for the type on the left: the room is dark there already; this keeps it so. */
+.v-bend .field { position: fixed; inset: 0 auto 0 0; width: 62vw; z-index: 1; pointer-events: none;
+  background: linear-gradient(90deg, rgba(11, 12, 13, 0.92) 0%, rgba(11, 12, 13, 0.82) 55%, rgba(11, 12, 13, 0) 100%); }
+
+/* ── header ── */
+.v-bend .top { position: fixed; top: 0; left: 0; right: 0; z-index: 20; background: rgba(11, 12, 13, 0.92); display: flex; justify-content: space-between; align-items: center; padding: 18px 6vw; pointer-events: none; }
+.v-bend .top > * { pointer-events: auto; }
+.v-bend .brand { font-family: var(--serif); font-size: 1.5rem; font-weight: 600; letter-spacing: -0.01em; min-height: 44px; display: inline-flex; align-items: center; }
+.v-bend .brand i { font-style: italic; font-weight: 500; margin-left: 1px; }
+.v-bend .top nav { display: flex; gap: 4px; }
+.v-bend .top nav a { font-size: 0.95rem; letter-spacing: 0.02em; padding: 0 12px; min-height: 44px; display: inline-flex; align-items: center; color: var(--dim); transition: color 0.2s; }
+.v-bend .top nav a:hover { color: var(--ink); }
+
+/* ── sections ── */
+.v-bend main, .v-bend .end { position: relative; z-index: 2; }
+.v-bend.is-live main, .v-bend.is-live .sec { pointer-events: none; }
+.v-bend.is-grab, .v-bend.is-grab * { user-select: none; -webkit-user-select: none; }
+.v-bend.is-live .sec .col > * { pointer-events: auto; }
+.v-bend .sec { min-height: 100vh; display: flex; align-items: center; padding: 14vh 6vw; }
+.v-bend .col { width: min(46vw, 700px); }
+.v-bend .grad { height: 14px; width: 100%; max-width: 560px; margin: 26px 0 30px; opacity: 0.75;
+  background:
+    repeating-linear-gradient(90deg, var(--ink) 0 1px, transparent 1px 70px) top left / 100% 14px no-repeat,
+    repeating-linear-gradient(90deg, var(--ink) 0 1px, transparent 1px 35px) top left / 100% 9px no-repeat,
+    repeating-linear-gradient(90deg, var(--ink) 0 1px, transparent 1px 7px) top left / 100% 5px no-repeat;
+  border-top: 1px solid var(--ink); }
+
+/* The opening: type arrives after the rule drops in. */
+.v-bend.is-live .hero .col > * { opacity: 0; transform: translateY(18px); transition: opacity 1s cubic-bezier(.2,.8,.2,1), transform 1.2s cubic-bezier(.2,.8,.2,1); }
+.v-bend.is-live.is-open .hero .col > * { opacity: 1; transform: none; }
+.v-bend.is-open .hero .col > :nth-child(2) { transition-delay: 0.15s; }
+.v-bend.is-open .hero .col > :nth-child(3) { transition-delay: 0.3s; }
+.v-bend.is-open .hero .col > :nth-child(4) { transition-delay: 0.45s; }
+.v-bend.is-open .hero .col > :nth-child(5) { transition-delay: 0.7s; }
+.v-bend.is-live .stage { opacity: 1; }
+
+/* ── hero ── */
+.v-bend .pitch { font-family: var(--serif); font-weight: 500; font-size: clamp(3rem, 6.2vw, 6rem); line-height: 0.98; letter-spacing: -0.025em; font-variation-settings: 'opsz' 96; text-wrap: balance; }
+.v-bend .pitch span, .v-bend .pitch em { display: block; }
+.v-bend .pitch em { font-style: italic; font-weight: 400; color: var(--steel); }
+.v-bend .statement { display: flex; flex-direction: column; font-size: 1.3rem; line-height: 1.45; }
+.v-bend .doors { display: flex; flex-wrap: wrap; gap: 14px 36px; margin-top: 36px; }
+.v-bend .doors a, .v-bend .more, .v-bend .ways > li > a .name {
+  background-image: linear-gradient(var(--ink), var(--ink)); background-size: 100% 1px; background-position: 0 100%; background-repeat: no-repeat; transition: background-size 0.45s cubic-bezier(.2,.8,.2,1);
+}
+.v-bend .doors a { font-family: var(--serif); font-size: 1.7rem; font-style: italic; min-height: 44px; display: inline-flex; align-items: center; padding-bottom: 2px; }
+.v-bend .doors a::after, .v-bend .more::after { content: ''; display: inline-block; width: 0.7em; height: 0.7em; margin-left: 0.4em; border-top: 1.5px solid currentColor; border-right: 1.5px solid currentColor; transform: rotate(45deg) scale(0.6); transition: transform 0.3s; }
+.v-bend .doors a:hover, .v-bend .more:hover { background-size: 30% 1px; }
+.v-bend .doors a:hover::after, .v-bend .more:hover::after { transform: translateX(4px) rotate(45deg) scale(0.6); }
+.v-bend .try { margin-top: 44px; display: flex; align-items: center; flex-wrap: wrap; gap: 6px 18px; color: var(--dim); font-size: 1rem; }
+.v-bend .lift { min-height: 44px; padding: 0 18px; border: 1px solid var(--ink) !important; color: var(--ink); font-size: 1rem; letter-spacing: 0.02em; transition: background 0.25s, color 0.25s; }
+.v-bend .lift:hover, .v-bend .lift[aria-pressed='true'] { background: var(--ink); color: var(--bg); }
+
+/* ── the four lines ── */
+.v-bend .say .line { font-family: var(--serif); font-size: clamp(2.3rem, 4.4vw, 4.5rem); line-height: 1.06; letter-spacing: -0.02em; font-weight: 450; font-variation-settings: 'opsz' 72; text-wrap: balance; max-width: 15ch; }
+
+/* ── section heads ── */
+.v-bend .title { font-family: var(--serif); font-size: clamp(3.2rem, 6vw, 6rem); line-height: 0.95; letter-spacing: -0.03em; font-weight: 500; font-variation-settings: 'opsz' 96; }
+.v-bend .lead { font-size: 1.3rem; line-height: 1.45; max-width: 34ch; }
+.v-bend .more { display: inline-flex; align-items: center; min-height: 44px; margin-top: 30px; font-size: 1.1rem; }
+
+/* ── record ── */
+.v-bend .rule { font-family: var(--serif); font-size: clamp(2.2rem, 3.9vw, 3.9rem); line-height: 1.06; letter-spacing: -0.02em; font-weight: 450; text-wrap: balance; max-width: 17ch; }
+.v-bend .event { display: flex; flex-direction: column; margin-top: 40px; color: var(--dim); font-size: 1.05rem; }
+.v-bend .event span:first-child { color: var(--ink); letter-spacing: 0.04em; text-transform: uppercase; font-size: 0.9rem; margin-bottom: 4px; }
+.v-bend .results { margin-top: 22px; border-top: 1px solid var(--line); }
+.v-bend .results li { padding: 18px 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 1fr 1fr; gap: 6px 24px; align-items: baseline; }
+.v-bend .results h3 { font-family: var(--serif); font-size: 1.7rem; line-height: 1.1; font-style: italic; font-weight: 400; }
+.v-bend .results p { color: var(--dim); font-size: 1.05rem; }
+.v-bend .results b { color: var(--ink); font-weight: 600; display: block; }
+
+/* ── drive ── */
+.v-bend .kit { margin-top: 34px; border-top: 1px solid var(--line); }
+.v-bend .kit > div { display: grid; grid-template-columns: 9.5rem 1fr; gap: 6px 20px; padding: 14px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+.v-bend .kit dt { font-family: var(--serif); font-size: 1.55rem; font-style: italic; line-height: 1.1; }
+.v-bend .kit dd { color: var(--dim); font-size: 1.05rem; }
+
+/* ── people ── */
+.v-bend .coaches { display: grid; gap: 34px; margin-bottom: 34px; }
+.v-bend .coaches h3 { font-family: var(--serif); font-size: clamp(2.4rem, 4.2vw, 4rem); line-height: 1; letter-spacing: -0.02em; font-weight: 500; }
+.v-bend .coaches .role { margin: 10px 0 6px; font-size: 0.9rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); }
+.v-bend .coaches p:not(.role) { color: var(--dim); font-size: 1.1rem; max-width: 40ch; }
+
+/* ── join ── */
+.v-bend .ways { margin-top: 34px; display: grid; gap: 34px; }
+.v-bend .ways > li > a { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 20px; min-height: 44px; }
+.v-bend .ways .name { font-family: var(--serif); font-size: clamp(2.6rem, 4.6vw, 4.4rem); line-height: 1; letter-spacing: -0.025em; font-weight: 500; padding-bottom: 4px; }
+.v-bend .ways .what { font-family: var(--serif); font-style: italic; font-size: 1.5rem; color: var(--steel); }
+.v-bend .ways > li > a:hover .name { background-size: 30% 1px; }
+.v-bend .ways ul { margin-top: 12px; display: grid; gap: 6px; max-width: 46ch; }
+.v-bend .ways ul li { color: var(--dim); font-size: 1.05rem; padding-left: 22px; position: relative; }
+.v-bend .ways ul li::before { content: ''; position: absolute; left: 0; top: 0.75em; width: 12px; height: 1px; background: var(--dim); }
+.v-bend .after { margin-top: 44px; display: grid; gap: 10px; font-size: 1.05rem; color: var(--dim); max-width: 46ch; }
+.v-bend .after a { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; display: inline-block; min-height: 44px; line-height: 44px; }
+
+/* ── the end ── */
+.v-bend .end { min-height: 100vh; align-items: flex-end; padding-bottom: 7rem; }
+.v-bend .once { margin-bottom: 15vh; }
+.v-bend .lift.big { font-family: var(--serif); font-size: clamp(1.8rem, 3vw, 2.8rem); font-style: italic; padding: 14px 30px; letter-spacing: -0.01em; }
+.v-bend .straight { margin-top: 20px; font-family: var(--serif); font-size: 1.5rem; color: var(--steel); min-height: 1.6em; opacity: 0; transform: translateY(8px); transition: opacity 0.8s 0.9s, transform 0.8s 0.9s; }
+.v-bend .straight.is-on { opacity: 1; transform: none; }
+.v-bend .last { font-family: var(--serif); font-size: clamp(2rem, 3.4vw, 3.3rem); line-height: 1.08; letter-spacing: -0.02em; max-width: 18ch; }
+.v-bend .end ul { display: flex; flex-wrap: wrap; gap: 0 22px; margin-top: 22px; }
+.v-bend .end ul a { display: inline-flex; align-items: center; min-height: 44px; color: var(--dim); transition: color 0.2s; }
+.v-bend .end ul a:hover { color: var(--ink); }
+.v-bend .end .pages { margin-top: 0; }
+.v-bend .end small { display: block; margin-top: 24px; color: var(--dim); font-size: 0.95rem; }
+
+/* ── reduced motion or no WebGL: two stills, side by side with their text ── */
+.v-bend.is-still .hero, .v-bend.is-still .record { gap: 4vw; }
+.v-bend.is-still .still { flex: 1; align-self: stretch; min-height: 70vh; position: relative; }
+.v-bend.is-still .still canvas { position: absolute !important; inset: 0; }
+.v-bend .drawing { width: 100%; height: 100%; max-height: 70vh; }
+.v-bend .drawing path { fill: none; stroke: var(--ink); stroke-width: 1.5; }
+.v-bend .drawing .rl { stroke: var(--steel); stroke-width: 5; }
+.v-bend .drawing .wl { stroke: var(--dim); stroke-dasharray: 3 3; }
+
+/* ── phone: the glass in a window at the top, the words on their own ground below ── */
+@media (max-width: 820px) {
+  .v-bend { font-size: 17px; }
+  .v-bend .field { display: none; }
+  .v-bend .top { padding: 8px 16px; background: var(--bg); }
+  .v-bend .top nav a { padding: 0 7px; font-size: 0.9rem; }
+  .v-bend .brand { font-size: 1.3rem; }
+  .v-bend .sec { display: block; min-height: 0; padding: 0 16px; }
+  .v-bend .col { width: 100%; }
+  .v-bend.is-live .sec { padding-top: 60svh; }
+  .v-bend.is-live .sec .col { background: var(--bg); padding: 26px 0 15svh; position: relative; }
+  .v-bend.is-live .sec .col::before { content: ''; position: absolute; left: -16px; right: -16px; top: 0; height: 12px; border-top: 1px solid var(--ink); opacity: 0.8;
+    background: repeating-linear-gradient(90deg, var(--ink) 0 1px, transparent 1px 39px) 16px 0 / 100% 12px no-repeat, repeating-linear-gradient(90deg, var(--ink) 0 1px, transparent 1px 7.8px) 16px 0 / 100% 5px no-repeat; }
+  .v-bend.is-live .hero { padding-top: 55svh; }
+  .v-bend .pitch { font-size: clamp(2.5rem, 11.4vw, 3.6rem); }
+  .v-bend .statement, .v-bend .lead { font-size: 1.15rem; }
+  .v-bend .doors { flex-direction: column; gap: 4px; margin-top: 24px; }
+  .v-bend .doors a { font-size: 1.5rem; }
+  .v-bend .try { margin-top: 26px; }
+  .v-bend .say .line { font-size: clamp(2rem, 8.6vw, 2.8rem); }
+  .v-bend .title { font-size: clamp(2.8rem, 13vw, 3.8rem); }
+  .v-bend .rule { font-size: clamp(1.9rem, 8.2vw, 2.6rem); }
+  .v-bend .results li { grid-template-columns: 1fr; }
+  .v-bend .kit > div { grid-template-columns: 1fr; gap: 2px; }
+  .v-bend .grad { margin: 18px 0 22px; }
+  .v-bend .end { padding-bottom: 7rem; }
+  .v-bend.is-live .end .col { padding-bottom: 0; }
+  .v-bend .once { margin-bottom: 10svh; }
+  .v-bend.is-still .sec { padding-top: 90px; padding-bottom: 60px; }
+  .v-bend.is-still .still { min-height: 62svh; margin-top: 24px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .v-bend *, .v-bend *::before, .v-bend *::after { transition: none !important; }
+}
