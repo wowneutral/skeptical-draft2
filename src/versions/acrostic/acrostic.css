@@ -1,0 +1,281 @@
+html[data-v='acrostic'] { background: #ece7db; }
+
+.v-acrostic {
+  --bg: #ece7db;
+  --ink: #121110;
+  --dim: #857e71;
+  --mute: #5a554c;
+  --red: #b92d1a;
+  --serif: 'Bodoni Moda Variable', 'Bodoni 72', Didot, serif;
+  --sans: 'Instrument Sans Variable', system-ui, sans-serif;
+  --lhr: 1;
+  --fr: 2.52;
+  --tt: 0;
+  --mpt: 0.2;
+  --m: clamp(26px, 3.2vw, 50px);
+  --gut: max(32px, 6vw);
+  --background: #ece7db; --foreground: #121110; --primary: #121110; --primary-foreground: #ece7db;
+  --border: #121110; --input: #121110; --ring: #b92d1a; --muted: #ddd6c7; --muted-foreground: #5a554c;
+  --accent: #b92d1a; --accent-foreground: #ece7db; --popover: #ece7db; --popover-foreground: #121110; --radius: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 18px;
+  line-height: 1.5;
+  min-height: 100vh;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  font-optical-sizing: auto;
+}
+.v-acrostic ::selection { background: var(--ink); color: var(--bg); }
+.v-acrostic a { color: inherit; text-decoration: none; }
+.v-acrostic :focus-visible { outline: 2px solid var(--red); outline-offset: 4px; }
+.v-acrostic .skip-x { background: var(--ink); color: var(--bg); }
+
+/* The capital that drops two rows deep. --f is the size of the line; everything else follows from the font. */
+.v-acrostic .drop { font-family: var(--serif); font-size: var(--f); line-height: calc(var(--f) * var(--lhr)); display: flow-root; margin: 0; }
+.v-acrostic .cap {
+  float: left;
+  font-family: var(--serif);
+  font-weight: 900;
+  font-style: normal;
+  font-size: calc(var(--f) * var(--fr));
+  line-height: calc(var(--f) * var(--lhr) * 2);
+  position: relative;
+  top: calc(var(--f) * var(--tt));
+  margin-right: calc(var(--f) * 0.16);
+  margin-left: calc(var(--f) * -0.04);
+  letter-spacing: 0;
+}
+.v-acrostic .tx { font-style: italic; font-weight: 500; }
+
+/* ---------- The first screen ---------- */
+.v-acrostic .hero-wrap { height: calc(100svh + 115svh); position: relative; margin-bottom: -78svh; }
+.v-acrostic.mastered .hero { visibility: hidden; }
+.v-acrostic .hero.moving .rows { pointer-events: none; }
+.v-acrostic .hero.moving .rest { transition: none; }
+.v-acrostic .hero { position: sticky; top: 0; height: 100svh; z-index: 2; }
+.v-acrostic .rows { --f: 36px; --gap: 12px; list-style: none; margin: 0; padding: 28px 0 0 var(--gut); }
+.v-acrostic .rows li { margin: 0 0 var(--gap); }
+.v-acrostic .row {
+  display: flow-root;
+  width: fit-content;
+  font-family: var(--serif);
+  font-size: var(--f);
+  line-height: calc(var(--f) * var(--lhr));
+  color: var(--ink);
+  transition: color 0.35s ease;
+}
+.v-acrostic .row .cap { transform-origin: 50% 50%; will-change: transform; }
+.v-acrostic .row.q .cap { color: var(--red); }
+.v-acrostic .rest {
+  display: inline-block;
+  vertical-align: top;
+  font-style: italic;
+  font-weight: 500;
+  opacity: calc(1 - var(--out, 0));
+  transform: translateX(calc(var(--out, 0) * -0.6em));
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.v-acrostic .rest span { white-space: nowrap; }
+/* hover */
+.v-acrostic .hero:not(.moving) .rows:has(.row:hover, .row:focus-visible) .row:not(:hover):not(:focus-visible) { color: var(--dim); }
+.v-acrostic .hero:not(.moving) .rows:has(.row:hover, .row:focus-visible) .row.q:not(:hover):not(:focus-visible) .cap { color: var(--dim); }
+.v-acrostic .row:hover .rest, .v-acrostic .row:focus-visible .rest { transform: translateX(0.5em); }
+.v-acrostic .row:focus-visible { outline-offset: 2px; }
+.v-acrostic .side {
+  position: absolute; right: var(--gut); bottom: 84px; width: min(15ch, 30vw); font-size: clamp(28px, 2.9vw, 46px);
+  opacity: calc(1 - var(--out, 0));
+}
+.v-acrostic .side h1 { font-family: var(--serif); font-weight: 500; font-style: italic; font-size: 1em; line-height: 1.08; margin: 0 0 22px; }
+.v-acrostic .side p { margin: 0; color: var(--mute); font-size: 17px; padding-top: 12px; border-top: 1px solid var(--ink); }
+
+/* ---------- The masthead the column becomes ---------- */
+.v-acrostic .mast {
+  position: fixed; inset: 0 0 auto 0; z-index: 60;
+  height: calc(var(--m) * 1.32);
+  font-size: var(--m);
+  background: var(--bg);
+  opacity: 0; pointer-events: none;
+}
+.v-acrostic .mast.on { opacity: 1; pointer-events: auto; box-shadow: 0 1px 0 var(--ink); }
+.v-acrostic .mast-row { display: flex; justify-content: space-between; padding: 0 calc(var(--gut) - 6px); padding-top: calc(1em * var(--mpt) - 10px); }
+.v-acrostic .m {
+  display: inline-block;
+  min-width: 44px;
+  padding: 10px 6px;
+  text-align: center;
+  font-family: var(--serif);
+  font-weight: 900;
+  font-size: 1em;
+  line-height: calc(1em * 2 * var(--lhr) / var(--fr));
+  color: var(--ink);
+  transition: color 0.5s ease;
+}
+.v-acrostic .m { position: relative; }
+.v-acrostic .m.lo { color: var(--dim); }
+/* the masthead remembers each letter's line */
+.v-acrostic .pk {
+  position: absolute; top: calc(100% + 0.32em); left: 6px;
+  font-family: var(--serif); font-style: italic; font-weight: 500; font-size: clamp(20px, 1.7vw, 28px); line-height: 1.2;
+  white-space: nowrap; color: var(--ink); background: var(--bg); padding: 6px 0 8px;
+  border-bottom: 1px solid var(--ink);
+  opacity: 0; transform: translateY(-6px); pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.v-acrostic .m.r .pk { left: auto; right: 6px; }
+.v-acrostic .m:hover .pk, .v-acrostic .m:focus-visible .pk { opacity: 1; transform: none; }
+.v-acrostic .mast.leaving .pk { display: none; }
+.v-acrostic .m.q { color: var(--red); }
+.v-acrostic .m:hover { color: var(--ink); }
+.v-acrostic .m.q:hover { color: var(--ink); }
+
+/* ---------- Sections ---------- */
+.v-acrostic .sec { position: relative; max-width: 1440px; margin: 0 auto; padding: clamp(110px, 18vh, 220px) var(--gut) clamp(40px, 8vh, 100px); scroll-margin-top: 90px; }
+.v-acrostic .sec .drop { --f: clamp(40px, 6.4vw, 108px); margin-bottom: calc(var(--f) * 0.42); }
+.v-acrostic [id^='line-'] { scroll-margin-top: 110px; }
+.v-acrostic .pair .drop:last-child { margin-bottom: 0; }
+.v-acrostic .calm { font-family: var(--serif); font-weight: 400; font-size: clamp(21px, 1.9vw, 29px); line-height: 1.38; max-width: 32ch; margin: 0; }
+.v-acrostic .lead { margin: 0 0 clamp(28px, 4vw, 56px) 0; color: var(--ink); }
+.v-acrostic .rubric {
+  font-family: var(--sans); font-size: 17px; font-weight: 600; letter-spacing: 0.01em;
+  margin: 0 0 clamp(40px, 7vh, 80px); padding-top: 14px; border-top: 1px solid var(--ink);
+}
+
+.v-acrostic .pitch .body { margin: clamp(56px, 9vh, 110px) 0 0 clamp(0px, 34%, 520px); }
+.v-acrostic .doors { display: flex; flex-wrap: wrap; gap: 10px 48px; margin-top: 44px; }
+.v-acrostic .door, .v-acrostic .more {
+  display: inline-flex; align-items: center; gap: 0.35em; min-height: 48px;
+  font-family: var(--serif); font-style: italic; font-weight: 500; font-size: clamp(28px, 2.8vw, 42px);
+  border-bottom: 2px solid var(--ink); line-height: 1.1; padding-bottom: 4px;
+}
+.v-acrostic .more { font-size: clamp(24px, 2.2vw, 32px); margin-top: clamp(40px, 6vh, 72px); }
+.v-acrostic .door svg, .v-acrostic .more svg { width: 0.7em; height: 0.7em; fill: none; stroke: currentColor; stroke-width: 2; transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1); }
+.v-acrostic .door:hover, .v-acrostic .more:hover { color: var(--red); border-color: var(--red); }
+.v-acrostic .door:hover svg, .v-acrostic .more:hover svg { transform: translate(4px, -4px); }
+
+.v-acrostic .free { font-family: var(--serif); font-weight: 400; font-size: clamp(40px, 6.4vw, 108px); line-height: 1; margin: 0 0 calc(clamp(40px, 6.4vw, 108px) * 0.5); }
+.v-acrostic .manifesto { list-style: none; margin: clamp(64px, 11vh, 140px) 0 0 clamp(0px, 34%, 520px); padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0 clamp(24px, 4vw, 64px); }
+.v-acrostic .manifesto li { font-family: var(--serif); font-size: clamp(22px, 2vw, 30px); line-height: 1.3; padding: 18px 0 34px; border-top: 1px solid var(--ink); }
+
+.v-acrostic .event { display: flex; flex-wrap: wrap; gap: 6px 0; margin: clamp(48px, 8vh, 96px) 0 0; font-size: 18px; font-weight: 500; }
+.v-acrostic .event span + span::before { content: ''; display: inline-block; width: 6px; height: 6px; background: var(--red); margin: 0 14px 3px; vertical-align: middle; }
+.v-acrostic .results { list-style: none; margin: 22px 0 0; padding: 0; }
+.v-acrostic .results li { display: grid; grid-template-columns: minmax(120px, 1fr) 3fr 2fr; align-items: baseline; gap: 12px 32px; padding: 22px 0 26px; border-top: 1px solid var(--ink); }
+.v-acrostic .results li:last-child { border-bottom: 1px solid var(--ink); }
+.v-acrostic .who { font-weight: 600; font-size: 18px; }
+.v-acrostic .what { font-family: var(--serif); font-weight: 900; font-size: clamp(36px, 5vw, 84px); line-height: 0.98; }
+.v-acrostic .also { font-family: var(--serif); font-style: italic; font-size: clamp(20px, 1.7vw, 26px); line-height: 1.3; }
+
+.v-acrostic .items { margin: 0; }
+.v-acrostic .item { display: grid; grid-template-columns: minmax(140px, 1fr) 3fr; align-items: baseline; gap: 8px 32px; padding: 16px 0 20px; border-top: 1px solid var(--ink); }
+.v-acrostic .item:last-child { border-bottom: 1px solid var(--ink); }
+.v-acrostic .item dt { font-family: var(--serif); font-weight: 900; font-size: clamp(28px, 3.2vw, 52px); line-height: 1; }
+.v-acrostic .item dd { margin: 0; font-family: var(--serif); font-size: clamp(21px, 1.9vw, 29px); line-height: 1.3; }
+.v-acrostic .item.big { align-items: start; padding: 26px 0 34px; }
+.v-acrostic .item.big dt { padding-top: 0.2em; }
+.v-acrostic .sec .item .drop { --f: clamp(34px, 4.6vw, 80px); margin: 0; }
+
+.v-acrostic .coaches { display: grid; grid-template-columns: 1fr 1fr; gap: 48px clamp(32px, 5vw, 96px); }
+.v-acrostic .coach h3 { font-family: var(--serif); font-weight: 900; font-size: clamp(48px, 7.2vw, 124px); line-height: 0.92; margin: 0 0 22px; letter-spacing: -0.01em; }
+.v-acrostic .role { font-weight: 600; font-size: 18px; margin: 0 0 12px; padding-top: 12px; border-top: 1px solid var(--ink); }
+.v-acrostic .count { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: clamp(36px, 5vw, 84px); line-height: 1.05; margin: clamp(64px, 10vh, 120px) 0 0; }
+
+.v-acrostic .join { min-height: 100vh; }
+.v-acrostic .bigq {
+  position: absolute; right: var(--gut); top: clamp(120px, 16vh, 200px);
+  font-family: var(--serif); font-weight: 900; color: var(--red);
+  font-size: clamp(200px, 30vw, 520px); line-height: 0.8; pointer-events: none; user-select: none;
+}
+.v-acrostic .ways { list-style: none; margin: clamp(40px, 7vh, 80px) 0 0; padding: 0; }
+.v-acrostic .way { padding: clamp(28px, 4vw, 48px) 0; border-top: 1px solid var(--ink); }
+.v-acrostic .way:last-child { border-bottom: 1px solid var(--ink); }
+.v-acrostic .sec .wayline { --f: clamp(40px, 6.2vw, 104px); display: flex; align-items: flex-start; width: fit-content; max-width: 100%; margin: 0; transition: color 0.35s ease; }
+.v-acrostic .wayline .cap { flex: none; }
+.v-acrostic .wayline .tx { transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1); display: block; min-width: 0; }
+.v-acrostic .wayline:hover .tx, .v-acrostic .wayline:focus-visible .tx { transform: translateX(0.4em); }
+.v-acrostic .ways:has(.wayline:hover, .wayline:focus-visible) .way:not(:has(.wayline:hover, .wayline:focus-visible)) .wayline { color: var(--dim); }
+.v-acrostic .waytext { display: grid; grid-template-columns: 1fr 1fr; gap: 6px clamp(24px, 4vw, 64px); margin: clamp(22px, 3vw, 36px) 0 0 clamp(0px, 34%, 520px); }
+.v-acrostic .waytext p { margin: 0; font-size: 18px; line-height: 1.5; color: var(--ink); padding-bottom: 10px; }
+.v-acrostic .sline { transition: color 0.6s ease; }
+.v-acrostic .ini { font-family: var(--serif); font-weight: 900; font-size: 1.7em; line-height: 0; vertical-align: -0.06em; margin-right: 1px; transition: color 0.6s ease; }
+.v-acrostic .after { margin: clamp(48px, 8vh, 96px) 0 0 clamp(0px, 34%, 520px); display: grid; gap: 8px; max-width: 46ch; }
+.v-acrostic .after p { margin: 0; font-size: 18px; }
+.v-acrostic .after a, .v-acrostic .flinks a, .v-acrostic .small a .sl { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+.v-acrostic .after a { display: inline-block; min-height: 44px; line-height: 44px; }
+.v-acrostic .after a:hover, .v-acrostic .flinks a:hover { color: var(--red); }
+
+/* the line you pressed answers */
+.v-acrostic .drop.lit .cap, .v-acrostic .lit .ini, .v-acrostic .join.lit > .drop .cap { color: var(--red); }
+.v-acrostic .drop .cap { transition: color 0.6s ease, clip-path 1.05s cubic-bezier(0.7, 0, 0.2, 1), transform 1.3s cubic-bezier(0.16, 1, 0.3, 1); }
+.v-acrostic .row .cap { transition: color 0.35s ease; }
+
+/* arrivals: only armed when motion is allowed */
+.v-acrostic.arm .sec .drop:not(.in) .cap { clip-path: inset(100% 0 -10% 0); transform: translateY(0.18em); }
+.v-acrostic.arm .sec .drop .cap { clip-path: inset(-10% -10% -10% -10%); }
+.v-acrostic.arm .sec .drop .tx { transition: opacity 0.9s ease 0.3s, transform 0.55s cubic-bezier(0.16, 1, 0.3, 1); }
+.v-acrostic.arm .sec .drop:not(.in) .tx { opacity: 0; }
+.v-acrostic.arm .sec .reveal { transition: opacity 0.9s ease, transform 1.1s cubic-bezier(0.16, 1, 0.3, 1); }
+.v-acrostic.arm .sec .reveal:not(.in) { opacity: 0; transform: translateY(26px); }
+
+/* ---------- The end: the column once more, small ---------- */
+.v-acrostic .foot { max-width: 1440px; margin: 0 auto; padding: clamp(120px, 18vh, 220px) var(--gut) 140px; }
+.v-acrostic .fline { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: clamp(38px, 6vw, 100px); line-height: 1.02; margin: 0 0 clamp(56px, 9vh, 110px); max-width: 14ch; }
+.v-acrostic .fcols { display: grid; grid-template-columns: 3fr 2fr; gap: 56px; border-top: 1px solid var(--ink); padding-top: 28px; }
+.v-acrostic .small { list-style: none; margin: 0; padding: 0; }
+.v-acrostic .small a { display: grid; grid-template-columns: 50px 1fr; align-items: center; min-height: 44px; gap: 14px; font-size: 17px; }
+.v-acrostic .small .sc { font-family: var(--serif); font-weight: 900; font-size: 40px; line-height: calc(1em * 2 * var(--lhr) / var(--fr)); text-align: center; transition: color 0.3s ease; }
+.v-acrostic.arm:not(.home) .small .sc { opacity: 0; }
+.v-acrostic.home .mast .m { visibility: hidden; }
+.v-acrostic .mast.leaving { background: transparent; box-shadow: none; }
+.v-acrostic .mast.leaving .m { transition: none; }
+.v-acrostic .small .sl { color: var(--mute); text-decoration-color: transparent; transition: color 0.3s ease, text-decoration-color 0.3s ease; }
+.v-acrostic .small a:hover .sl, .v-acrostic .small a:focus-visible .sl { color: var(--ink); text-decoration-color: currentColor; }
+.v-acrostic .small a.q .sc { color: var(--red); }
+.v-acrostic .small a:hover .sc { color: var(--red); }
+.v-acrostic .small a.q:hover .sc { color: var(--ink); }
+.v-acrostic .flinks ul { list-style: none; margin: 0 0 28px; padding: 0; display: flex; flex-wrap: wrap; gap: 0 22px; }
+.v-acrostic .flinks a { display: inline-block; min-height: 44px; line-height: 44px; font-size: 18px; }
+.v-acrostic .flinks .pages a { color: var(--mute); }
+.v-acrostic .draft { font-size: 16px; color: var(--mute); margin: 12px 0 0; }
+
+/* ---------- Phone ---------- */
+@media (max-width: 760px) {
+  .v-acrostic { --gut: 16px; font-size: 17px; }
+  .v-acrostic .side { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .v-acrostic .sec { padding: 104px 16px 40px; }
+  .v-acrostic .sec .drop { --f: clamp(30px, 8.6vw, 60px); }
+  .v-acrostic { --m: 24px; }
+  .v-acrostic .mast-row { padding: 0 8px; padding-top: calc(1em * var(--mpt) - 10px); }
+  .v-acrostic .m { flex: 1 1 0; min-width: 0; padding: 10px 0; }
+  .v-acrostic .pk { display: none; }
+  .v-acrostic .event { display: grid; gap: 4px; }
+  .v-acrostic .event span + span::before { display: none; }
+  .v-acrostic .pitch .body, .v-acrostic .manifesto, .v-acrostic .after, .v-acrostic .waytext { margin-left: 0; }
+  .v-acrostic .manifesto { grid-template-columns: 1fr; }
+  .v-acrostic .calm { font-size: 21px; }
+  .v-acrostic .doors { flex-direction: column; gap: 18px; }
+  .v-acrostic .results li { grid-template-columns: 1fr; gap: 6px; }
+  .v-acrostic .item { grid-template-columns: 1fr; gap: 6px; }
+  .v-acrostic .item.big dt { padding-top: 0; }
+  .v-acrostic .sec .item .drop { --f: clamp(32px, 9.4vw, 56px); }
+  .v-acrostic .coaches { grid-template-columns: 1fr; }
+  .v-acrostic .bigq { display: none; }
+  .v-acrostic .sec .wayline { --f: clamp(30px, 8.6vw, 60px); }
+  .v-acrostic .waytext { grid-template-columns: 1fr; }
+  .v-acrostic .fcols { grid-template-columns: 1fr; }
+  .v-acrostic .foot { padding-bottom: 120px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v-acrostic .hero-wrap { height: auto; margin-bottom: 0; }
+  .v-acrostic .hero { position: relative; }
+  .v-acrostic *, .v-acrostic *::before { transition: none !important; }
+}
+
+/* the opening: the capitals set themselves, top to bottom, then their lines run out */
+@keyframes acro-cap { from { clip-path: inset(0 0 100% 0); transform: translateY(24%); } to { clip-path: inset(-10% -10% -10% -10%); transform: none; } }
+@keyframes acro-rest { from { opacity: 0; transform: translateX(-0.5em); } }
+.v-acrostic.arm .rows li .cap { animation: acro-cap 0.9s cubic-bezier(0.16, 1, 0.3, 1) calc(0.25s + var(--i) * 0.07s) backwards; }
+.v-acrostic.arm .rows li .rest { animation: acro-rest 1s cubic-bezier(0.16, 1, 0.3, 1) calc(0.75s + var(--i) * 0.07s) backwards; }
+.v-acrostic.arm .side { animation: acro-rest 1.2s ease 1.6s backwards; }

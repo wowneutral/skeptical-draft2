@@ -1,0 +1,12 @@
+import type { Version } from '@/content';
+
+const meta: Version = {
+  slug: 'acrostic',
+  n: 81,
+  name: 'The acrostic',
+  color: '#ece7db',
+  ink: '#121110',
+  kind: 'Big type',
+  text: 'SKEPTICAL? runs down the first screen in heavy Bodoni, each capital starting one of the team’s own lines. Point at a letter to pull its line out or press it to jump there; scroll and the column tips over into a masthead that tracks your section, then turns back into a column at the end.',
+};
+export default meta;
