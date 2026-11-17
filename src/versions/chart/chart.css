@@ -1,0 +1,190 @@
+html[data-v="chart"] { background: #121211; }
+html[data-v="chart"] ::selection { background: #c2281d; color: #f3f0e7; }
+
+.v-chart {
+  --room: #121211;
+  --bone: #f3f0e7;
+  --ink: #121212;
+  --soft: #4a4740;
+  --red: #b8261b;
+  --background: var(--bone);
+  --foreground: var(--ink);
+  --primary: var(--red);
+  --primary-foreground: var(--bone);
+  --border: #cfcabd;
+  --input: #cfcabd;
+  --ring: var(--red);
+  --muted: #e6e2d7;
+  --muted-foreground: var(--soft);
+  --accent: var(--red);
+  --accent-foreground: var(--bone);
+  --popover: var(--bone);
+  --popover-foreground: var(--ink);
+  --radius: 0;
+  --display: 'Archivo Variable', 'Archivo', sans-serif;
+  --body: 'Newsreader Variable', 'Newsreader', Georgia, serif;
+  background: var(--room);
+  color: var(--ink);
+  font-family: var(--body);
+}
+
+.v-chart .track { position: relative; }
+.v-chart .stage {
+  position: sticky; top: 0; height: 100vh; overflow: hidden; overflow: clip;
+  background: var(--room);
+}
+.v-chart .panel {
+  position: absolute; left: 0; top: 0; width: 1px; height: 1px;
+  transform-origin: 0 0; background: var(--bone);
+  box-shadow: 0 0 0 0.02px rgba(0, 0, 0, 0.4);
+}
+.v-chart .mark {
+  position: absolute; left: 0; top: 0; width: 1px; height: 1px;
+  transform-origin: 0 0; background: var(--red); pointer-events: none;
+}
+
+/* The rows: one heavy display face, set like optotypes. */
+.v-chart .row, .v-chart .lrow {
+  position: absolute; left: 0; top: 0;
+  transform-origin: 0 0;
+  font-family: var(--display);
+  font-weight: 900;
+  font-stretch: 116%;
+  font-size: calc(var(--f) * 1px);
+  line-height: 0.94;
+  letter-spacing: 0.035em;
+  text-transform: uppercase;
+  text-align: center;
+  text-wrap: balance;
+  color: var(--ink);
+  background: none; border: 0; padding: 0; margin: 0;
+  cursor: zoom-in;
+  white-space: normal;
+  width: max-content;
+  min-width: min-content;
+  transition: color 0.25s ease;
+}
+.v-chart .row-q { letter-spacing: 0; font-stretch: 100%; }
+.v-chart .row-name { letter-spacing: 0.06em; }
+.v-chart .row[data-cur] { cursor: default; }
+.v-chart .row:hover:not([data-cur]) { color: var(--red); }
+.v-chart .row.has-rule::after, .v-chart .lrow.has-rule::after {
+  content: ''; position: absolute; left: -6%; right: -6%; bottom: -0.32em;
+  height: 0.055em; background: var(--red);
+}
+.v-chart .has-links { display: block; }
+.v-chart .has-links a, .v-chart .has-links .ll {
+  display: inline-block; margin: 0 0.32em; color: inherit; text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 100% 0.05em; background-position: 0 96%; background-repeat: no-repeat;
+}
+.v-chart .has-links a:hover { color: var(--red); }
+.v-chart .row-doors a::after, .v-chart .row-ways a::after { content: ''; }
+
+.v-chart :focus-visible { outline: 3px solid var(--red); outline-offset: 4px; }
+.v-chart .row:focus-visible, .v-chart .has-links a:focus-visible { outline-width: 0.06em; outline-offset: 0.1em; }
+
+.v-chart .lrow { cursor: inherit; display: block; }
+.v-chart .lens {
+  position: absolute; left: 0; top: 0; width: 236px; height: 236px; border-radius: 50%;
+  overflow: hidden; pointer-events: none; visibility: hidden; transform-origin: 50% 50%;
+  background: var(--bone);
+  box-shadow: 0 0 0 2px var(--ink), 0 0 0 7px var(--bone), 0 0 0 8.5px var(--ink), 0 18px 40px -8px rgba(0, 0, 0, 0.45);
+  z-index: 5;
+}
+.v-chart .lens-panel { position: absolute; left: 0; top: 0; width: 1px; height: 1px; transform-origin: 0 0; background: var(--bone); }
+
+/* The calm block beneath a reached row. */
+.v-chart .calm {
+  position: absolute; left: 0; right: 0; top: 0; margin-inline: auto;
+  width: min(700px, calc(100% - 40px));
+  font-family: var(--body); font-size: 20px; line-height: 1.5; color: var(--ink);
+  font-optical-sizing: auto;
+  visibility: hidden;
+}
+.v-chart .calm.is-wide { width: min(1040px, calc(100% - 40px)); }
+.v-chart .calm h2 {
+  font-family: var(--display); font-weight: 900; font-stretch: 112%;
+  font-size: 15px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 14px;
+}
+.v-chart .calm h3 {
+  font-family: var(--display); font-weight: 800; font-stretch: 110%;
+  font-size: 22px; letter-spacing: 0.04em; text-transform: uppercase; line-height: 1.1;
+}
+.v-chart .calm p + p { margin-top: 10px; }
+.v-chart .calm a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--red); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.v-chart .calm a:hover { color: var(--red); }
+.v-chart .calm .lede { font-size: 24px; line-height: 1.4; text-align: center; text-wrap: balance; }
+.v-chart .calm .ev { display: flex; flex-wrap: wrap; gap: 4px 22px; margin: 14px 0 18px; font-family: var(--display); font-weight: 700; font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase; }
+.v-chart .calm .ev span + span::before { content: ''; display: inline-block; width: 6px; height: 6px; background: var(--red); margin-right: 22px; vertical-align: 2px; }
+.v-chart .calm .res { display: grid; gap: 14px; margin-bottom: 20px; border-top: 1px solid var(--ink); padding-top: 16px; }
+.v-chart .calm .res li { display: grid; grid-template-columns: 9rem 1fr; gap: 0 18px; }
+.v-chart .calm .res b { font-family: var(--display); font-weight: 900; font-stretch: 112%; text-transform: uppercase; letter-spacing: 0.05em; font-size: 17px; padding-top: 3px; grid-row: span 2; }
+.v-chart .calm .res span { font-weight: 600; }
+.v-chart .calm .more { display: inline-block; margin-top: 18px; font-style: italic; font-size: 20px; min-height: 44px; line-height: 44px; }
+.v-chart .calm .items { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px 48px; margin: 22px 0 4px; border-top: 1px solid var(--ink); padding-top: 18px; }
+.v-chart .calm .items div { display: grid; grid-template-columns: 8.5rem 1fr; gap: 0 14px; }
+.v-chart .calm .items dt { font-family: var(--display); font-weight: 900; font-stretch: 112%; text-transform: uppercase; letter-spacing: 0.05em; font-size: 16px; padding-top: 3px; }
+.v-chart .coaches { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; border-top: 1px solid var(--ink); padding-top: 18px; }
+.v-chart .coaches .role { font-style: italic; color: var(--soft); margin: 2px 0 8px; }
+.v-chart .count { margin-top: 20px; font-family: var(--display); font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; font-size: 16px; }
+.v-chart .paths { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; margin: 22px 0 20px; border-top: 1px solid var(--ink); padding-top: 18px; font-size: 17px; }
+.v-chart .paths h3 a { text-decoration: none; display: inline-block; min-height: 44px; line-height: 44px; }
+.v-chart .paths h3 a:hover { color: var(--red); }
+.v-chart .paths .line { font-style: italic; font-size: 19px; margin: 0 0 10px; }
+.v-chart .calm .aside { font-size: 17px; }
+.v-chart .calm .aside a { display: inline-block; min-height: 32px; }
+.v-chart .foot { text-align: center; padding-bottom: 72px; }
+.v-chart .foot ul { display: flex; flex-wrap: wrap; justify-content: center; gap: 0 26px; }
+.v-chart .foot ul + ul { margin-top: 4px; }
+.v-chart .foot ul:first-child a { font-family: var(--display); font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; font-size: 15px; }
+.v-chart .foot a { display: inline-block; min-height: 44px; line-height: 44px; text-decoration: none; }
+.v-chart .foot a:hover { color: var(--red); }
+.v-chart .foot .draft { margin-top: 14px; font-size: 16px; color: var(--soft); font-style: italic; }
+
+.v-chart .hint {
+  position: absolute; left: 0; right: 0; bottom: 2.2vh; text-align: center;
+  font-family: var(--body); font-style: italic; font-size: 17px; color: #d9d5ca;
+  pointer-events: none;
+}
+
+@media (max-width: 699px) {
+  .v-chart .calm { font-size: 17px; width: calc(100% - 36px); }
+  .v-chart .calm.is-wide { width: calc(100% - 36px); }
+  .v-chart .calm .lede { font-size: 19px; }
+  .v-chart .calm .items { grid-template-columns: 1fr; gap: 8px; }
+  .v-chart .calm .items div { grid-template-columns: 7.4rem 1fr; }
+  .v-chart .calm .items dt { font-size: 13px; letter-spacing: 0.03em; }
+  .v-chart .calm .res li { grid-template-columns: 1fr; }
+  .v-chart .calm .ev { flex-direction: column; gap: 2px; }
+  .v-chart .calm .ev span + span::before { display: none; }
+  .v-chart .coaches { grid-template-columns: 1fr; gap: 18px; }
+  .v-chart .paths { grid-template-columns: 1fr; gap: 18px; font-size: 16px; }
+  .v-chart .paths p:not(.line) { font-size: 16px; }
+  .v-chart .hint { bottom: 92px; font-size: 16px; }
+  .v-chart .foot { padding-bottom: 84px; }
+}
+
+.v-chart .back {
+  margin-top: 22px; min-height: 48px; padding: 0 22px;
+  font-family: var(--display); font-weight: 900; font-stretch: 112%; font-size: 14px;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--bone); background: var(--ink); border: 0; cursor: zoom-out;
+  transition: background-color 0.2s ease;
+}
+.v-chart .back:hover { background: var(--red); }
+
+/* Reduced motion: a still stack of rows at readable sizes, each section under its row. */
+@media (prefers-reduced-motion: reduce) {
+  .v-chart { background: var(--bone); }
+  html[data-v="chart"] { background: #f3f0e7; }
+  .v-chart .stage { position: static; height: auto !important; overflow: visible; background: var(--bone); padding: 64px 0 96px; }
+  .v-chart .panel, .v-chart .mark, .v-chart .hint, .v-chart .lens, .v-chart .back { display: none; }
+  .v-chart .unit { display: flex; flex-direction: column; align-items: center; margin: 0 auto; padding: 0 20px; }
+  .v-chart .row { position: relative; transform: none !important; max-width: min(100%, 22em); font-size: max(1.3rem, min(calc(var(--f) * 0.5px), 14vw)); margin: 0 auto 28px; cursor: default; }
+  .v-chart .row-q { font-size: min(12rem, 40vw); }
+  .v-chart .row-name { font-size: min(4.4rem, 10vw); }
+  .v-chart .row.has-rule::after { left: 0; right: 0; }
+  .v-chart .calm { position: relative; visibility: visible; transform: none !important; opacity: 1 !important; margin: 0 auto 72px; }
+}
