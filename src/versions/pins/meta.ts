@@ -1,0 +1,6 @@
+import type { Version } from '@/content';
+const meta: Version = {
+  slug: 'pins', n: 84, name: 'The impression', color: '#0b0b0c', ink: '#eceae4', kind: '3D centrepiece',
+  text: 'A steel pinscreen in a black frame: the pins rise into the question mark, an 8, two plaques, seven blank slabs and a head in profile as you scroll, and your pointer presses dents that spring slowly back. At Join the pins go flat and keep whatever you press into them.',
+};
+export default meta;
