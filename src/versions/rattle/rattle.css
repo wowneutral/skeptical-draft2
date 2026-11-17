@@ -1,0 +1,205 @@
+html[data-v="rattle"] { background: #e6e2d9; }
+
+.v-rattle {
+  --bg: #e6e2d9;
+  --field: #ebe8e1;
+  --ink: #141311;
+  --mute: #4b4740;
+  --line: #c9c3b6;
+  --accent: #7c2414;
+  --background: #ebe8e1; --foreground: #141311; --primary: #141311; --primary-foreground: #ebe8e1;
+  --border: #c9c3b6; --input: #c9c3b6; --ring: #7c2414; --muted: #ddd8ce; --muted-foreground: #4b4740;
+  --accent-foreground: #ebe8e1; --popover: #ebe8e1; --popover-foreground: #141311; --radius: 0;
+  --serif: 'Bodoni Moda Variable', 'Bodoni Moda', Didot, serif;
+  --sans: 'Hanken Grotesk Variable', 'Hanken Grotesk', system-ui, sans-serif;
+  --col: min(44vw, 700px);
+  position: relative;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 18px;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+.v-rattle ::selection { background: var(--ink); color: var(--field); }
+.v-rattle a { color: inherit; text-decoration: none; }
+.v-rattle :focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+
+/* The scene: fixed behind everything on a wide screen. */
+.v-rattle .stage { position: fixed; inset: 0; z-index: 0; background: #dcd7cc; }
+.v-rattle .stage canvas { display: block; }
+.v-rattle .stage .flat { position: absolute; left: calc(var(--col) + 6vw); right: 6vw; top: 30%; width: auto; height: 40%; }
+
+/* An invisible handle over the stone for the keyboard. */
+.v-rattle .grip {
+  position: fixed; left: 0; top: 0; z-index: 2; width: 28vw; height: 18vw; max-height: 40vh;
+  background: none; border: 0; pointer-events: none; outline: none;
+}
+.v-rattle .grip:focus-visible { outline: 2px solid var(--accent); outline-offset: 0; }
+
+/* Header sits in the field. */
+.v-rattle .top {
+  position: absolute; z-index: 3; left: 0; top: 0; width: var(--col);
+  display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+  padding: 28px clamp(24px, 4vw, 64px) 0;
+}
+.v-rattle .mark { font-family: var(--serif); font-size: 26px; font-weight: 600; letter-spacing: -0.01em; min-height: 44px; display: inline-flex; align-items: center; }
+.v-rattle .mark span { font-style: italic; font-weight: 500; margin-left: 1px; }
+.v-rattle .top nav { display: flex; gap: clamp(12px, 1.6vw, 26px); }
+.v-rattle .top nav a { font-size: 16px; min-height: 44px; display: inline-flex; align-items: center; color: var(--mute); background-image: linear-gradient(currentColor, currentColor); background-size: 0 1px; background-repeat: no-repeat; background-position: 0 72%; transition: background-size .35s cubic-bezier(.2,.8,.2,1), color .2s; }
+.v-rattle .top nav a:hover, .v-rattle .top nav a:focus-visible { color: var(--ink); background-size: 100% 1px; }
+
+/* Sections: a calm field down the left, the stone on the right. */
+.v-rattle main { position: relative; z-index: 1; pointer-events: none; }
+.v-rattle .sec { position: relative; min-height: 100vh; display: flex; }
+.v-rattle .field {
+  pointer-events: auto; width: var(--col); background: var(--field);
+  padding: clamp(96px, 16vh, 180px) clamp(24px, 4vw, 64px) clamp(72px, 12vh, 140px);
+  box-shadow: 1px 0 0 var(--line);
+  display: flex; flex-direction: column; justify-content: center;
+}
+.v-rattle .ln { display: block; }
+.v-rattle .it { font-style: italic; }
+
+/* The opening */
+.v-rattle .hero .field { justify-content: flex-end; padding-bottom: clamp(56px, 10vh, 120px); }
+.v-rattle .pitch {
+  font-family: var(--serif); font-weight: 500; font-variation-settings: 'opsz' 96;
+  font-size: clamp(46px, 5.5vw, 96px); line-height: 0.98; letter-spacing: -0.025em; text-wrap: balance;
+}
+.v-rattle .pitch .it { font-weight: 400; }
+.v-rattle .statement { margin-top: clamp(28px, 5vh, 52px); font-size: clamp(20px, 1.75vw, 28px); line-height: 1.35; font-weight: 450; }
+.v-rattle .statement .ln + .ln { color: var(--mute); }
+.v-rattle .doors { margin-top: clamp(30px, 5vh, 56px); display: flex; flex-wrap: wrap; gap: 0; border-top: 1px solid var(--ink); }
+.v-rattle .door {
+  flex: 1 1 50%; min-height: 64px; display: flex; align-items: center; justify-content: space-between;
+  font-family: var(--serif); font-style: italic; font-size: clamp(22px, 1.9vw, 30px); padding: 14px 0;
+  border-bottom: 1px solid var(--ink); position: relative; transition: padding .4s cubic-bezier(.2,.8,.2,1), color .2s;
+}
+.v-rattle .door + .door { padding-left: 24px; border-left: 1px solid var(--ink); }
+.v-rattle .door::after { content: ''; width: 10px; height: 10px; border-radius: 50%; background: var(--ink); transform: scale(0); transition: transform .35s cubic-bezier(.2,.8,.2,1); margin-right: 8px; }
+.v-rattle .door:hover::after, .v-rattle .door:focus-visible::after { transform: scale(1); background: var(--accent); }
+.v-rattle .door:hover, .v-rattle .door:focus-visible { color: var(--accent); }
+.v-rattle .hint {
+  position: absolute; z-index: 1; right: clamp(24px, 4vw, 64px); bottom: 34px;
+  font-family: var(--serif); font-style: italic; font-size: 20px; color: var(--ink);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .v-rattle .hero .field > *, .v-rattle .hint { animation: rattle-up 1.4s cubic-bezier(.2,.8,.2,1) both; }
+  .v-rattle .hero .pitch { animation-delay: .35s; }
+  .v-rattle .hero .statement { animation-delay: .6s; }
+  .v-rattle .hero .doors { animation-delay: .8s; }
+  .v-rattle .hint { animation-delay: 2.6s; }
+}
+@keyframes rattle-up { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+
+/* Manifesto */
+.v-rattle .lines { display: grid; gap: clamp(36px, 7vh, 72px); counter-reset: l; }
+.v-rattle .lines li { font-family: var(--serif); font-size: clamp(32px, 3.1vw, 54px); line-height: 1.08; letter-spacing: -0.015em; font-variation-settings: 'opsz' 72; text-wrap: balance; }
+.v-rattle .lines li:nth-child(2) { font-style: italic; }
+
+/* The fourth line, alone */
+.v-rattle .fourth { min-height: 130vh; }
+.v-rattle .fourth .field { background: var(--ink); color: var(--field); box-shadow: none; }
+.v-rattle .fourth .big { font-family: var(--serif); line-height: 0.96; letter-spacing: -0.03em; font-variation-settings: 'opsz' 96; }
+.v-rattle .fourth .yes { display: block; font-size: clamp(54px, 6.4vw, 118px); font-weight: 500; text-wrap: balance; }
+.v-rattle .fourth .no { display: block; margin-top: clamp(24px, 4vh, 44px); font-size: clamp(28px, 2.6vw, 44px); font-style: italic; line-height: 1.12; color: #cfc9bd; }
+
+/* Section titles */
+.v-rattle .title { font-family: var(--serif); font-weight: 500; font-size: clamp(60px, 7.2vw, 128px); line-height: 0.92; letter-spacing: -0.035em; font-variation-settings: 'opsz' 96; }
+.v-rattle .lead, .v-rattle .rule { margin-top: 22px; max-width: 34ch; font-size: clamp(18px, 1.35vw, 21px); color: var(--mute); }
+.v-rattle .more-link {
+  align-self: flex-start; margin-top: clamp(30px, 5vh, 48px); min-height: 44px; display: inline-flex; align-items: center;
+  font-family: var(--serif); font-style: italic; font-size: 24px; border-bottom: 1px solid var(--ink); transition: color .2s, border-color .2s;
+}
+.v-rattle .more-link:hover, .v-rattle .more-link:focus-visible { color: var(--accent); border-color: var(--accent); }
+
+/* Record */
+.v-rattle .event { margin-top: clamp(30px, 5vh, 48px); display: flex; flex-wrap: wrap; gap: 4px 18px; font-size: 17px; text-transform: none; padding: 12px 0; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--line); }
+.v-rattle .event .it { font-family: var(--serif); font-size: 19px; }
+.v-rattle .results { margin-top: 10px; }
+.v-rattle .results li { display: grid; grid-template-columns: 1fr auto; gap: 2px 16px; padding: 26px 0; border-bottom: 1px solid var(--line); }
+.v-rattle .results .what { grid-column: 1 / -1; font-family: var(--serif); font-size: clamp(36px, 3.6vw, 62px); line-height: 1; letter-spacing: -0.02em; }
+.v-rattle .results .who { font-weight: 600; font-size: 18px; }
+.v-rattle .results .more { color: var(--mute); text-align: right; }
+
+/* Drive */
+.v-rattle .items { margin-top: clamp(26px, 4vh, 40px); border-top: 1px solid var(--ink); }
+.v-rattle .item { display: grid; grid-template-columns: minmax(7.5em, 34%) 1fr; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); transition: background-color .25s, padding .35s cubic-bezier(.2,.8,.2,1); }
+.v-rattle .item dt { font-family: var(--serif); font-size: clamp(22px, 1.8vw, 30px); line-height: 1.1; }
+.v-rattle .item dd { color: var(--mute); font-size: 17px; align-self: center; }
+.v-rattle .item:hover { padding-left: 12px; background: #e2ded5; }
+
+/* People */
+.v-rattle .coaches { margin-top: clamp(26px, 4vh, 44px); display: grid; gap: 30px; }
+.v-rattle .coaches li { display: grid; gap: 6px; padding-top: 18px; border-top: 1px solid var(--ink); }
+.v-rattle .coaches .name { font-family: var(--serif); font-size: clamp(36px, 3.4vw, 58px); line-height: 1; letter-spacing: -0.02em; }
+.v-rattle .coaches .role { font-family: var(--serif); font-style: italic; font-size: 21px; color: var(--mute); }
+.v-rattle .coaches .bio { max-width: 40ch; }
+.v-rattle .count { margin-top: clamp(30px, 5vh, 48px); font-family: var(--serif); font-style: italic; font-size: clamp(30px, 2.6vw, 44px); line-height: 1.1; }
+
+/* Join: the stone above, the three ways in on a field below. */
+.v-rattle .join { flex-direction: column; min-height: 0; }
+.v-rattle .join .window { height: 66vh; }
+.v-rattle .field.wide { width: 100%; box-shadow: 0 -1px 0 var(--line); padding-top: clamp(48px, 8vh, 96px); justify-content: flex-start; }
+.v-rattle .join-head { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.v-rattle .join-head .lead { margin-top: 0; }
+.v-rattle .paths { margin-top: clamp(32px, 6vh, 64px); display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--ink); }
+.v-rattle .path { padding: 22px clamp(16px, 2vw, 32px) 30px; border-right: 1px solid var(--line); transition: background-color .3s; }
+.v-rattle .path:first-child { padding-left: 0; }
+.v-rattle .path:last-child { border-right: 0; padding-right: 0; }
+.v-rattle .path:hover { background: #e2ded5; }
+.v-rattle .path-name { display: inline-flex; min-height: 44px; align-items: center; font-family: var(--serif); font-weight: 500; font-size: clamp(48px, 5vw, 88px); line-height: 1; letter-spacing: -0.03em; border-bottom: 2px solid transparent; transition: color .2s, border-color .2s; }
+.v-rattle .path-name:hover, .v-rattle .path-name:focus-visible { color: var(--accent); border-color: var(--accent); }
+.v-rattle .path-line { margin-top: 10px; font-family: var(--serif); font-style: italic; font-size: 24px; }
+.v-rattle .path-text { margin-top: 12px; color: var(--mute); font-size: 17px; max-width: 38ch; }
+.v-rattle .after { margin-top: clamp(36px, 6vh, 64px); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 48px; padding-top: 22px; border-top: 1px solid var(--ink); }
+.v-rattle .after a { border-bottom: 1px solid currentColor; padding: 10px 0 2px; display: inline-block; }
+.v-rattle .after a:hover, .v-rattle .after a:focus-visible { color: var(--accent); }
+
+/* The end */
+.v-rattle .foot { position: relative; z-index: 1; background: var(--ink); color: #ebe8e1; }
+.v-rattle .foot-in { display: grid; grid-template-columns: 1fr auto; gap: 28px 48px; padding: clamp(80px, 14vh, 160px) clamp(24px, 4vw, 64px) 120px; }
+.v-rattle .foot-line { font-family: var(--serif); font-size: clamp(48px, 7vw, 124px); line-height: 0.95; letter-spacing: -0.035em; max-width: 12ch; text-wrap: balance; }
+.v-rattle .foot-q { grid-row: span 3; width: clamp(110px, 14vw, 230px); fill: #ebe8e1; align-self: start; }
+.v-rattle .foot-links, .v-rattle .foot-pages { display: flex; flex-wrap: wrap; gap: 4px 28px; }
+.v-rattle .foot-links a { font-family: var(--serif); font-style: italic; font-size: 24px; }
+.v-rattle .foot-pages a { color: #c9c3b6; font-size: 16px; }
+.v-rattle .foot a { min-height: 44px; display: inline-flex; align-items: center; border-bottom: 1px solid transparent; transition: border-color .2s; }
+.v-rattle .foot a:hover, .v-rattle .foot a:focus-visible { border-color: currentColor; }
+.v-rattle .foot :focus-visible { outline-color: #ebe8e1; }
+.v-rattle .small { grid-column: 1 / -1; font-size: 16px; color: #b9b3a6; }
+
+/* Phone: the stone in a window above, the words on solid fields below. */
+@media (max-width: 820px) {
+  .v-rattle { --col: 100%; font-size: 16px; }
+  .v-rattle .stage { bottom: auto; height: 44svh; z-index: 4; box-shadow: 0 1px 0 var(--line); }
+  .v-rattle .stage .flat { left: 8vw; right: 8vw; top: 18%; height: 64%; }
+  .v-rattle .grip { width: 70vw; height: 26vw; z-index: 5; }
+  .v-rattle .top { position: fixed; z-index: 6; width: auto; padding: 6px 16px 0; }
+  .v-rattle .top nav { display: none; }
+  .v-rattle .mark { font-size: 22px; }
+  .v-rattle main { padding-top: 44svh; }
+  .v-rattle .sec { min-height: 0; }
+  .v-rattle .field { width: 100%; padding: 36px 16px 64px; box-shadow: none; border-bottom: 1px solid var(--line); }
+  .v-rattle .hero .field { padding-top: 26px; }
+  .v-rattle .hint { position: static; order: -1; display: none; }
+  .v-rattle .pitch { font-size: clamp(40px, 11.4vw, 56px); }
+  .v-rattle .door { flex-basis: 100%; }
+  .v-rattle .door + .door { padding-left: 0; border-left: 0; }
+  .v-rattle .fourth { min-height: 0; }
+  .v-rattle .fourth .field { padding: 64px 16px 80px; }
+  .v-rattle .fourth .yes { font-size: clamp(46px, 13vw, 64px); }
+  .v-rattle .title { font-size: clamp(56px, 16vw, 76px); }
+  .v-rattle .item { grid-template-columns: 1fr; gap: 2px; }
+  .v-rattle .item dd { font-size: 16px; }
+  .v-rattle .join .window { display: none; }
+  .v-rattle .paths { grid-template-columns: 1fr; }
+  .v-rattle .path { padding: 22px 0 26px; border-right: 0; border-bottom: 1px solid var(--line); }
+  .v-rattle .path-text { font-size: 16px; }
+  .v-rattle .after { grid-template-columns: 1fr; }
+  .v-rattle .foot { z-index: 1; }
+  .v-rattle .foot-in { grid-template-columns: 1fr; padding: 64px 16px 120px; }
+  .v-rattle .foot-q { grid-row: auto; width: 96px; order: -1; }
+  .v-rattle .foot-line { font-size: clamp(44px, 12.5vw, 64px); }
+}
