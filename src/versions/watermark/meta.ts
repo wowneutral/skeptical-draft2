@@ -1,0 +1,3 @@
+import type { Version } from '@/content';
+const meta: Version = { slug: 'watermark', n: 93, name: 'The watermark', color: '#0b0a09', ink: '#ede7da', kind: '3D centrepiece', text: 'A sheet of bone paper with SKEPTICAL printed on it lies on a dark desk. Drag it or scroll and it rises in front of a lamp you steer with the pointer, and a question mark shows inside the paper itself.' };
+export default meta;
