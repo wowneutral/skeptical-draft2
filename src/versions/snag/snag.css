@@ -1,0 +1,137 @@
+html[data-v='snag'] { background: #ece7dc; }
+
+.v-snag {
+  --bone: #ece7dc;
+  --ink: #111110;
+  --soft: #4a4740;
+  --red: #b0241b;
+  --background: #ece7dc; --foreground: #111110; --primary: #111110; --primary-foreground: #ece7dc;
+  --border: #111110; --input: #111110; --ring: #b0241b; --muted: #ddd7ca; --muted-foreground: #4a4740;
+  --accent: #b0241b; --accent-foreground: #ece7dc; --popover: #ece7dc; --popover-foreground: #111110; --radius: 0;
+  position: relative;
+  min-height: 100vh;
+  background: var(--bone);
+  color: var(--ink);
+  overflow-x: clip;
+  font-family: 'Instrument Sans Variable', system-ui, sans-serif;
+}
+.v-snag ::selection { background: var(--ink); color: var(--bone); }
+.v-snag a:focus-visible { outline: 3px solid var(--red); outline-offset: 3px; }
+
+/* the stone */
+.v-snag .mk {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 5;
+  transform-origin: 0 0;
+  pointer-events: none;
+  background: none;
+  border: 0;
+  padding: 0;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.v-snag .mk svg {
+  display: block;
+  overflow: visible;
+  filter: drop-shadow(0 10px 12px rgba(40, 32, 18, 0.22));
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.v-snag .mk path {
+  fill: #0c0c0b;
+  pointer-events: visiblePainted;
+  cursor: grab;
+  touch-action: pan-y;
+  -webkit-touch-callout: none;
+  user-select: none;
+}
+.v-snag .mk:hover svg,
+.v-snag .mk.press svg {
+  transform: translateY(-1.2%);
+  filter: drop-shadow(0 34px 34px rgba(40, 32, 18, 0.3));
+}
+.v-snag .mk.up svg,
+.v-snag .mk.held svg {
+  transform: translateY(-2.6%) scale(1.02);
+  filter: drop-shadow(0 70px 60px rgba(40, 32, 18, 0.34));
+}
+.v-snag .mk.up path { cursor: grabbing; }
+.v-snag .mk:focus-visible path {
+  stroke: var(--red);
+  stroke-width: 4px;
+  vector-effect: non-scaling-stroke;
+  paint-order: stroke;
+}
+.v-snag.dragging, .v-snag.dragging * { cursor: grabbing; user-select: none; }
+
+/* the page */
+.v-snag .sec { position: relative; }
+.v-snag .pp { font-size: 0; line-height: 0; margin: 0; }
+.v-snag .tk {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+  white-space: nowrap;
+  opacity: 0;
+}
+.v-snag.ready .tk { opacity: 1; transition: opacity 0.7s ease-out; }
+
+.v-snag .s-h1 .tk, .v-snag .tk.s-h1 { font: 900 var(--h1)/0.98 'Bodoni Moda Variable', serif; letter-spacing: -0.02em; }
+.v-snag .s-h .tk, .v-snag .tk.s-h { font: 900 var(--h)/0.92 'Bodoni Moda Variable', serif; letter-spacing: -0.025em; }
+.v-snag .s-d2 .tk, .v-snag .tk.s-d2 { font: 500 var(--d2)/1.08 'Bodoni Moda Variable', serif; }
+.v-snag .s-d3 .tk, .v-snag .tk.s-d3 { font: 800 var(--d3)/1.04 'Bodoni Moda Variable', serif; letter-spacing: -0.01em; }
+.v-snag .s-d4 .tk, .v-snag .tk.s-d4 { font: italic 600 var(--d4)/1.1 'Bodoni Moda Variable', serif; }
+.v-snag .s-ui .tk, .v-snag .tk.s-ui { font: 600 var(--ui)/1.5 'Instrument Sans Variable', sans-serif; }
+.v-snag .s-b .tk, .v-snag .tk.s-b { font: 400 var(--b)/1.52 'Instrument Sans Variable', sans-serif; }
+.v-snag .s-b .tk.em { font-weight: 600; }
+.v-snag .tk.dim { color: var(--soft); }
+
+.v-snag a.tk {
+  color: var(--red);
+  text-decoration: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.18em;
+  transition: color 0.2s;
+}
+.v-snag a.tk:hover { color: var(--ink); }
+.v-snag .s-ui .tk { min-height: 44px; display: flex; align-items: center; line-height: 1.5; }
+
+/* the footer: the mark comes to rest as a letter */
+.v-snag .ft {
+  position: relative;
+  padding: 14vh 6vw 120px;
+  border-top: 1px solid var(--ink);
+}
+.v-snag .ft-line {
+  font: 900 clamp(40px, 7.5vw, 128px)/0.96 'Bodoni Moda Variable', serif;
+  letter-spacing: -0.02em;
+  max-width: 12ch;
+}
+.v-snag .ft-nav { display: flex; flex-wrap: wrap; gap: 28px 72px; margin-top: 64px; }
+.v-snag .ft-nav ul { display: flex; flex-wrap: wrap; gap: 0 28px; }
+.v-snag .ft-nav a {
+  display: inline-flex; align-items: center; min-height: 44px;
+  font-size: 18px; color: var(--ink);
+  text-decoration: underline; text-decoration-color: var(--red); text-underline-offset: 0.25em; text-decoration-thickness: 2px;
+}
+.v-snag .ft-nav a:hover { color: var(--red); }
+.v-snag .ft-end {
+  margin-top: 80px;
+  font: 800 clamp(32px, 3vw, 44px)/1.2 'Bodoni Moda Variable', serif;
+}
+.v-snag .slot { display: inline-block; width: 0.5em; color: transparent; }
+.v-snag .ft-draft { margin-top: 20px; font-size: 16px; color: var(--soft); }
+
+@media (max-width: 820px) {
+  .v-snag .ft { padding: 96px 20px 120px; }
+  .v-snag .ft-nav { gap: 16px 40px; margin-top: 40px; }
+  .v-snag .ft-end { margin-top: 56px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v-snag .mk svg, .v-snag.ready .tk, .v-snag a.tk { transition: none; }
+}
+
+.v-snag .tk.mast { font: 800 22px/1.5 'Bodoni Moda Variable', serif; letter-spacing: 0.01em; }
