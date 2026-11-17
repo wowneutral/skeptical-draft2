@@ -1,0 +1,3 @@
+import type { Version } from '@/content';
+const meta: Version = { slug: 'overhang', n: 88, name: 'The overhang', color: '#0c0c0b', ink: '#ece8df', kind: '3D centrepiece', text: 'Eight marble blocks lean out past the edge of a black plinth, the top one over empty air. Drag a block a hair too far and the stack falls and rebuilds; scrolling takes the camera under the overhang, round its end, and at Join a ninth block slides in underneath.' };
+export default meta;

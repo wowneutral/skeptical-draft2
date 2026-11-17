@@ -1,0 +1,173 @@
+html[data-v="overhang"] { background: #0c0c0b; }
+
+.v-overhang {
+  --bg: #0c0c0b; --ink: #ece8df; --dim: #aba598; --line: #3a3833; --stone: #141412;
+  --background: #0c0c0b; --foreground: #ece8df; --primary: #ece8df; --primary-foreground: #0c0c0b;
+  --border: #3a3833; --input: #3a3833; --ring: #ece8df; --muted: #1a1a18; --muted-foreground: #aba598;
+  --accent: #1a1a18; --accent-foreground: #ece8df; --popover: #141412; --popover-foreground: #ece8df; --radius: 0;
+  --serif: 'Bodoni Moda Variable', 'Bodoni Moda', Didot, serif;
+  --sans: 'Instrument Sans Variable', 'Instrument Sans', system-ui, sans-serif;
+  --gut: clamp(16px, 5.2vw, 92px);
+  background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 18px; line-height: 1.5;
+  min-height: 100vh; position: relative;
+}
+.v-overhang ::selection { background: var(--ink); color: var(--bg); }
+.v-overhang a:focus-visible, .v-overhang button:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+
+/* the stage: fixed behind everything, never swallowing the page scroll */
+.v-overhang .ov-stage { position: fixed; inset: 0; z-index: 0; }
+.v-overhang .ov-fill { position: absolute; inset: 0; }
+.v-overhang .ov-canvas, .v-overhang .ov-canvas canvas { touch-action: pan-y; }
+.v-overhang .ov-flat { position: absolute; right: 6vw; top: 18vh; width: min(46vw, 640px); height: auto; }
+.v-overhang .ov-flat .pl { fill: #1b1b19; }
+.v-overhang .ov-flat .bk { fill: #e6e0d3; }
+
+/* the top line */
+.v-overhang .ov-top {
+  position: fixed; z-index: 5; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center;
+  padding: 18px var(--gut); pointer-events: none;
+}
+.v-overhang .ov-top > * { pointer-events: auto; }
+.v-overhang .ov-mark { font-family: var(--serif); font-size: 1.5rem; font-weight: 600; letter-spacing: -0.01em; min-height: 44px; display: inline-flex; align-items: center; }
+.v-overhang .ov-mark i { font-style: italic; font-weight: 500; }
+.v-overhang .ov-top nav { display: flex; gap: 4px; }
+.v-overhang .ov-top nav a {
+  font-size: 0.95rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 12px 12px; min-height: 44px; display: inline-flex; align-items: center;
+  color: var(--dim); background-image: linear-gradient(var(--ink), var(--ink)); background-size: 0 1px; background-repeat: no-repeat; background-position: 12px 70%;
+  transition: color .25s, background-size .35s cubic-bezier(.2,.7,.2,1);
+}
+.v-overhang .ov-top nav a:hover { color: var(--ink); background-size: calc(100% - 24px) 1px; }
+
+.v-overhang main, .v-overhang .ov-foot { position: relative; z-index: 1; }
+.v-overhang main { pointer-events: none; }
+.v-overhang .ov-man .ov-col { width: min(41vw, 640px); }
+.v-overhang .ov-rec .ov-col { width: min(38vw, 600px); }
+.v-overhang .ov-sec { pointer-events: none; min-height: 100svh; display: flex; align-items: center; }
+.v-overhang .ov-col, .v-overhang .ov-wide { pointer-events: auto; }
+.v-overhang .ov-col { width: min(46vw, 700px); padding: 120px 0 80px var(--gut); }
+.v-overhang .ov-wide { width: 100%; padding: 0 var(--gut); }
+
+/* hero */
+.v-overhang .ov-hero { align-items: flex-start; }
+.v-overhang .ov-hero .ov-col { padding-top: clamp(96px, 15vh, 170px); }
+.v-overhang .ov-h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(4.4rem, 11.2vw, 12.5rem); line-height: 0.8; letter-spacing: -0.035em; font-variation-settings: 'opsz' 96; margin-left: -0.04em; }
+.v-overhang .ov-pitch { margin-top: clamp(22px, 4vh, 40px); font-family: var(--serif); font-style: italic; font-size: clamp(1.6rem, 2.5vw, 2.6rem); line-height: 1.08; font-variation-settings: 'opsz' 40; }
+.v-overhang .ov-pitch span, .v-overhang .ov-state span { display: block; }
+.v-overhang .ov-state { margin-top: 22px; font-size: 1.06rem; letter-spacing: 0.02em; color: var(--dim); }
+.v-overhang .ov-state span:first-child { color: var(--ink); }
+.v-overhang .ov-doors { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+.v-overhang .ov-door {
+  display: inline-flex; align-items: center; min-height: 54px; padding: 0 26px; border: 1px solid var(--ink); font-weight: 600; font-size: 1.02rem; letter-spacing: 0.01em;
+  transition: background .25s, color .25s, transform .35s cubic-bezier(.2,.7,.2,1);
+}
+.v-overhang .ov-door.on { background: var(--ink); color: var(--bg); }
+.v-overhang .ov-door:hover { transform: translateX(6px); }
+.v-overhang .ov-door:not(.on):hover { background: var(--ink); color: var(--bg); }
+.v-overhang .ov-try {
+  margin-top: 26px; display: inline-flex; align-items: center; gap: 14px; min-height: 44px; color: var(--dim); font-size: 1rem; cursor: pointer; background: none; border: 0; padding: 0;
+  transition: color .25s;
+}
+.v-overhang .ov-try::before { content: ''; width: 38px; height: 1px; background: currentColor; transition: width .4s cubic-bezier(.2,.7,.2,1); }
+.v-overhang .ov-try:hover { color: var(--ink); }
+.v-overhang .ov-try:hover::before { width: 64px; }
+
+/* manifesto */
+.v-overhang .ov-lines { display: grid; gap: clamp(18px, 3.4vh, 36px); }
+.v-overhang .ov-lines li { font-family: var(--serif); font-size: clamp(1.7rem, 2.6vw, 3rem); line-height: 1.06; letter-spacing: -0.012em; font-variation-settings: 'opsz' 60; color: var(--dim); }
+.v-overhang .ov-lines li.hi { color: var(--ink); font-style: italic; }
+
+/* shared section type */
+.v-overhang .ov-kick { font-size: 0.95rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--dim); font-weight: 600; margin-bottom: 22px; display: flex; align-items: center; gap: 14px; }
+.v-overhang .ov-kick::before { content: ''; width: 38px; height: 1px; background: currentColor; }
+.v-overhang .ov-lead { font-size: 1.15rem; color: var(--dim); max-width: 34ch; }
+.v-overhang .ov-more {
+  display: inline-flex; align-items: center; min-height: 44px; margin-top: 26px; font-family: var(--serif); font-style: italic; font-size: 1.45rem;
+  background-image: linear-gradient(var(--ink), var(--ink)); background-size: 100% 1px; background-repeat: no-repeat; background-position: 0 85%; transition: background-size .35s;
+}
+.v-overhang .ov-more:hover { background-size: 30% 1px; }
+
+/* record: the rule, large, under the overhang */
+.v-overhang .ov-rule { font-family: var(--serif); font-size: clamp(2.2rem, 4.2vw, 4.6rem); line-height: 0.98; letter-spacing: -0.02em; font-variation-settings: 'opsz' 96; }
+.v-overhang .ov-event { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 4px 18px; color: var(--dim); font-size: 1rem; letter-spacing: 0.04em; }
+.v-overhang .ov-results { margin-top: 26px; border-top: 1px solid var(--line); }
+.v-overhang .ov-results li { display: grid; grid-template-columns: 9.5rem 1fr; gap: 2px 20px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.v-overhang .ov-results .who { font-family: var(--serif); font-size: 1.6rem; grid-row: span 2; line-height: 1.1; }
+.v-overhang .ov-results .what { font-weight: 600; }
+.v-overhang .ov-results .more { color: var(--dim); }
+
+/* drive */
+.v-overhang .ov-items { margin-top: 26px; display: grid; grid-template-columns: 1fr 1fr; gap: 0 28px; border-top: 1px solid var(--line); }
+.v-overhang .ov-items > div { padding: 14px 0; border-bottom: 1px solid var(--line); }
+.v-overhang .ov-items dt { font-family: var(--serif); font-size: 1.7rem; line-height: 1.1; }
+.v-overhang .ov-items dd { color: var(--dim); font-size: 1.02rem; margin-top: 4px; }
+.v-overhang .ov-items > div:last-child { grid-column: span 2; }
+
+/* people */
+.v-overhang .ov-coach { padding: 16px 0 22px; border-bottom: 1px solid var(--line); }
+.v-overhang .ov-coach h3 { font-family: var(--serif); font-size: clamp(2.6rem, 4.6vw, 5rem); line-height: 0.95; letter-spacing: -0.025em; font-variation-settings: 'opsz' 96; }
+.v-overhang .ov-coach .role { margin-top: 8px; font-size: 0.95rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; }
+.v-overhang .ov-coach .bio { margin-top: 6px; color: var(--dim); max-width: 38ch; }
+.v-overhang .ov-count { margin-top: 26px; font-family: var(--serif); font-style: italic; font-size: 1.9rem; }
+
+/* join: the stack above, the three ways in on the calm field below */
+.v-overhang .ov-join { min-height: 170svh; align-items: flex-end; padding-bottom: 12vh; }
+.v-overhang .ov-join .ov-wide { background: var(--bg); padding-top: 40px; box-shadow: 0 -60px 60px -20px var(--bg); }
+.v-overhang .ov-joinhead { display: flex; align-items: baseline; gap: 40px; flex-wrap: wrap; border-bottom: 1px solid var(--line); padding-bottom: 20px; }
+.v-overhang .ov-big { font-family: var(--serif); font-weight: 500; font-size: clamp(4.6rem, 10vw, 11rem); line-height: 0.82; letter-spacing: -0.04em; font-variation-settings: 'opsz' 96; }
+.v-overhang .ov-paths { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid var(--line); }
+.v-overhang .ov-path { padding: 26px 28px 30px 0; display: flex; flex-direction: column; }
+.v-overhang .ov-path + .ov-path { border-left: 1px solid var(--line); padding-left: 28px; }
+.v-overhang .ov-path h3 { font-family: var(--serif); font-size: clamp(2.6rem, 4.2vw, 4.4rem); line-height: 1; letter-spacing: -0.02em; }
+.v-overhang .ov-path h3 a { transition: font-style .2s; }
+.v-overhang .ov-path h3 a:hover { font-style: italic; }
+.v-overhang .ov-path .line { margin-top: 6px; font-weight: 600; font-size: 1.1rem; }
+.v-overhang .ov-path ul { margin-top: 12px; display: grid; gap: 8px; color: var(--dim); font-size: 1rem; flex: 1; }
+.v-overhang .ov-go {
+  margin-top: 22px; align-self: flex-start; display: inline-flex; align-items: center; min-height: 48px; padding: 0 20px; border: 1px solid var(--ink); font-weight: 600;
+  transition: background .25s, color .25s;
+}
+.v-overhang .ov-go:hover { background: var(--ink); color: var(--bg); }
+.v-overhang .ov-after { margin-top: 24px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 40px; color: var(--dim); }
+.v-overhang .ov-after a { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; display: inline-block; padding: 10px 0; }
+
+/* footer: the ending */
+.v-overhang .ov-foot { min-height: 120svh; align-items: flex-end; padding-bottom: 110px; }
+.v-overhang .ov-foot .ov-wide { background: var(--bg); padding-top: 30px; box-shadow: 0 -60px 60px -20px var(--bg); }
+.v-overhang .ov-last { font-family: var(--serif); font-size: clamp(2.8rem, 7vw, 8rem); line-height: 0.92; letter-spacing: -0.03em; font-variation-settings: 'opsz' 96; max-width: 14ch; }
+.v-overhang .ov-links, .v-overhang .ov-pages { display: flex; flex-wrap: wrap; gap: 0 26px; margin-top: 24px; }
+.v-overhang .ov-links a, .v-overhang .ov-pages a { display: inline-flex; align-items: center; min-height: 44px; }
+.v-overhang .ov-links a { font-size: 1.1rem; }
+.v-overhang .ov-pages { margin-top: 4px; }
+.v-overhang .ov-pages a { color: var(--dim); font-size: 1rem; }
+.v-overhang .ov-links a:hover, .v-overhang .ov-pages a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+.v-overhang .ov-draft { margin-top: 30px; color: var(--dim); font-size: 0.95rem; padding-left: 13rem; }
+
+/* phone: the stack in the top half, the words beneath it */
+@media (max-width: 820px) {
+  .v-overhang { font-size: 16px; }
+  .v-overhang .ov-top { position: absolute; }
+  .v-overhang .ov-top nav { display: none; }
+  .v-overhang .ov-sec { min-height: 0; display: block; padding-top: 50svh; }
+  .v-overhang .ov-col, .v-overhang .ov-wide { width: 100%; padding: 28px 16px 64px; background: var(--bg); box-shadow: 0 -40px 40px -10px var(--bg); }
+  .v-overhang .ov-hero .ov-col { padding-top: 22px; }
+  .v-overhang .ov-hero { padding-top: 47svh; }
+  .v-overhang .ov-h1 { font-size: 23vw; }
+  .v-overhang .ov-pitch { font-size: 1.7rem; margin-top: 16px; }
+  .v-overhang .ov-doors { flex-direction: column; }
+  .v-overhang .ov-door { justify-content: space-between; }
+  .v-overhang .ov-lines li { font-size: 1.75rem; }
+  .v-overhang .ov-rule { font-size: 2.3rem; }
+  .v-overhang .ov-results li { grid-template-columns: 1fr; }
+  .v-overhang .ov-results .who { grid-row: auto; }
+  .v-overhang .ov-items { grid-template-columns: 1fr; }
+  .v-overhang .ov-items > div:last-child { grid-column: auto; }
+  .v-overhang .ov-join { min-height: 0; padding-bottom: 0; }
+  .v-overhang .ov-paths { grid-template-columns: 1fr; }
+  .v-overhang .ov-path { padding: 22px 0 26px; }
+  .v-overhang .ov-path + .ov-path { border-left: 0; border-top: 1px solid var(--line); padding-left: 0; }
+  .v-overhang .ov-after { grid-template-columns: 1fr; }
+  .v-overhang .ov-foot { min-height: 0; padding-bottom: 0; }
+  .v-overhang .ov-foot .ov-wide { padding-bottom: 110px; }
+  .v-overhang .ov-draft { padding-left: 0; }
+  .v-overhang .ov-flat { left: 8vw; right: auto; top: 8svh; width: 84vw; }
+}
