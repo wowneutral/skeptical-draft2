@@ -1,0 +1,140 @@
+/* Version 100: the furrow. Bone, one heavy monoline capital on a strict grid, red only for the question. */
+html[data-v="furrow"] { background: #ebe6dc; }
+
+.v-furrow {
+  --bg: #ebe6dc; --ink: #111111; --q: #c22a1a; --soft: #3a3631; --line: rgba(17, 17, 17, 0.2);
+  --cap: "Archivo Variable", "Arial Black", sans-serif;
+  --body: "Newsreader Variable", Georgia, serif;
+  --g: clamp(16px, 3.4vw, 52px);
+  --background: #ebe6dc; --foreground: #111111; --primary: #111111; --primary-foreground: #ebe6dc; --border: #111111; --input: #111111; --ring: #111111;
+  --muted: #e0dacd; --muted-foreground: #3a3631; --accent: #e0dacd; --accent-foreground: #111111; --popover: #ebe6dc; --popover-foreground: #111111; --radius: 0;
+  position: relative; min-height: 100svh; background: var(--bg); color: var(--ink);
+  font: 400 1.1875rem/1.5 var(--body); font-optical-sizing: auto;
+  padding: 0 var(--g); overflow-x: clip; color-scheme: light;
+  -webkit-tap-highlight-color: transparent;
+}
+.v-furrow ::selection { background: var(--ink); color: var(--bg); }
+.v-furrow :focus-visible { outline: 3px solid var(--ink); outline-offset: 5px; }
+.v-furrow a { color: inherit; }
+
+/* ---------- display rows ---------- */
+.v-furrow .d { display: block; container-type: inline-size; margin: 0; font-weight: 400; touch-action: pan-y; cursor: default; }
+.v-furrow .d[tabindex] { cursor: grab; }
+.v-furrow .d[tabindex]:active { cursor: grabbing; }
+.v-furrow .d:focus-visible { outline-offset: 8px; }
+.v-furrow .rows { display: block; }
+.v-furrow .row {
+  position: relative; display: grid; grid-template-columns: repeat(var(--c), minmax(0, 1fr));
+  perspective: 1100px; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
+  font: 900 calc(100cqw / var(--c) * 0.94) / 1 var(--cap); font-stretch: 120%;
+  letter-spacing: 0; text-transform: uppercase;
+}
+.v-furrow .d[data-size="t"] .row { font-size: calc(100cqw / var(--c) * 0.98); font-stretch: 125%; }
+.v-furrow .d[data-size="r"] .row { font-size: calc(100cqw / var(--c) * 1.0); }
+.v-furrow .rule {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 7px; pointer-events: none;
+  background:
+    linear-gradient(var(--line), var(--line)) left bottom / 100% 1px no-repeat,
+    repeating-linear-gradient(to right, var(--line) 0 1px, transparent 1px calc(100% / var(--c))) left bottom / calc(100% + 1px) 7px no-repeat;
+}
+.v-furrow .cell { position: relative; aspect-ratio: 1 / 1.04; grid-row: 1; }
+.v-furrow .d[data-size="t"] .cell { aspect-ratio: 1 / 1.1; }
+.v-furrow .tile { position: absolute; inset: 0; transform-style: preserve-3d; will-change: transform; }
+.v-furrow .f {
+  position: absolute; inset: 0; display: grid; place-items: center; padding-top: 0.06em;
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  color: color-mix(in oklab, var(--ink), var(--bg) calc(var(--sh, 0) * 55%));
+}
+.v-furrow .f.r { transform: rotateY(180deg); }
+.v-furrow .f.s .g { display: inline-block; transform: scaleX(-1); }
+.v-furrow .g { display: inline-block; }
+.v-furrow .q { color: var(--q); }
+
+/* ---------- body: never mirrored, a calm column under the line above ---------- */
+.v-furrow .b { padding: clamp(1rem, 2.4vw, 1.75rem) 0 clamp(2rem, 5vw, 3.5rem); }
+.v-furrow .col { max-width: 34rem; }
+.v-furrow .b[data-align="right"] .col { margin-left: auto; text-align: right; }
+.v-furrow .b.wide .col { max-width: none; }
+.v-furrow .b p + p { margin-top: 0.7em; }
+.v-furrow .b a { text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 0.2em; }
+.v-furrow .b a:hover { text-decoration-thickness: 3px; }
+.v-furrow .lead { font-size: clamp(1.3rem, 2vw, 1.6rem); line-height: 1.35; }
+.v-furrow .meta { display: flex; flex-wrap: wrap; gap: 0.15em 1.2em; font: 700 1.0625rem/1.4 var(--cap); font-stretch: 105%; text-transform: uppercase; letter-spacing: 0.04em; margin-top: 1.1em; }
+.v-furrow .b[data-align="right"] .meta { justify-content: flex-end; }
+.v-furrow .who { font-weight: 700; }
+.v-furrow .role { font: 800 1.0625rem/1.3 var(--cap); font-stretch: 108%; text-transform: uppercase; letter-spacing: 0.06em; }
+.v-furrow .line { font-size: clamp(1.3rem, 2vw, 1.6rem); }
+.v-furrow .more { font-weight: 600; }
+.v-furrow .small { font-size: 1.0625rem; }
+.v-furrow .mani p { font-size: clamp(1.35rem, 2.3vw, 2rem); line-height: 1.3; }
+.v-furrow .big .col { max-width: 42rem; }
+.v-furrow .big { padding-top: clamp(2rem, 6vw, 4.5rem); }
+
+/* the opening */
+.v-furrow .hero { min-height: 100svh; display: flex; flex-direction: column; justify-content: center; padding: 5.5rem 0 2rem; }
+.v-furrow .hintb { padding: 1.25rem 0 0; }
+.v-furrow .hint { font: 700 1rem/1.3 var(--cap); font-stretch: 105%; text-transform: uppercase; letter-spacing: 0.08em; color: var(--soft); }
+
+/* sections open with space above the cut */
+.v-furrow .d[data-size="xl"] { margin-top: clamp(4.5rem, 14vh, 10rem); }
+.v-furrow .fieldrest > .d:first-child { margin-top: 0; }
+.v-furrow .d[data-size="xl"] + .d[data-size="xl"] { margin-top: 0; }
+.v-furrow h3.d[data-size="xl"] { margin-top: clamp(2rem, 6vh, 4rem); }
+
+/* the two doors */
+.v-furrow .doors { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.v-furrow .door {
+  display: inline-flex; align-items: center; min-height: 48px; padding: 0.55em 0.85em 0.5em;
+  font: 900 clamp(1.1rem, 2.4vw, 2rem)/1 var(--cap); font-stretch: 112%; text-transform: uppercase;
+  border: 3px solid var(--ink); text-decoration: none !important;
+  transition: background-color 0.18s ease, color 0.18s ease;
+}
+.v-furrow .door:hover, .v-furrow .door:focus-visible { background: var(--ink); color: var(--bg); }
+
+/* the stone switch, quiet, top right */
+.v-furrow .stonebtn {
+  position: fixed; top: 14px; right: var(--g); z-index: 40; min-height: 44px; padding: 0 16px;
+  font: 800 0.9375rem/1 var(--cap); font-stretch: 110%; text-transform: uppercase; letter-spacing: 0.08em;
+  background: var(--bg); color: var(--ink); border: 2px solid var(--ink); cursor: pointer; border-radius: 0;
+  transition: background-color 0.18s ease, color 0.18s ease;
+}
+.v-furrow .stonebtn:hover, .v-furrow .stonebtn[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+
+/* holding: the corrections drop, the copy steps back so the stone shows */
+.v-furrow .b, .v-furrow .stonebtn { transition: opacity 0.35s ease; }
+.v-furrow.is-stone .b { opacity: 0.16; }
+.v-furrow.is-stone .d { cursor: grabbing; }
+
+/* the end */
+.v-furrow .d[data-end]:not(.deco) { margin-top: clamp(6rem, 22vh, 14rem); }
+.v-furrow .foot { padding-bottom: 7rem; }
+.v-furrow .foot ul { display: flex; flex-wrap: wrap; gap: 0.4rem 1.6rem; }
+.v-furrow .foot ul + ul { margin-top: 0.8rem; }
+.v-furrow .b[data-align="right"] .foot ul { justify-content: flex-end; }
+.v-furrow .foot li a { display: inline-flex; align-items: center; min-height: 44px; }
+.v-furrow .foot ul:first-child a { font: 800 1.0625rem/1 var(--cap); font-stretch: 108%; text-transform: uppercase; letter-spacing: 0.05em; text-decoration: none; }
+.v-furrow .foot ul:first-child a:hover { text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 0.25em; }
+.v-furrow .draft { margin-top: 2rem; font-size: 1rem; color: var(--soft); }
+
+@media (max-width: 639px) {
+  .v-furrow { font-size: 1.0625rem; }
+  .v-furrow .hero { padding-top: 5rem; justify-content: center; }
+  .v-furrow .doors { flex-direction: column; align-items: stretch; }
+  .v-furrow .door { justify-content: center; }
+  .v-furrow .door:last-child { align-self: stretch; }
+  .v-furrow .stonebtn { top: 10px; }
+}
+
+/* the last mark: one cell, the question, reversed until you arrive */
+.v-furrow .deco { margin-top: clamp(1rem, 3vw, 2rem); }
+.v-furrow .deco[data-size] .row { font-size: calc(100cqw / var(--c) * 1.08); }
+.v-furrow .deco .rule { display: none; }
+.v-furrow .deco[data-size] .cell { aspect-ratio: 1 / 1.25; }
+/* where the plough turns: a thin bend in the margin from the end of one row into the next */
+.v-furrow .bend {
+  position: absolute; top: 50%; height: 100%; width: calc(var(--g) * 0.62); pointer-events: none;
+  border: 1.5px solid rgba(17, 17, 17, 0.42);
+}
+@media (max-width: 639px) { .v-furrow .bend { border-color: rgba(17, 17, 17, 0.28); border-width: 1px; } }
+.v-furrow .bend[data-side="right"] { left: calc(100% + var(--g) * 0.12); border-left: 0; border-radius: 0 999px 999px 0; }
+.v-furrow .bend[data-side="left"] { right: calc(100% + var(--g) * 0.12); border-right: 0; border-radius: 999px 0 0 999px; }
