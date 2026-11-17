@@ -1,0 +1,12 @@
+import type { Version } from '@/content';
+
+const meta: Version = {
+  slug: 'entry',
+  n: 72,
+  name: 'The entry',
+  color: '#f1ede3',
+  ink: '#111111',
+  kind: 'Debate-native',
+  text: 'The whole site set as one enormous dictionary entry for its own name. Scroll and each numbered sense swells to display size while the rest fall back to fine print; pull the headword apart at its syllable dots, press a red number to read that sense alone, and follow the italic see references.',
+};
+export default meta;
