@@ -1,0 +1,12 @@
+import type { Version } from '@/content';
+
+const meta: Version = {
+  slug: 'perm',
+  n: 87,
+  name: 'The perm',
+  color: '#0c0c0c',
+  ink: '#eeeae0',
+  kind: 'Debate-native',
+  text: 'One hard seam splits the page into black and bone, and every section offers two lines in huge type that condenses or stretches to fill its half as you drag the seam. Press the seam, or throw it off the edge, and it refuses to choose: the halves interleave in bands with Perm. set across them in red.',
+};
+export default meta;
