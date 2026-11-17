@@ -1,0 +1,3 @@
+import type { Version } from '@/content';
+const meta: Version = { slug: 'tower', n: 98, name: 'The tower', color: '#e7e3d9', ink: '#121212', kind: '3D centrepiece', text: 'A tall black tower stands alone in a bone white haze and looks round. Scroll to walk toward it until its corners appear, drag to circle it, and press and hold to step back and watch it round off again.' };
+export default meta;
