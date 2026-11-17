@@ -1,0 +1,163 @@
+/* Version 78: the domino. Black slate, polished bone, one red dot. */
+html[data-v="domino"] { background: #0c0c0b; }
+
+.v-domino {
+  --black: #0c0c0b; --bone: #ece7dc; --soft: #aba496; --line: rgba(236, 231, 220, 0.2);
+  --face: #e7e0cf; --face-ink: #0c0c0b; --face-soft: #4a443a; --red: #c8321e; --red-ink: #a3260f;
+  --gut: clamp(16px, 4vw, 64px);
+  --background: var(--black); --foreground: var(--bone); --primary: var(--bone); --primary-foreground: var(--black);
+  --border: var(--line); --input: var(--line); --ring: var(--red); --muted: #1b1a18; --muted-foreground: var(--soft);
+  --accent: #1b1a18; --accent-foreground: var(--bone); --popover: var(--black); --popover-foreground: var(--bone); --radius: 0px;
+  --display: 'Bodoni Moda Variable', 'Bodoni 72', Didot, serif;
+  --sans: 'Instrument Sans Variable', 'Helvetica Neue', Arial, sans-serif;
+  position: relative; color: var(--bone); background: var(--black);
+  font: 400 1.125rem/1.55 var(--sans);
+  font-synthesis: none; overflow-x: clip;
+}
+.v-domino ::selection { background: var(--red); color: #fff7ee; }
+.v-domino :focus-visible { outline: 2px solid var(--bone); outline-offset: 4px; }
+.v-domino b { font-weight: 600; }
+
+/* The scene sits behind everything; the black fields slide over it. */
+.v-domino .stage { position: fixed; inset: 0; z-index: 0; opacity: 0; transition: opacity 1.4s cubic-bezier(0.2, 0.8, 0.2, 1) 0.15s; }
+.v-domino .stage:has(canvas) { opacity: 1; }
+.v-domino .stage canvas { display: block; touch-action: pan-y; }
+.v-domino main, .v-domino footer { position: relative; z-index: 1; }
+/* Only the words take the pointer; everywhere else it falls through to the tiles. */
+.v-domino main, .v-domino footer, .v-domino .pairing { pointer-events: none; }
+.v-domino .field, .v-domino .foot, .v-domino .copy, .v-domino .field *, .v-domino .foot *, .v-domino .copy * { pointer-events: auto; }
+
+/* Top bar: two small black plates. */
+.v-domino .top { position: fixed; z-index: 6; inset: 0 0 auto 0; padding: 14px var(--gut) 0; display: flex; align-items: flex-start; justify-content: space-between; pointer-events: none; }
+.v-domino .top a { pointer-events: auto; }
+.v-domino .brand { font: 600 1.45rem/1 var(--display); font-variation-settings: 'opsz' 28; min-height: 44px; display: inline-flex; align-items: center; background: var(--black); color: var(--bone); padding: 0 12px; margin-left: -12px; }
+.v-domino .brand .q { color: var(--red); font-style: italic; margin-left: 0.04em; }
+.v-domino .top nav { display: flex; background: var(--black); padding: 0 4px; }
+.v-domino .top nav a { font: 500 0.95rem/1 var(--sans); letter-spacing: 0.02em; min-height: 44px; min-width: 44px; padding: 0 12px; display: inline-flex; align-items: center; justify-content: center; position: relative; color: var(--bone); }
+.v-domino .top nav a::after { content: ''; position: absolute; left: 12px; right: 12px; bottom: 10px; height: 1px; background: var(--red); transform: scaleX(0); transform-origin: left; transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.v-domino .top nav a:hover::after, .v-domino .top nav a:focus-visible::after { transform: scaleX(1); }
+
+/* Shots: windows onto the row. They let the pointer through to the tiles. */
+.v-domino .shot { position: relative; height: 92vh; pointer-events: none; }
+.v-domino .shot.tall { height: 170vh; }
+.v-domino .shot button, .v-domino .shot a { pointer-events: auto; }
+.v-domino .nudge { position: absolute; left: 50%; bottom: 24px; transform: translateX(-50%); min-height: 44px; padding: 0 18px; background: var(--black); color: var(--bone); font: 500 1rem/1 var(--sans); opacity: 0; pointer-events: none; }
+.v-domino .nudge:focus-visible { opacity: 1; pointer-events: auto; }
+
+/* The opening shot: the words on the left, the row on the right. */
+.v-domino .hero { height: 100vh; height: 100svh; display: flex; align-items: center; }
+.v-domino .hero .copy { pointer-events: auto; width: 36vw; padding: 96px 0 72px var(--gut); }
+.v-domino .pitch { font: 500 clamp(2.6rem, 4.6vw, 5.4rem)/0.98 var(--display); font-variation-settings: 'opsz' 96; letter-spacing: -0.02em; text-wrap: balance; max-width: 9.5ch; }
+.v-domino .statement { margin-top: clamp(22px, 3.6vh, 40px); display: flex; flex-direction: column; font-size: clamp(1.1rem, 1.25vw, 1.3rem); line-height: 1.4; color: var(--bone); }
+.v-domino .statement span:nth-child(2) { color: var(--soft); }
+.v-domino .doors { margin-top: clamp(20px, 3.4vh, 36px); display: flex; flex-wrap: wrap; gap: 4px 26px; }
+.v-domino .doors a, .v-domino .more, .v-domino .after a, .v-domino .foot a {
+  min-height: 44px; display: inline-flex; align-items: center; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 6px; text-decoration-color: var(--red); transition: text-underline-offset 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), color 0.2s;
+}
+.v-domino .doors a { font: 500 1.2rem/1 var(--sans); }
+.v-domino .doors a:hover, .v-domino .more:hover, .v-domino .after a:hover, .v-domino .foot a:hover { text-underline-offset: 10px; }
+.v-domino .go { margin-top: clamp(14px, 2.6vh, 30px); min-height: 44px; display: inline-flex; align-items: center; gap: 14px; font: italic 500 1.25rem/1 var(--display); color: var(--bone); cursor: pointer; padding: 0; }
+.v-domino .go .tip { width: 7px; height: 22px; background: var(--bone); border-radius: 1.5px; transform-origin: 100% 100%; transition: transform 0.45s cubic-bezier(0.3, 1.5, 0.5, 1); }
+.v-domino .go:hover .tip, .v-domino .go:focus-visible .tip { transform: rotate(-24deg); }
+
+/* Fields: calm black between the shots. Nothing ever sits on the row. */
+.v-domino .field { position: relative; background: var(--black); padding: clamp(96px, 16vh, 180px) var(--gut); }
+.v-domino .field::before, .v-domino .field::after { content: ''; position: absolute; left: 0; right: 0; height: 64px; pointer-events: none; }
+.v-domino .field::before { bottom: 100%; background: linear-gradient(to top, var(--black), rgba(12, 12, 11, 0)); }
+.v-domino .field::after { top: 100%; background: linear-gradient(to bottom, var(--black), rgba(12, 12, 11, 0)); }
+.v-domino .say .line { font: 400 clamp(2.3rem, 5.2vw, 5.6rem)/1.04 var(--display); font-variation-settings: 'opsz' 96; letter-spacing: -0.02em; max-width: 15ch; text-wrap: balance; }
+.v-domino .say.at-r .line { margin-left: auto; text-align: right; }
+
+.v-domino .pair { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 6vw, 110px); align-items: start; max-width: 1500px; margin: 0 auto; }
+.v-domino .title { font: 500 clamp(3.4rem, 8vw, 8.4rem)/0.9 var(--display); font-variation-settings: 'opsz' 96; letter-spacing: -0.03em; }
+.v-domino .lead { margin-top: 26px; font-size: clamp(1.15rem, 1.4vw, 1.4rem); line-height: 1.45; color: var(--soft); max-width: 30ch; }
+.v-domino .head { position: sticky; top: 110px; }
+.v-domino .event { font-size: 1.15rem; color: var(--soft); padding-bottom: 22px; border-bottom: 1px solid var(--line); }
+.v-domino .event span { color: var(--bone); margin-right: 10px; }
+.v-domino .results li { padding: 34px 0; border-bottom: 1px solid var(--line); }
+.v-domino .results h3 { font: 500 clamp(2.2rem, 4.2vw, 4.4rem)/1 var(--display); font-variation-settings: 'opsz' 96; letter-spacing: -0.02em; }
+.v-domino .results p { margin-top: 12px; font-size: 1.2rem; color: var(--soft); }
+.v-domino .results b { color: var(--bone); margin-right: 8px; }
+.v-domino .more { margin-top: 24px; font-size: 1.15rem; }
+
+.v-domino .kit { display: grid; grid-template-columns: 1fr 1fr; gap: 0 clamp(24px, 3vw, 48px); }
+.v-domino .kit > div { padding: 22px 0 24px; border-top: 1px solid var(--line); }
+.v-domino .kit dt { font: 500 clamp(1.7rem, 2.4vw, 2.4rem)/1.05 var(--display); font-variation-settings: 'opsz' 72; }
+.v-domino .kit dd { margin-top: 8px; color: var(--soft); }
+
+.v-domino .coaches li { padding: 30px 0 34px; border-top: 1px solid var(--line); }
+.v-domino .coaches h3 { font: 500 clamp(2.4rem, 4.6vw, 4.8rem)/1 var(--display); font-variation-settings: 'opsz' 96; letter-spacing: -0.02em; }
+.v-domino .coaches .role { margin: 10px 0 8px; font: italic 500 1.3rem/1.2 var(--display); color: var(--bone); }
+.v-domino .coaches p { color: var(--soft); max-width: 46ch; }
+
+/* Join: the last slab's face, laid flat. Black on bone, the red dot above. */
+.v-domino .join { background: var(--face); color: var(--face-ink); padding-top: clamp(110px, 18vh, 200px); padding-bottom: clamp(110px, 16vh, 180px); }
+.v-domino .join::before, .v-domino .join::after { display: none; }
+.v-domino .join ::selection { background: var(--face-ink); color: var(--face); }
+.v-domino .join :focus-visible { outline-color: var(--face-ink); }
+.v-domino .join .dot { display: block; width: clamp(64px, 8vw, 116px); aspect-ratio: 1; border-radius: 50%; background: var(--red); margin: 0 auto clamp(48px, 8vh, 90px); box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.28); }
+.v-domino .jhead { text-align: center; }
+.v-domino .join .title { font-size: clamp(4.4rem, 12vw, 12rem); }
+.v-domino .join .lead { color: var(--face-soft); margin: 22px auto 0; }
+.v-domino .ways { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(24px, 3.4vw, 56px); max-width: 1440px; margin: clamp(56px, 10vh, 110px) auto 0; }
+.v-domino .ways > li { border-top: 2px solid var(--face-ink); padding-top: 20px; }
+.v-domino .ways a { display: flex; flex-direction: column; gap: 6px; min-height: 44px; padding-bottom: 18px; }
+.v-domino .ways .name { font: 500 clamp(2.8rem, 4.8vw, 5rem)/0.95 var(--display); font-variation-settings: 'opsz' 96; letter-spacing: -0.025em; display: inline-flex; align-items: baseline; gap: 14px; }
+.v-domino .ways .name::after { content: ''; width: 0.24em; height: 0.24em; border-radius: 50%; background: var(--red); transform: scale(0); transition: transform 0.4s cubic-bezier(0.3, 1.6, 0.5, 1); }
+.v-domino .ways a:hover .name::after, .v-domino .ways a:focus-visible .name::after { transform: scale(1); }
+.v-domino .ways .what { font: italic 500 1.4rem/1.2 var(--display); color: var(--face-ink); }
+.v-domino .ways ul { display: flex; flex-direction: column; gap: 10px; color: var(--face-soft); font-size: 1.125rem; }
+.v-domino .after { max-width: 1440px; margin: clamp(56px, 9vh, 100px) auto 0; padding-top: 22px; border-top: 1px solid rgba(12, 12, 11, 0.22); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; color: var(--face-soft); }
+.v-domino .after a { color: var(--face-ink); text-decoration-color: var(--red-ink); min-height: 0; display: inline; }
+
+/* The end: the row stands again, and the footer under it. */
+.v-domino .end { position: relative; z-index: 1; }
+.v-domino .last .pitch { font-style: italic; max-width: 11ch; }
+.v-domino .foot { background: var(--black); padding: 56px var(--gut) 120px; display: grid; grid-template-columns: 1fr 1fr auto; gap: 24px 48px; align-items: end; border-top: 1px solid var(--line); }
+.v-domino .foot ul { display: flex; flex-wrap: wrap; gap: 0 22px; }
+.v-domino .foot small { font-size: 0.95rem; color: var(--soft); }
+
+/* Without WebGL: the row as a drawing, and short gaps where the shots were. */
+.v-domino.no-gl .shot:not(.hero) { height: 14vh; }
+.v-domino.no-gl .shot.hero.last { height: auto; padding: 80px 0; }
+.v-domino .flatrow { position: absolute; right: var(--gut); bottom: 12vh; width: 52vw; }
+.v-domino .flatrow rect { fill: var(--face); }
+.v-domino .flatrow rect.dark { fill: #2a2622; stroke: var(--face); stroke-width: 1; }
+.v-domino .flatrow line { stroke: var(--line); }
+
+/* Phone: the row runs up from the bottom edge; the words sit above it on black. */
+@media (max-width: 820px) {
+  .v-domino { font-size: 1.0625rem; }
+  .v-domino .top { padding-top: 8px; }
+  .v-domino .brand { font-size: 1.2rem; }
+  .v-domino .top nav a { padding: 0 8px; font-size: 0.9rem; }
+  .v-domino .hero { align-items: flex-start; }
+  .v-domino .hero .copy { width: 100%; padding: 74px var(--gut) 18px; background: var(--black); }
+  .v-domino .hero .copy::after { content: ''; position: absolute; left: 0; right: 0; top: 100%; height: 36px; background: linear-gradient(to bottom, var(--black), rgba(12, 12, 11, 0)); }
+  .v-domino .hero .copy { position: relative; }
+  .v-domino .pitch { font-size: clamp(2.2rem, 10vw, 2.9rem); max-width: 12ch; }
+  .v-domino .statement { margin-top: 14px; font-size: 1.0625rem; line-height: 1.35; }
+  .v-domino .doors { margin-top: 8px; gap: 0 18px; }
+  .v-domino .doors a { font-size: 1.0625rem; }
+  .v-domino .go { margin-top: 0; font-size: 1.1rem; }
+  .v-domino .shot { height: 62vh; }
+  .v-domino .shot.tall { height: 130vh; }
+  .v-domino .shot.hero { height: 100vh; height: 100svh; }
+  .v-domino .field { padding: 72px var(--gut); }
+  .v-domino .say .line { font-size: clamp(2rem, 9vw, 2.7rem); }
+  .v-domino .pair { grid-template-columns: 1fr; gap: 28px; }
+  .v-domino .head { position: static; }
+  .v-domino .title { font-size: clamp(3.2rem, 15vw, 4.4rem); }
+  .v-domino .kit { grid-template-columns: 1fr; }
+  .v-domino .ways { grid-template-columns: 1fr; gap: 40px; }
+  .v-domino .after { grid-template-columns: 1fr; }
+  .v-domino .join .title { font-size: clamp(4rem, 20vw, 6rem); }
+  .v-domino .last { align-items: flex-start; }
+  .v-domino .foot { grid-template-columns: 1fr; padding-bottom: 110px; }
+  .v-domino .flatrow { position: static; width: calc(100% - 2 * var(--gut)); margin: 24px var(--gut); }
+  .v-domino.no-gl .hero { flex-direction: column; height: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v-domino .stage, .v-domino .go .tip, .v-domino .ways .name::after, .v-domino .top nav a::after { transition: none; }
+}
