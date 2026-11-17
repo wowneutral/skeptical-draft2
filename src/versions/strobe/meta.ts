@@ -1,0 +1,3 @@
+import type { Version } from '@/content';
+const meta: Version = { slug: 'strobe', n: 74, name: 'The strobe', color: '#0a0a0a', ink: '#efebe3', kind: '3D centrepiece', text: 'Sixteen plaster figures on a black turntable, each an exclamation mark a little further bent into a question mark. Drag the table or read fast, and past a certain speed they become one mark curling into doubt and back; at the drive it stops dead under one light, and at Join the full question faces you.' };
+export default meta;
