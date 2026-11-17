@@ -1,0 +1,6 @@
+import type { Version } from '@/content';
+const meta: Version = {
+  slug: 'mobile', n: 70, name: 'The mobile', color: '#e7e3da', ink: '#141311', kind: '3D centrepiece',
+  text: 'A hanging mobile of painted steel in a pale gallery, its hook bent as a question mark and its lowest weight the red dot. Brush or pull any shape and the whole thing swings; each section hangs one more weight and you watch it find its balance, and at Join each way in sets its own arm swinging.',
+};
+export default meta;
