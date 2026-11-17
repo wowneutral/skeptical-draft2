@@ -1,0 +1,1 @@
+var e={slug:`facade`,n:95,name:`The facade`,color:`#d8d5cd`,ink:`#141412`,kind:`3D centrepiece`,text:`A white plaster temple front on a stone sweep that turns out to be one finger thick, propped up from behind by black steel. Drag it round to see, press a column to make its prop give, and scroll to walk the camera to the back, the far side and over the top.`};export{e as t};

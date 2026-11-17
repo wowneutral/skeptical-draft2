@@ -1,0 +1,1 @@
+var e={f:0,lift:0,lid:1,yaw:0,yawV:0,over:!1,phone:!1,onSeated:null,onLid:null};export{e as t};

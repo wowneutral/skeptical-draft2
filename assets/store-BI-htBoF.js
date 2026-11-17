@@ -1,0 +1,1 @@
+var e={f:0,sec:0,asks:[],hold:!1,yawV:0,yaw:0,dragging:!1,mended:0,phone:!1,ready:!1,reset(){this.f=0,this.sec=0,this.asks=[],this.hold=!1,this.yawV=0,this.yaw=0,this.dragging=!1,this.mended=0,this.ready=!1}};export{e as t};

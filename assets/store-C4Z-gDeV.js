@@ -1,0 +1,1 @@
+var e={sections:[],turn:{u:-1.1,w:0,g:0,flick:0,drag:!1,lastX:0,lastT:0},f:0,stop:0,opened:!1,openedAt:0,plate:{text:``,start:0,dur:0,ver:0}},t=Math.PI/6,n=`skeptical-trophy-plate`;function r(){try{return localStorage.getItem(`skeptical-trophy-plate`)??``}catch{return``}}function i(e){try{e?localStorage.setItem(n,e):localStorage.removeItem(n)}catch{}}export{i,e as n,r,t};

@@ -1,0 +1,1 @@
+var e={f:0,px:0,py:0,drag:0,vel:0,held:!1,hover:-1,phone:!1,opened:!1,stops:[],onBand:null,onEdge:null};export{e as t};

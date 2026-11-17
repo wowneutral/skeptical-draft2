@@ -1,0 +1,1 @@
+var e={slug:`across`,n:85,name:`The crossword`,color:`#efebe2`,ink:`#121212`,kind:`Big type`,text:`The site as one big printed crossword with SKEPTICAL? across the middle, and every clue is one of the team’s own lines with a word taken out. Scroll and the answers type themselves in, or press any square and solve it yourself.`};export{e as default};

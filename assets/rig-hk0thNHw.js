@@ -1,0 +1,1 @@
+var e={level:0,clicks:0,step:0,yaw:0,pitch:0,held:!1,hover:!1,releasedAt:0,glow:0,onStep:null},t=()=>Math.min(12,e.level+e.clicks);export{t as n,e as t};
