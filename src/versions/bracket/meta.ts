@@ -1,0 +1,12 @@
+import type { Version } from '@/content';
+
+const meta: Version = {
+  slug: 'bracket',
+  n: 82,
+  name: 'The bracket',
+  color: '#0b0b0b',
+  ink: '#eeeae1',
+  kind: 'Debate-native',
+  text: 'The site as one huge printed elimination bracket. Scroll and a red line advances from SKEPTICAL round by round while the view dives into each slot it reaches; press a round to fly there, drag the sheet, and at Join the empty champion slot holds a red question mark that splits into the three ways in.',
+};
+export default meta;
